@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Page's title -->
+  <title>PreviewReading</title>
+
+  <!-- Link to manifest and css file -->
+  <link rel = "manifest" href = "manifest.json">
+  <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+
+  <!-- Character codific -->
+  <meta charset="UTF-8">
+
+  <!-- Meta tag for PWA -->
+  <meta name = "viewport"    content = "width = device-width, initial-scale = 1.0">
+  <meta name = "theme-color" content = "white">
+  <meta name = "description" content = "PreviewReading">
+
+  <!--Specific meta tag for IOS -->
+  <link rel="apple-touch-icon" href="images/logo.webp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="PreviewReading">
+
+  <!-- Specific meta tag for OS Windows -->
+  <meta name="application-name" content="PreviewReading">
+  <meta name="msapplication-TileImage" content="images/144x144.png">
+  <meta name="msapplication-TileColor" content="#cc194b">
+</head>
+<body>
+<!-- Navbar --->
+<nav class="navbar">
+  <input type = "button" value="Home"    id="nav_home" onclick="window.location.href='index.html'">
+  <input type = "button" value="Negozio" id="nav_shop" onclick="window.location.href='shop.html'">
+</nav>
+<!-- Navbar -->
+
+<div id="account_elements">
+  <!-- User -->
+  <div id="user_data">
+    <div id="datauser_container">
+      <div class="data_insert">
+        <h1 class="data_form" id="acc_user"></h1>
+      </div>
+      <div class="data_insert">
+        <p class="data_form">Nome:</p>
+        <p class="data_form" id="acc_name"></p>
+      </div>
+      <div class="data_insert">
+        <p class="data_form">Cognome:</p>
+        <p class="data_form" id="acc_surn"></p>
+      </div>
+      <input type = "submit" value="logout" id="button_logout" onclick="logout()">
+    </div>
+  </div>
+  <!-- User -->
+
+  <!-- Cart -->
+  <div class="style_cart">
+    <div class="acc_container" id = "cart_container">
+      <div id ="cart_list"></div>
+    </div>
+    <div class="price_clear_cart">
+      <p id="cart_clear" ></p>
+      <p id="book_spacer1"></p>
+      <p id="cart_price" ></p>
+    </div>
+  </div>
+  <!-- Cart -->
+
+  <!-- Reviews Cronology -->
+  <div class="style_cart">
+    <div class="acc_container" id="user_reviews">
+      <div id="reviews_cronology"></div>
+    </div>
+    <div class="price_clear_cart">
+      <p id="no_reviews"></p>
+    </div>
+  </div>
+</div>
+<!-- Reviews Cronology -->
+
+<div class="footer">
+  <div id="container_creators">
+    <div class="creators" id="domenico">
+      <img class="img_creator" src="images/domenico.webp" alt="domenico">
+      <p class="nome_creator">Domenico Risso</p>
+      <p class="matr_creator">domenico.risso001 | 2542</p>
+    </div>
+    <div class="creators" id="vincenzo">
+      <img class="img_creator" src="images/vincenzo.webp" alt="vincenzo">
+      <p class="nome_creator">Vincenzo Figliolino</p>
+      <p class="matr_creator">vincenzo.figliolino001 | 2541</p>
+    </div>
+    <div class="creators" id="gaetano">
+      <img class="img_creator" src="images/gaetano.webp" alt="gaetano">
+      <p class="nome_creator">Gaetano Romeo</p>
+      <p class="matr_creator">gaetano.romeo001 | 2667</p>
+    </div>
+  </div>
+  <div id="linietta_footer"></div>
+  <p id="footer_explain">Copyright®2023 Progetto TechWeb anno accademico 2023/2024 università degli studi di napoli Parthenope, prof. Raffaele Montella. Autori: Domenico Risso matricola 0124002542; Vincenzo Figliolino matricola 0124002541; Gaetano Romeo matricola 0124002667. </p>
+  <img id="logo_footer" src="images/booksnap_white.webp" alt = "logo" width="8%"/>
+</div>
+
+<!-- JavaScript Client Side -->
+<script>
+  window.addEventListener('load', function()
+  {
+    checkLogged();
+    getInfo();
+    showUserReviews();
+    showCart();
+  });
+</script>
+<!-- JavaScript Client Side -->
+
+<script src="js/jquery.min.js"></script>
+<script src="js/server.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,516 @@
+{
+  "utenti": [
+    {
+      "nome": "Gaetano",
+      "cognome": "Romeo",
+      "username": "gaetano22",
+      "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+      "carrello": []
+    },
+    {
+      "nome": "Giovanni",
+      "cognome": "Picardi",
+      "username": "giopic02",
+      "password": "aab2d72a64eabefa38f5a3694ab6874e17db854960f0a76fbcab83005e67620f",
+      "carrello": []
+    }
+  ],
+  "libri": [
+    {
+      "nome": "Il signore degli anelli",
+      "autore": "J.R.R. Tolkien",
+      "genere": "Avventura e Azione",
+      "anno": "2002",
+      "pagine": "1380",
+      "prezzo": "10€",
+      "recensioni": [],
+      "percorso": "pdf/Il_signore_degli_anelli_anteprima.pdf"
+    },
+    {
+      "nome": "L'assassinio di Roger Ackroyd",
+      "autore": "Agatha Christie",
+      "genere": "Giallo",
+      "prezzo": "15€",
+      "recensioni": []
+    },
+    {
+      "nome": "Il mastino dei Baskerville",
+      "autore": "Arthur Conan Doyle",
+      "genere": "Giallo",
+      "prezzo": "10€",
+      "recensioni": []
+    },
+    {
+      "nome": "Il falcone maltese",
+      "autore": "Dashiell Hammett",
+      "genere": "Giallo",
+      "prezzo": "12.50€",
+      "recensioni": [],
+      "percorso": "pdf/Il_falcone_maltese_anteprima.pdf"
+    },
+    {
+      "nome": "Il nome della rosa",
+      "autore": "Umberto Eco",
+      "genere": "Giallo",
+      "prezzo": "5.50€",
+      "recensioni": [],
+      "percorso": "pdf/Il_nome_della_rosa_anteprima.pdf"
+    },
+    {
+      "nome": "Il grande sonno",
+      "autore": "Raymond Chandler",
+      "genere": "Giallo",
+      "prezzo": "8€",
+      "recensioni": []
+    },
+    {
+      "nome": "Assassinio sull'Orient Express",
+      "autore": "Agatha Christie",
+      "genere": "Giallo",
+      "prezzo": "9.99€",
+      "recensioni": [],
+      "percorso": "pdf/Assassinio_sull_Orient_Express_anteprima.pdf"
+    },
+    {
+      "nome": "Madre d'ossa",
+      "autore": "Ilaria Tuti",
+      "genere": "Giallo",
+      "prezzo": "11€",
+      "recensioni": []
+    },
+    {
+      "nome": "Addio, mia amata",
+      "autore": "Raymond Chandler",
+      "genere": "Giallo",
+      "prezzo": "11€",
+      "recensioni": []
+    },
+    {
+      "nome": "L'inverno più nero",
+      "autore": "Carlo Lucarelli",
+      "genere": "Giallo",
+      "prezzo": "2€",
+      "recensioni": []
+    },
+    {
+      "nome": "La spia che venne dal freddo",
+      "autore": "John le Carré",
+      "genere": "Giallo",
+      "prezzo": "32€",
+      "recensioni": []
+    },
+    {
+      "nome": "Il cacciatore di aquiloni",
+      "autore": "Khaled Hosseini",
+      "genere": "Thriller",
+      "prezzo": "22€",
+      "recensioni": []
+    },
+    {
+      "nome": "La ragazza con il tatuaggio del drago",
+      "autore": "Stieg Larsson",
+      "genere": "Thriller",
+      "prezzo": "22€",
+      "recensioni": []
+    },
+    {
+      "nome": "Il silenzio degli innocenti",
+      "autore": "Thomas Harris",
+      "genere": "Thriller",
+      "prezzo": "11€",
+      "recensioni": []
+    },
+    {
+      "nome": "Shutter Island",
+      "autore": " Dennis Lehane",
+      "genere": "Thriller",
+      "prezzo": "12€",
+      "recensioni": []
+    },
+    {
+      "nome": "La ragazza del treno",
+      "autore": "Paula Hawkins",
+      "genere": "Thriller",
+      "prezzo": "12.50€",
+      "recensioni": []
+    },
+    {
+      "nome": "Il codice Da Vinci",
+      "autore": " Dan Brown",
+      "genere": "Thriller",
+      "prezzo": "12.25€",
+      "recensioni": []
+    },
+    {
+      "nome": "Uomini che odiano le donne",
+      "autore": "Stieg Larsson",
+      "genere": "Thriller",
+      "prezzo": "10€",
+      "recensioni": []
+    },
+    {
+      "nome": "La verità sul caso Harry Quebert",
+      "autore": "Joël Dicker",
+      "genere": "Thriller",
+      "prezzo": "10€",
+      "recensioni": []
+    },
+    {
+      "nome": "Shining",
+      "autore": "Stephen King",
+      "genere": "Thriller",
+      "prezzo": "10€",
+      "recensioni": []
+    },
+    {
+      "nome": "L'amore bugiardo",
+      "autore": " Gillian Flynn",
+      "genere": "Thriller",
+      "prezzo": "10€",
+      "recensioni": []
+    },
+    {
+      "nome": "I predatori dell'arca perduta",
+      "autore": "Campbell Black",
+      "genere": "Avventura e Azione",
+      "prezzo": "10€",
+      "recensioni": []
+    },
+    {
+      "nome": "Il vecchio e il mare",
+      "autore": "Ernest Hemingway",
+      "genere": "Avventura e Azione",
+      "prezzo": "10€",
+      "recensioni": []
+    },
+    {
+      "nome": "Le avventure di Tom Sawyer",
+      "autore": "Mark Twain",
+      "genere": "Avventura e Azione",
+      "prezzo": "12€",
+      "recensioni": []
+    },
+    {
+      "nome": "Il conte di Montecristo",
+      "autore": "Alexandre Dumas",
+      "genere": "Avventura e Azione",
+      "prezzo": "11€",
+      "recensioni": []
+    },
+    {
+      "nome": "Harry Potter e la pietra filosofale",
+      "autore": "J.K. Rowling",
+      "genere": "Avventura e Azione",
+      "prezzo": "9€",
+      "recensioni": []
+    },
+    {
+      "nome": "Venti mila leghe sotto i mari",
+      "autore": "Jules Verne",
+      "genere": "Avventura e Azione",
+      "prezzo": "9€",
+      "recensioni": []
+    },
+    {
+      "nome": "Jurassic Park",
+      "autore": "Michael Crichton",
+      "genere": "Avventura e Azione",
+      "prezzo": "9€",
+      "recensioni": []
+    },
+    {
+      "nome": "I tre moschettieri",
+      "autore": "Alexandre Dumas",
+      "genere": "Avventura e Azione",
+      "prezzo": "9€",
+      "recensioni": []
+    },
+    {
+      "nome": "Robinson Crusoe",
+      "autore": "Daniel Defoe",
+      "genere": "Avventura e Azione",
+      "prezzo": "10€",
+      "recensioni": []
+    },
+    {
+      "nome": "Fahrenheit 451",
+      "autore": "Ray Bradbury",
+      "genere": "Fantascienza",
+      "prezzo": "21€",
+      "recensioni": []
+    },
+    {
+      "nome": "L'imperatore-dio di Dune",
+      "autore": "Frank Herbert",
+      "genere": "Fantascienza",
+      "prezzo": "21€",
+      "recensioni": []
+    },
+    {
+      "nome": "Guida galattica per gli autostoppisti",
+      "autore": "Douglas Adams",
+      "genere": "Fantascienza",
+      "prezzo": "21€",
+      "recensioni": []
+    },
+    {
+      "nome": "Il problema dei tre corpi",
+      "autore": "Liu Cixin",
+      "genere": "Fantascienza",
+      "prezzo": "21€",
+      "recensioni": []
+    },
+    {
+      "nome": "Cronache marziane",
+      "autore": "Ray Bradbury",
+      "genere": "Fantascienza",
+      "prezzo": "22€",
+      "recensioni": []
+    },
+    {
+      "nome": "Le guide del tramonto",
+      "autore": "Arthur C. Clarke",
+      "genere": "Fantascienza",
+      "prezzo": "10€",
+      "recensioni": []
+    },
+    {
+      "nome": "La guerra dei mondi",
+      "autore": "H.G. Wells",
+      "genere": "Fantascienza",
+      "prezzo": "16€",
+      "recensioni": []
+    },
+    {
+      "nome": "La mano sinistra delle tenebre",
+      "autore": "Ursula K. Le Guin",
+      "genere": "Fantascienza",
+      "prezzo": "16€",
+      "recensioni": []
+    },
+    {
+      "nome": "Il ciclo di Ender",
+      "autore": "Orson Scott Card",
+      "genere": "Fantascienza",
+      "prezzo": "16€",
+      "recensioni": []
+    },
+    {
+      "nome": "2001 Odissea nello spazio",
+      "autore": "Arthur C. Clarke",
+      "genere": "Fantascienza",
+      "prezzo": "16€",
+      "recensioni": []
+    },
+    {
+      "nome": "Le cronache di Narnia",
+      "autore": "Clive S. Lewis",
+      "genere": "Fantasy",
+      "prezzo": "20€",
+      "recensioni": []
+    },
+    {
+      "nome": "Animali fantastici",
+      "autore": "J.K Kloves",
+      "genere": "Fantasy",
+      "prezzo": "18€",
+      "recensioni": []
+    },
+    {
+      "nome": "Una piccola magia",
+      "autore": "Terry Brooks",
+      "genere": "Fantasy",
+      "prezzo": "25€",
+      "recensioni": []
+    },
+    {
+      "nome": "Piranesi",
+      "autore": "Susanna Clarke",
+      "genere": "Fantasy",
+      "prezzo": "22€",
+      "recensioni": []
+    },
+    {
+      "nome": "Il guardiano degli innocenti",
+      "autore": "Andrzej Sapkowski",
+      "genere": "Fantasy",
+      "prezzo": "15€",
+      "recensioni": []
+    },
+    {
+      "nome": "Fidanzati dell'inverno",
+      "autore": "Christelle Dabos",
+      "genere": "Fantasy",
+      "prezzo": "30€",
+      "recensioni": []
+    },
+    {
+      "nome": "Eragon",
+      "autore": "Christopher Paolini",
+      "genere": "Fantasy",
+      "prezzo": "28€",
+      "recensioni": []
+    },
+    {
+      "nome": "L'occhio del mondo",
+      "autore": "Robert Jordan",
+      "genere": "Fantasy",
+      "prezzo": "26€",
+      "recensioni": []
+    },
+    {
+      "nome": "Il ciclo di Shannara",
+      "autore": "Terry Brooks",
+      "genere": "Fantasy",
+      "prezzo": "24€",
+      "recensioni": []
+    },
+    {
+      "nome": "Il mare senza stelle",
+      "autore": "Erin Morgenstern",
+      "genere": "Fantasy",
+      "prezzo": "32€",
+      "recensioni": []
+    },
+    {
+      "nome": "Teddy",
+      "autore": "Jason Rekulak",
+      "genere": "Horror",
+      "prezzo": "32€",
+      "recensioni": []
+    },
+    {
+      "nome": "L'incubo",
+      "autore": "Hill House di Shirley",
+      "genere": "Horror",
+      "prezzo": "32€",
+      "recensioni": []
+    },
+    {
+      "nome": "Perfect day",
+      "autore": "Romy Hausmann",
+      "genere": "Horror",
+      "prezzo": "32€",
+      "recensioni": []
+    },
+    {
+      "nome": "Holly",
+      "autore": "Stephen King",
+      "genere": "Horror",
+      "prezzo": "15€",
+      "recensioni": []
+    },
+    {
+      "nome": "Casa di foglie",
+      "autore": " Mark Z. Danielewski",
+      "genere": "Horror",
+      "prezzo": "15€",
+      "recensioni": []
+    },
+    {
+      "nome": "Dark ladies",
+      "autore": "scrittrici vittoriane",
+      "genere": "Horror",
+      "prezzo": "15€",
+      "recensioni": []
+    },
+    {
+      "nome": "Notturno",
+      "autore": " Mike Ashley",
+      "genere": "Horror",
+      "prezzo": "15€",
+      "recensioni": []
+    },
+    {
+      "nome": "La stazione",
+      "autore": "Jacopo De Michelis",
+      "genere": "Horror",
+      "prezzo": "15€",
+      "recensioni": []
+    },
+    {
+      "nome": "La casa in fondo alla strada",
+      "autore": "Karen McQuestion ",
+      "genere": "Horror",
+      "prezzo": "15€",
+      "recensioni": []
+    },
+    {
+      "nome": "L'educazione delle farfalle",
+      "autore": "Donato Carrisi ",
+      "genere": "Horror",
+      "prezzo": "15€",
+      "recensioni": []
+    },
+    {
+      "nome": "Tre uomini in barca",
+      "autore": "Jerome K. Jerome",
+      "genere": "Umoristico",
+      "prezzo": "18€",
+      "recensioni": []
+    },
+    {
+      "nome": "Zia Mame",
+      "autore": "Patrick Dennis",
+      "genere": "Umoristico",
+      "prezzo": "20€",
+      "recensioni": []
+    },
+    {
+      "nome": "Vita con Loyd",
+      "autore": "Simone Tempia",
+      "genere": "Umoristico",
+      "prezzo": "22€",
+      "recensioni": []
+    },
+    {
+      "nome": "Fottuta campagna",
+      "autore": "Porcelli Safonov",
+      "genere": "Umoristico",
+      "prezzo": "25€",
+      "recensioni": []
+    },
+    {
+      "nome": "Momenti di trascurabile felicita",
+      "autore": "Francesco Piccolo",
+      "genere": "Umoristico",
+      "prezzo": "15€",
+      "recensioni": []
+    },
+    {
+      "nome": "Libro",
+      "autore": "Maccio Capatondo",
+      "genere": "Umoristico",
+      "prezzo": "28€",
+      "recensioni": []
+    },
+    {
+      "nome": "Libro 2",
+      "autore": "Maccio Capatondo",
+      "genere": "Umoristico",
+      "prezzo": "26€",
+      "recensioni": []
+    },
+    {
+      "nome": "Fantozzi",
+      "autore": "Paolo Villaggio",
+      "genere": "Umoristico",
+      "prezzo": "24€",
+      "recensioni": []
+    },
+    {
+      "nome": "Piccoli suicidi tra amici",
+      "autore": "Arto Paasilinna",
+      "genere": "Umoristico",
+      "prezzo": "32€",
+      "recensioni": []
+    },
+    {
+      "nome": "Costumi degli italiani",
+      "autore": "Gianni Celati",
+      "genere": "Umoristico",
+      "prezzo": "15€",
+      "recensioni": []
+    }
+  ]
+}

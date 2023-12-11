@@ -1,0 +1,19 @@
+{
+  "name": "PreviewReading",
+  "short_name": "PreRea",
+  "lang": "en-US",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "white",
+  "theme_color": "white",
+  "description": "Site to allow users to preview books available in the library",
+  "icons":
+  [
+    {
+      "src": "images/logo.webp",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ]
+}

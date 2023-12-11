@@ -1,0 +1,1294 @@
+*
+{
+  font-family: 'SF UI Display', sans-serif;
+}
+
+body
+{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+
+/* navbar */
+.navbar
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  height: 3rem;
+  width: 98%;
+  background-color: black;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 0 50px 7px rgba(0, 0, 0, 0.15);
+}
+
+.navbar input[type="button"]
+{
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  font-size: 15px;
+  text-decoration: none;
+  color: white;
+  margin-right: 10px;
+  margin-left: 10px;
+  height: 100%;
+  width: 5rem;
+}
+
+nav input[type="button"]:hover
+{
+  color: #b4b4b4;
+  transition: 0.1s;
+}
+
+/* descrizione e logo */
+#description_spacer
+{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  height: 44rem;
+  width: 100%;
+
+  background-color: black;
+}
+
+#container_description
+{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+#container_description img
+{
+  margin-bottom: 2rem;
+}
+
+#index_boxes
+{
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+  width: 90%;
+}
+
+#carousel_description
+{
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 20rem;
+  width: 98%;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  font-size: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
+}
+
+#carousel_description img
+{
+  border-radius: 10px;
+  margin-left: 2rem;
+}
+
+#container_description h1
+{
+  margin: 0.25rem;
+  width: 80%;
+}
+
+#explain_text
+{
+  margin: 0.25rem;
+  font-size: 20px;
+  width: 80%;
+}
+
+#bookgrid_description
+{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  width: 60%;
+  margin-right: 2rem;
+}
+
+#bookgrid_description h2
+{
+  margin: 0.25rem;
+}
+
+#bookgrid_description p
+{
+  margin: 0.25rem;
+}
+
+#carousel_group
+{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #f5f5f7;
+}
+
+.group_of_two
+{
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  width: 98%;
+}
+
+/* carousel */
+.carousel_spacer
+{
+  width: 95%;
+  margin-top: 1rem;
+}
+
+.wrapper
+{
+  width: 100%;
+  margin: 1rem auto;
+  text-align: center;
+  position: relative;
+}
+
+.carousel
+{
+  display: flex;
+  overflow: hidden;
+}
+
+.wrapper i
+{
+  top: 50%;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 1.15rem;
+  position: absolute;
+  text-align: center;
+  transform: translateY(-50%);
+  transition: transform 0.1s linear;
+}
+
+.wrapper i:active
+{
+  transform: translateY(-50%) scale(0.9);
+}
+
+.wrapper i:first-child
+{
+  left: -1.7%;
+  display: none;
+}
+
+.wrapper i:last-child
+{
+  right: -1.7%;
+}
+
+.wrapper .carousel
+{
+  font-size: 0;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+}
+
+.carousel.dragging
+{
+  cursor: grab;
+  scroll-behavior: auto;
+}
+
+.carousel.dragging img
+{
+  pointer-events: none;
+}
+
+.carousel img
+{
+  height: 300px;
+  object-fit: cover;
+  user-select: none;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  width: calc(100% / 3);
+  border-radius: 10px;
+}
+
+.carousel img:first-child
+{
+  margin-left: 0;
+}
+
+@media screen and (max-width: 900px)
+{
+  .carousel img{
+    width: calc(100% / 2);
+  }
+}
+
+@media screen and (max-width: 550px)
+{
+  .carousel img{
+    width: 100%;
+  }
+}
+
+.carousel_position
+{
+  margin-top: 3rem;
+}
+
+.book_type
+{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  width: 100%;
+  height: 10rem;
+}
+
+.carousel_container
+{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 98%;
+  height: 35rem;
+  color: white;
+  background-color: black;
+  margin-bottom: 1.25rem;
+  border-radius: 20px;
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
+}
+
+.carousel_container h1
+{
+  text-align: center;
+  margin: 0.25rem;
+}
+
+.type_explain
+{
+  width: 95%;
+  text-align: center;
+  margin: 0.25rem;
+  font-size: 20px;
+}
+
+.book_click
+{
+  width: 95%;
+  text-align: center;
+  margin: 0.25rem;
+  font-size: 15px;
+  color: #ec3853;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.carousel_type
+{
+  width: 97%;
+  margin-bottom: 3rem;
+}
+
+
+#gialli:hover
+{
+  color: #fbbb02;
+  transition: 0.4s;
+}
+
+#horror:hover
+{
+  color: #858585;
+  transition: 0.4s;
+}
+
+#thriller:hover
+{
+  color: #960000;
+  transition: 0.4s;
+}
+
+#fantascienza:hover
+{
+  color: #3a66aa;
+  transition: 0.4s;
+}
+
+#fantasy:hover
+{
+  color: #3f6e4e;
+  transition: 0.4s;
+}
+
+#azioneavventura:hover
+{
+  color: #ff6a00;
+  transition: 0.4s;
+}
+
+#umoristico:hover
+{
+  color: #00b2ad;
+  transition: 0.4s;
+}
+
+/* form del login e registrazione */
+.box_form
+{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.logo
+{
+  height: 35px;
+  margin-bottom: 1rem;
+}
+
+.box_form h2
+{
+  margin-bottom: 0;
+}
+
+#login_form
+{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#register_form
+{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.user_label
+{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.user_error
+{
+  display: none;
+  color: red;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* box di inserimento (nome, cognome..) nelle pagine login e registrazione */
+.account
+{
+  padding: 15px;
+  border: none;
+  border-radius: 100px;
+  margin: 10px;
+  width: 30rem;
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
+}
+
+.account:hover
+{
+  background-color: #e8e8e8;
+  transition: 0.5s;
+}
+
+.signin_signup_switch p, a
+{
+  display: inline-block;
+  color: black;
+  font-size: 13px;
+  margin: 0;
+}
+
+.signin_signup_switch a
+{
+  color: black;
+}
+
+.signin_signup_switch a:hover
+{
+  color: #ec3853;
+  transition: 0.1s;
+}
+
+/* login e signup nella pagina login (accesso) */
+.btn
+{
+  background-color: rgba(171, 171, 171, 0.82);
+  color: white;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  width: 32rem;
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
+  margin: 10px;
+}
+
+.btn:hover
+{
+  background-color: #ec3853;
+  transition: 0.2s;
+}
+
+/* barra di ricerca */
+#shop_spacer
+{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+}
+
+#search_box
+{
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+}
+
+#search_in
+{
+  padding: 15px;
+  border: none;
+  border-radius: 100px;
+  width: 30rem;
+  box-shadow: 0 0 50px 7px rgba(0, 0, 0, 0.15);
+  margin-right: 0.25rem;
+}
+
+#search_in:hover
+{
+  background-color: #ccc;
+  transition: 0.2s;
+}
+
+#search_bnt
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 100%;
+  box-shadow: 0 0 50px 7px rgba(0, 0, 0, 0.15);
+  margin-left: 0.25rem;
+}
+
+#search_bnt:hover
+{
+  background-color: #ccc;
+  transition: 0.2s;
+}
+
+#suggestion_list
+{
+  list-style-type: none;
+  text-align: left;
+  width: 33rem;
+  margin: 0;
+  top: 13rem;
+  position: absolute;
+  z-index: 2;
+  background-color: white;
+  box-shadow: 0 0 50px 7px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+}
+
+#suggestion_list li
+{
+  font-size: 15px;
+  margin-left: -26px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#suggestion_list li:hover
+{
+  color: #ec3853;
+}
+
+/* box nella pagina account */
+#account_elements
+{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  width: min(50rem, 90%);
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+}
+
+#user_data
+{
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: black;
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  height: 20rem;
+  border-radius: 20px;
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
+}
+
+#explain_container
+{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+#datauser_container
+{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+}
+
+.data_insert
+{
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  width: 100%;
+  color: white;
+}
+
+.data_form
+{
+  width: 35%;
+  margin: 3px;
+}
+
+#acc_user
+{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#index_button
+{
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#index_button button
+{
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  width: 9rem;
+}
+
+#show_cart
+{
+  text-align: right;
+}
+
+#show_cronology
+{
+  text-align: left;
+}
+
+#show_cart:hover
+{
+  color: #ec3853;
+  transition: 0.2s;
+}
+
+#show_cronology:hover
+{
+  color: #ec3853;
+  transition: 0.2s;
+}
+
+#button_logout
+{
+  background-color: rgba(171, 171, 171, 0.82);
+  color: white;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  width: 80%;
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
+  margin-top: 1rem;
+}
+
+#button_logout:hover
+{
+  background-color: #ec3853;
+  transition: 0.2s;
+}
+
+.style_cart
+{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 26rem;
+  background-color: white;
+  box-shadow: 0 0 50px 7px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.acc_container
+{
+  display: flex;
+  flex-flow: column;
+  list-style-type: none;
+  height: 90%;
+  width: 95%;
+  margin-top: 1rem;
+  overflow: auto;
+}
+
+.acc_container::-webkit-scrollbar
+{
+  width: 10px;
+}
+
+.acc_container::-webkit-scrollbar-thumb
+{
+  border-radius: 20px;
+  background-color: #575757;
+}
+
+.acc_container::-webkit-scrollbar-track
+{
+  background-color: rgba(255, 255, 255, 0);
+}
+
+#cart_list img
+{
+  border-radius: 3px;
+  height: 5rem;
+}
+
+#cart_list button:hover
+{
+  color: #ec3853;
+  transition: 0.2s;
+}
+
+.price_clear_cart
+{
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #626262;
+  margin-bottom: 1rem;
+}
+
+#cart_price
+{
+  margin: 0;
+}
+
+#cart_clear
+{
+  margin: 0;
+}
+
+#cart_clear:hover
+{
+  color: #ec3853;
+  transition: 0.2s;
+}
+
+.image_container
+{
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+#cronology_rev_img
+{
+  border-radius: 3px;
+  height: 5rem;
+}
+
+.info_container
+{
+  display: flex;
+  flex-flow: column;
+  margin-left: 1rem;
+}
+
+.price_container
+{
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  color: #626262;
+  margin-top: 2px;
+}
+
+.price_container button
+{
+  background-color: rgba(255, 255, 255, 0);
+  color: #626262;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0;
+}
+
+.price_container button:hover
+{
+  color: #ec3853;
+  transition: 0.2s;
+}
+
+.info_container h3
+{
+  margin: 0;
+}
+
+.info_container p
+{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.price_container p
+{
+  font-size: 13px;
+  margin: 0;
+  padding: 0;
+}
+
+#book_spacer
+{
+  margin-right: 0.3rem;
+  margin-left: 0.3rem;
+}
+
+#book_spacer1
+{
+  margin: 0 0.3rem;
+}
+
+#review_acc
+{
+  display: flex;
+  flex-flow: row;
+}
+
+#button_rev_acc
+{
+  display: flex;
+  flex-flow: column;
+}
+
+#reviews_cronology::-webkit-scrollbar
+{
+  width: 10px;
+}
+
+#reviews_cronology::-webkit-scrollbar-thumb
+{
+  border-radius: 20px;
+  background-color: #575757;
+}
+
+#reviews_cronology::-webkit-scrollbar-track
+{
+  background-color: rgba(255, 255, 255, 0);
+}
+
+#no_reviews
+{
+  margin: 0;
+}
+
+.change_credential
+{
+  display: block;
+  box-sizing: border-box;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  margin: 5px;
+  height: 5px;
+  width: 20rem;
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
+  font-size: 10px;
+}
+
+#button_modify
+{
+  background-color: white;
+  border: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 100%;
+  box-shadow: 0 0 50px 7px rgba(0, 0, 0, 0.15);
+}
+
+#change_box
+{
+  display: flex;
+  flex-flow: column;
+}
+
+#info_insert
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.haid_lable
+{
+  display: none
+}
+
+#slider
+{
+  width:70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#img_slider
+{
+  width:100%;
+}
+
+#img_slider img
+{
+  width:100%;
+  display: none;
+}
+
+#img_slider img:nth-child(1)
+{
+  display:block;
+}
+
+/* pdf container */
+#pdf_hidden
+{
+  display: none;
+}
+
+#shop_elements
+{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+  width: min(70rem, 97%);
+}
+
+#pdf_container
+{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#pdf_viewer
+{
+  height: 70rem;
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
+}
+
+#book_data_img
+{
+  background-color: white;
+  width: 70%;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  border-radius: 20px;
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
+  margin-left: 0.5rem;
+}
+
+#preview
+{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 0 50px 2px rgba(0, 0, 0, 0.15);
+  width: 30%;
+  margin-right: 0.5rem;
+}
+
+#preview h1
+{
+  text-align: center;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+#preview p
+{
+  text-align: left;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+#preview_image
+{
+  border-radius: 5px;
+  height: 60%;
+}
+
+#book_space
+{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  height: 100%;
+  margin-right: 1rem;
+}
+
+#preview_data
+{
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+#book_data
+{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  color: black;
+  margin-left: 1rem;
+}
+
+#name_author
+{
+  display: flex;
+  flex-flow: column;
+  text-align: center;
+}
+
+#book_name
+{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#other_data
+{
+  display: flex;
+  flex-flow: column;
+  margin-top: 10%;
+}
+
+#cart_btn
+{
+  background-color: #abababd1;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 11px;
+  text-align: center;
+  width: 100%;
+  height: 20px;
+  margin-top: 5px;
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
+}
+
+#cart_btn:hover
+{
+  background-color: #ec3853;
+  transition: 0.2s;
+}
+
+#previews_manage
+{
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+#previews_manage p
+{
+  margin-top: -3px;
+  margin-bottom: -3px;
+}
+
+.previews_btn
+{
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  font-size: 11px;
+  color: black;
+}
+
+.previews_btn:hover
+{
+  color: #ec3853;
+  transition: 0.2s;
+}
+
+/* recensioni */
+#reviews_box
+{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 0 50px 7px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  margin-top: 1rem;
+  width: min(70rem, 100%);
+}
+
+#shop_container
+{
+  display: flex;
+  flex-flow: column;
+  list-style-type: none;
+  height: 90%;
+  width: 97%;
+  margin-top: 1rem;
+}
+
+#shop_container::-webkit-scrollbar
+{
+  width: 10px;
+}
+
+#shop_container::-webkit-scrollbar-thumb
+{
+  border-radius: 20px;
+  background-color: #575757;
+}
+
+#shop_container::-webkit-scrollbar-track
+{
+  background-color: rgba(255, 255, 255, 0);
+}
+
+#inforev_container
+{
+  display: flex;
+  flex-flow: row;
+  padding: 0;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+#review_container
+{
+  display: flex;
+  flex-flow: column;
+  width: 95%;
+  margin-bottom: 2rem;
+}
+
+#review_container h3
+{
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+#review_container p
+{
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+#review_container button
+{
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  margin-bottom: 0;
+  margin-top: 2px;
+  padding: 0;
+}
+
+#review_container button:hover
+{
+  color: #ec3853;
+  transition: 0.2s;
+}
+
+#review
+{
+  height: 15rem;
+  resize: none;
+  border-radius: 20px;
+}
+
+#review_title
+{
+  margin-top: 0;
+}
+
+/* footer */
+.footer
+{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  height: 20rem;
+  width: 98%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0 0 50px 7px rgba(0, 0, 0, 0.15);
+}
+
+#logo_footer
+{
+  margin-top: 1rem;
+}
+
+#container_creators
+{
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.creators
+{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  width: 15rem;
+  color: white;
+}
+
+.img_creator
+{
+  height: 80px;
+  border-radius: 100px;
+  margin-bottom: 1rem;
+}
+
+.nome_creator
+{
+  margin: 0.25rem;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.matr_creator
+{
+  font-size: 15px;
+  margin: 0;
+}
+
+#linietta_footer
+{
+  width: 41rem;
+  height: 1px;
+  background-color: white;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#footer_explain
+{
+  width: 41rem;
+  font-size: 11px;
+  color: white;
+  text-align: left;
+  margin: 0;
+}
