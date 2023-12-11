@@ -1,16 +1,15 @@
-window.onload = () =>
-{
+//starts automatically when the page is loaded and sets the service worker
+window.onload = () => {
   'use strict';
 
-  if ('serviceWorker' in navigator)
-  {
-    navigator.serviceWorker.register('service_worker.js').then(function (registration)
-    {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service_worker.js').then(function (registration) {
+
       //service worker registered correctly
       console.log('ServiceWorker registration successful with scope: ', registration.scope);
     },
-    function (err)
-    {
+    function (err) {
+
       //troubles in registering the service worker
       console.log('ServiceWorker registration failed: ', err);
     });
@@ -18,42 +17,38 @@ window.onload = () =>
 }
 
 //starts automatically when the page is loaded and checks if the user has access to the page (used by "cart.html", "account.html", "shop.html" e "recensione.html")
-function checkLogged()
-{
+function checkLogged() {
     if (sessionStorage.getItem('logged') !== 'true')
       document.location.href = "index.html";
 }
 
 //starts automatically when the page is loaded and checks if the user is logged
-function checkNotLogged()
-{
+function checkNotLogged() {
     if (sessionStorage.getItem('logged') === 'true')
       document.location.href = "index.html";
 }
 
 //------------------------------------------------INDEX.HTML------------------------------------------------------------
 //starts automatically when the page is loaded and checks if the user is logged
-function showNavbar()
-{
+function showNavbar() {
+
   //gets navbar's button's elements
   const accountButton = document.getElementById('nav_account'),
         shopButton    = document.getElementById('nav_shop'),
         loginButton   = document.getElementById('nav_login');
 
   //checks if each buttons is correctly get
-  if (accountButton && shopButton && loginButton)
-  {
+  if (accountButton && shopButton && loginButton) {
+
     //if the user is logged, it shows buttons that send the user to page for which login is needed
-    if (sessionStorage.getItem('logged') === 'true')
-    {
+    if (sessionStorage.getItem('logged') === 'true') {
       accountButton.style.display = "block";
       shopButton.style.display = "block";
       loginButton.style.display = "none";
     }
 
     //otherwise it hides buttons that send user to page for which login is needed
-    else
-    {
+    else {
       shopButton.style.display = "none";
       accountButton.style.display = "none";
     }
@@ -62,41 +57,57 @@ function showNavbar()
     console.log("Errore cattura elementi bottoni navbar");
 }
 
-function initializeCarousel(wrapperSelector)
-{
-  const wrapper = document.querySelector(wrapperSelector),
-    //elemento del carosello
-    carousel = wrapper.querySelector(".carousel"),
-    //prima immagine del carosello
-    firstImg = carousel.querySelectorAll("img")[0],
-    //frecce per scorrere le immagini
-    arrowIcons = wrapper.querySelectorAll("i");
+function initializeCarousel(wrapperSelector) {
 
+  //gets each carousel's elements
+  const wrapper = document.querySelector(wrapperSelector),
+
+  //carousel's class of element
+  carousel = wrapper.querySelector(".carousel"),
+
+  //carousel's first image
+  firstImg = carousel.querySelectorAll("img")[0],
+
+  //arrow to scroll images
+  arrowIcons = wrapper.querySelectorAll("i");
+
+  //variables to track drag states and positions
   let isDragStart = false,
     isDragging = false,
     prevPageX,
     prevScrollLeft,
     positionDiff;
 
-  const showHideIcons = () =>
-  {
+  //shows or hides navigation icons based on carousel scroll position
+  const showHideIcons = () => {
+
+    //scroll width
     let scrollWidth = carousel.scrollWidth - carousel.clientWidth;
+
+    //left arrow property
     arrowIcons[0].style.display = carousel.scrollLeft === 0 ? "none" : "block";
+
+    //right arrow property
     arrowIcons[1].style.display = carousel.scrollLeft === scrollWidth ? "none" : "block";
   };
 
-  arrowIcons.forEach(icon =>
-  {
-    icon.addEventListener("click", () =>
-    {
-      let firstImgWidth = firstImg.clientWidth + 14;
-      carousel.scrollLeft += icon.classList.contains("carousel-left") ? -firstImgWidth : firstImgWidth;
-      setTimeout(() => showHideIcons(), 60);
+  //sets an event that start when an arrow is pressed
+  arrowIcons.forEach(icon => { icon.addEventListener("click", () => {
+
+    //first image's width
+    let firstImgWidth = firstImg.clientWidth + 14;
+
+    //updates carousel position based on the clicked arrow
+    carousel.scrollLeft += icon.classList.contains("carousel-left") ? -firstImgWidth : firstImgWidth;
+
+    //delays the execution of showHideIcons
+    setTimeout(() => showHideIcons(), 60);
     });
   });
 
-  const autoSlide = () =>
-  {
+  //manages automatic sliding based on the drag direction and position difference
+  const autoSlide = () => {
+
     // if there is no image left to scroll then return from here
     if(carousel.scrollLeft - (carousel.scrollWidth - carousel.clientWidth) > -1 || carousel.scrollLeft <= 0) return;
 
@@ -114,45 +125,63 @@ function initializeCarousel(wrapperSelector)
     carousel.scrollLeft -= positionDiff > firstImgWidth / 3 ? valDifference : -positionDiff;
   }
 
-  const dragStart = (e) =>
-  {
-    // updatating global variables value on mouse down event
+  //manages the drag of the carousel
+  const dragStart = (e) => {
+
+    //variables to track drag start state and initial position
     isDragStart = true;
     prevPageX = e.pageX || e.touches[0].pageX;
     prevScrollLeft = carousel.scrollLeft;
   }
 
-  const dragging = (e) =>
-  {
-    // scrolling images/carousel to left according to mouse pointer
+  //manages dragging operations
+  const dragging = (e) => {
+
+    //checks if the draggins is start
     if(!isDragStart) return;
+
+    //prevents default behavior for touch and mouse events
     e.preventDefault();
+
+    //indicates that the dragging is in progress
     isDragging = true;
     carousel.classList.add("dragging");
+
+    //upgrades the scroll left property
     positionDiff = (e.pageX || e.touches[0].pageX) - prevPageX;
     carousel.scrollLeft = prevScrollLeft - positionDiff;
+
+    //shows or hides navigation icons based on the updated scroll position
     showHideIcons();
   }
 
-  const dragStop = () =>
-  {
+  //stops the dragging
+  const dragStop = () => {
+
+    // resets drag start state
     isDragStart = false;
     carousel.classList.remove("dragging");
+
+    //if dragging is in progress, executes autoSlide
     if(!isDragging) return;
     isDragging = false;
     autoSlide();
   }
 
+  // adds event listeners for mouse and touch events to initiate the drag operation
   carousel.addEventListener("mousedown",  dragStart, { passive: true });
   carousel.addEventListener("touchstart", dragStart, { passive: true });
 
+  // adds event listeners for mouse and touch move events to handle dragging
   document.addEventListener("mousemove", dragging, { passive: true });
   carousel.addEventListener("touchmove", dragging, { passive: true });
 
+  // adds event listeners for mouse and touch end events to handle the end of dragging
   document.addEventListener("mouseup",  dragStop, { passive: true });
   carousel.addEventListener("touchend", dragStop, { passive: true });
 }
 
+//initializes each carousel
 initializeCarousel("#carousel1");
 initializeCarousel("#carousel2");
 initializeCarousel("#carousel3");
@@ -162,11 +191,11 @@ initializeCarousel("#carousel6");
 initializeCarousel("#carousel7");
 
 //when the user clicks on a book's image, it sends him to "shop.html" and shows book's information
-function showBook(bookElement)
-{
-   //checks if user is logged
-      if (sessionStorage.getItem('logged') === 'true')
-      {
+function showBook(bookElement) {
+
+  //checks if user is logged
+      if (sessionStorage.getItem('logged') === 'true') {
+
         //gets image's URL
         let imageUrl = bookElement.src;
 
@@ -192,41 +221,37 @@ function showBook(bookElement)
 
 //------------------------------------------------LOGIN.HTML------------------------------------------------------------
 //executes the login when the form's submit button is pressed
-function login()
-{
+function login() {
+
   //gets user's username and password from the page
   const username = document.getElementById('log_usr').value,
         password = document.getElementById('log_passw').value;
 
   //checks if entered values are correctly read
-  if(username && password)
-  {
+  if(username && password) {
+
     //sends an HTTP request to the server at the specified url to check if the login works
-    $.ajax
-    ({
+    $.ajax ({
       url        : 'http://localhost:3000/login',
       method     : 'POST',
       contentType: 'application/json',
       data       : JSON.stringify({username, password}),
 
       //if the login works, it sends the user at "index.html"
-      success: function (data)
-      {
+      success: function (data) {
         sessionStorage.setItem('logged', 'true');
         document.location.href = data.redirect;
       },
 
       //if the login doesn't work, it shows the error message
-      error: function (xhr)
-      {
+      error: function (xhr) {
         console.error("Errore durante l'autenticazione:", xhr.responseJSON.error);
 
         //gets login error element
         const loginError = document.getElementById('login_error');
 
         //checks if the login error element is correctly read and shows the error message
-        if (loginError)
-        {
+        if (loginError) {
           loginError.innerText     = 'Credenziali errate';
           loginError.style.display = 'block';
         }
@@ -240,18 +265,17 @@ function login()
 
 //------------------------------------------------REGISTRAZIONE.HTML----------------------------------------------------
 //checks if the password respects the standard
-function checkPassword()
-{
+function checkPassword() {
+
   //gets password and error message element
   let password   = document.getElementById('reg_passw').value;
   const regError = document.getElementById('reg_error');
 
   //checks if password and error message element are correctly read
-  if (password && regError)
-  {
+  if (password && regError) {
+
     //checks if the password contains at least 8 letters, an upper case letter and a special character
-    if (password.length < 8 || !/[A-Z]/.test(password) || !/[@#$%^&+=-_]/.test(password))
-    {
+    if (password.length < 8 || !/[A-Z]/.test(password) || !/[@#$%^&+=-_]/.test(password)) {
       regError.innerText     = 'La password deve contenere almeno 8 caratteri, una lettera maiuscola e un carattere speciale';
       regError.style.display = 'block';
       return false;
@@ -261,8 +285,8 @@ function checkPassword()
 }
 
 //executes the signup when the form's submit button is pressed
-function register()
-{
+function register() {
+
   //gets user's name, surname, username and password from the page
   const name     = document.getElementById('reg_name'   ).value,
         surname  = document.getElementById('reg_surname').value,
@@ -270,35 +294,31 @@ function register()
         password = document.getElementById('reg_passw'  ).value;
 
   //checks if entered values are correctly read
-  if (name && surname && username && password)
-  {
+  if (name && surname && username && password) {
+
     //checks if the password respects the standard
-    if (checkPassword())
-    {
+    if (checkPassword()) {
+
       //sends an HTTP request to the server at the specified url to check if the sign-up works
-      $.ajax
-      ({
+      $.ajax ({
         url:          'http://localhost:3000/register',
         method:       'POST',
         contentType:  'application/json',
         data:         JSON.stringify({name, surname, username, password}),
 
         //if the sign-up works, it sends the user at the page "index.html"
-        success: function (data)
-        {
+        success: function (data) {
           sessionStorage.setItem('logged', 'true');
           window.location.href = data.redirect;
         },
-        error: function (xhr)
-        {
+        error: function (xhr) {
           console.error("Errore durante l'autenticazione:", xhr.responseJSON.error);
 
           //gets register error element
           const regError = document.getElementById('reg_error');
 
           //checks if the register error element is correctly read and shows the error message
-          if (regError)
-          {
+          if (regError) {
             regError.innerText     = 'Username non disponibile o uso di caratteri non consentiti per nome e cognome';
             regError.style.display = 'block';
           }
@@ -313,8 +333,8 @@ function register()
 
 //------------------------------------------------SHOP.HTML-------------------------------------------------------------
 //clears the reviews list
-function clearReviewList()
-{
+function clearReviewList() {
+
   //gets reviews list element
   const reviewList = document.getElementById('reviews_list');
 
@@ -326,8 +346,8 @@ function clearReviewList()
 }
 
 //shows suggestions to the user about the book he's searching
-function getSuggestions()
-{
+function getSuggestions() {
+
   //gets book's name and suggestions list element
   const input          = document.getElementById('search_in').value,
         suggestionList = document.getElementById('suggestion_list');
@@ -339,23 +359,20 @@ function getSuggestions()
     suggestionList.innerHTML = '';
 
     //sends an HTTP request to the specified url to get suggestions for the search
-    $.ajax
-    ({
+    $.ajax ({
       url:         'http://localhost:3000/getSuggestions',
       method:      'POST',
       contentType: 'application/json',
       data:        JSON.stringify({input}),
-      success: function (data)
-      {
+      success: function (data) {
+
         //each suggestion is inserted as a <li> element in a <ul> list
-        data.value.forEach(suggestion =>
-        {
+        data.value.forEach(suggestion => {
           const li = document.createElement('li');
           li.textContent = suggestion;
 
           //if the user clicks on a suggestion, it writes it into the search bar text
-          li.onclick = function ()
-          {
+          li.onclick = function () {
             document.getElementById('search_in').value = suggestion;
 
             //deletes remaining suggestions
@@ -366,8 +383,7 @@ function getSuggestions()
           suggestionList.appendChild(li);
         });
       },
-      error: function (xhr)
-      {
+      error: function (xhr) {
         console.error("Errore nella ricerca del libro: ", xhr.responseJSON.error);
       }
     });
@@ -375,14 +391,14 @@ function getSuggestions()
 }
 
 //searchs book which title is entered by the user when the form's submit button is pressed
-function searchBook()
-{
+function searchBook() {
+
   //gets book's name
   const bookName = document.getElementById('search_in').value;
 
   //checks if book's name is correctly read
-  if (bookName)
-  {
+  if (bookName) {
+
     //gets book's information
     const bookImage        = document.getElementById("preview_image"),
           bookNameAppear   = document.getElementById('book_name'),
@@ -395,17 +411,14 @@ function searchBook()
           pdfAppear        = document.getElementById('pdf_hidden');
 
     //checks if every book's piece of information is correctly read
-    if(bookImage && bookNameAppear && bookAuthorAppear && bookTypeAppear && bookYearAppear && bookPageAppear && bookPriceAppear && pdfView && pdfAppear)
-    {
+    if(bookImage && bookNameAppear && bookAuthorAppear && bookTypeAppear && bookYearAppear && bookPageAppear && bookPriceAppear && pdfView && pdfAppear) {
       //sends an HTTP request to the server at the specified url to check if the login works
-      $.ajax
-      ({
+      $.ajax ({
         url:          'http://localhost:3000/searchBook',
         method:       'POST',
         contentType:  'application/json',
         data:         JSON.stringify({bookName}),
-        success: function (data)
-        {
+        success: function (data) {
           //clears preview reviews list
           clearReviewList();
           showBookReviews();
@@ -423,8 +436,7 @@ function searchBook()
           //stores book's name into the session's cache
           sessionStorage.setItem('bookName', bookName);
         },
-        error: function (xhr)
-        {
+        error: function (xhr) {
           console.error("Errore nella ricerca del libro: ", xhr.responseJSON.error);
         }
       });
@@ -435,23 +447,19 @@ function searchBook()
 }
 
 //allows the user to add a book in his cart
-function addBook()
-{
+function addBook() {
   //gets the book searched by the user
   const bookName = document.getElementById("search_in").value;
 
   //checks if the book's name is correctly read
-  if (bookName)
-  {
+  if (bookName) {
     //sends an HTTP request at the specified url to add the book in user's cart
-    $.ajax
-    ({
+    $.ajax ({
       url:         'http://localhost:3000/addBook',
       method:      'POST',
       contentType: 'application/JSON',
       data:         JSON.stringify({ bookName }),
-      error: function (xhr)
-      {
+      error: function (xhr) {
         console.error('Errore inserimento libro nel carrello:', xhr.responseJSON.error);
       }
     });
@@ -460,40 +468,36 @@ function addBook()
     console.log("Errore lettura nome libro");
 }
 
-// shows book's reviews
-function showBookReviews()
-{
-  // gets book's name and reviews list element
+//shows book's reviews
+function showBookReviews() {
+
+  //gets book's name and reviews list element
   const bookName = document.getElementById('search_in').value;
 
-  if (bookName)
-  {
-    // sends an HTTP request at the specified url to get logged value and check if the user is logged
-    $.ajax
-    ({
+  if (bookName) {
+
+    //sends an HTTP request at the specified url to get logged value and check if the user is logged
+    $.ajax ({
       url:         'http://localhost:3000/showBookReviews',
       method:      'POST',
       contentType: 'application/JSON',
       data:        JSON.stringify({ bookName }),
 
-      success: function (data)
-      {
-        // clears previous reviews list
+      success: function (data) {
+
+        //clears previous reviews list
         clearReviewList();
 
-        // gets reviews list element
+        //gets reviews list element
         const reviewsList      = document.getElementById('reviews_list');
         const noReviewsMessage = document.getElementById('no_reviews');
 
-        // Check if there are reviews
-        if (data.value.length > 0)
-        {
-          // Display "Recensioni" message
+        //checks if there are reviews
+        if (data.value.length > 0) {
           noReviewsMessage.textContent = 'Recensioni';
 
-          // each review is inserted as a <li> element in a <ul> list
-          data.value.forEach((review) =>
-          {
+          //each review is inserted as a <li> element in a <ul> list
+          data.value.forEach((review) => {
             const bookReview     = document.createElement('p'),
               reviewTitle      = document.createElement('h3'),
               reviewUsername   = document.createElement('p'),
@@ -503,7 +507,7 @@ function showBookReviews()
               reviewContainer  = document.createElement('div'),
               manageContainer  = document.createElement('div');
 
-            // sets review's information
+            //sets review's information
             reviewUsername.textContent = review.utente;
             reviewData.textContent     = review.data;
             spacer.textContent         = '|';
@@ -515,7 +519,7 @@ function showBookReviews()
             reviewContainer.id         = 'review_container';
             manageContainer.id         = 'managerev_container';
 
-            // appends the review and its information
+            //appends the review and its information
             reviewContainer.appendChild(infoRevContainer);
             infoRevContainer.appendChild(reviewData);
             infoRevContainer.appendChild(spacer);
@@ -524,54 +528,40 @@ function showBookReviews()
             reviewContainer.appendChild(bookReview);
             reviewsList.appendChild(reviewContainer);
           });
-        }
-        else
-        {
-          // Display "Nessuna recensione" message
+        } else {
           noReviewsMessage.textContent = 'Nessuna recensione';
         }
       },
-      error: function (xhr)
-      {
+      error: function (xhr) {
         console.error('Errore ricerca recensioni libro:', xhr.responseJSON.error);
       },
     });
-  }
-  else
-  {
+  } else {
     console.log('Errore lettura nome libro');
   }
 }
 
 //checks if the user has already reviewed the book
-function checkReview()
-{
+function checkReview() {
+
+  //gets book's name from the session storage
   const bookName = sessionStorage.getItem('bookName');
 
-  if (bookName)
-  {
+  if (bookName) {
+
     //sends an HTTP request at the specified url to check if user has already registered the book
-    $.ajax
-    ({
+    $.ajax ({
       url:         'http://localhost:3000/checkReview',
       method:      'POST',
       contentType: 'application/JSON',
       data:         JSON.stringify({ bookName }),
 
       //if the user hasn't already reviewed the book, it sends him to "recensione.html"
-      success: function(data)
-      {
+      success: function(data) {
         if (!data.value)
-        {
           document.location.href = data.redirect;
-        }
-        else
-        {
-
-        }
       },
-      error: function (xhr)
-      {
+      error: function (xhr) {
         console.error('Errore inserimento libro nel carrello:', xhr.responseJSON.error);
       }
     });
@@ -579,15 +569,15 @@ function checkReview()
 }
 
 //checks if the user has accessed this page by clicking a book's image in "index.html"
-function checkSearch()
-{
+function checkSearch() {
+
   //gets book's name searched by the user from session storage
   const checkBook1 = sessionStorage.getItem('bookSearch'),
         checkBook2 = sessionStorage.getItem('bookName');
 
   //checks if the user has accessed this page from "index.html"
-  if (checkBook1)
-  {
+  if (checkBook1) {
+
     //gets search bar's value
     document.getElementById('search_in').value = checkBook1;
 
@@ -599,8 +589,8 @@ function checkSearch()
   }
 
   //checks if the user has accessed this page from "recensione.html"
-  else if (checkBook2)
-  {
+  else if (checkBook2) {
+
     //gets search bar's value
     document.getElementById('search_in').value = checkBook2;
 
@@ -615,42 +605,37 @@ function checkSearch()
 
 //------------------------------------------------RECENSIONE.HTML-------------------------------------------------------
 //stores a book's review written by the user
-function writeReview()
-{
+function writeReview() {
+
   //gets book's review and name
   const reviewTitle = document.getElementById('review_title').value,
     review      = document.getElementById('review').value,
     bookName    = sessionStorage.getItem('bookName');
 
   //checks if book's review and name are correctly read
-  if (bookName && review && reviewTitle)
-  {
+  if (bookName && review && reviewTitle) {
+
     //sends an HTTP request to the server at the specified url to store user's review
-    $.ajax
-    ({
+    $.ajax ({
       url: 'http://localhost:3000/writeReview',
       method: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({bookName, review, reviewTitle}),
-      success: function(data)
-      {
+      success: function(data) {
         document.location.href = data.redirect;
       },
-      error: function (xhr)
-      {
+      error: function (xhr) {
         console.error("Errore scrittura recensione: ", xhr.responseJSON.error);
       }
     });
-  }
-  else
-    console.log("Errore lettura recensione o nome libro");
+  } else
+      console.log("Errore lettura recensione o nome libro");
 }
 //------------------------------------------------RECENSIONE.HTML-------------------------------------------------------
 
 //------------------------------------------------ACCOUNT.HTML----------------------------------------------------------
 //executes the logout when the form's submit button is pressed
-function logout()
-{
+function logout() {
     sessionStorage.removeItem('bookName');
     sessionStorage.removeItem('bookSearch');
     sessionStorage.removeItem('logged');
@@ -658,107 +643,94 @@ function logout()
 }
 
 //empties user's cart
-function emptyCart()
-{
-  //send an HTTP request to the server at the specified url to get logged value and check if the user is logged
-  $.ajax
-  ({
+function emptyCart() {
+
+  //sends an HTTP request to the server at the specified url to get logged value and check if the user is logged
+  $.ajax ({
     url   : 'http://localhost:3000/emptyCart',
     method: 'POST',
 
     //if the logout works, it sends the user to "index.html"
-    success: function ()
-    {
+    success: function () {
       updateCartView();
     },
-    error: function (xhr)
-    {
+    error: function (xhr) {
       console.error('Errore durante la richiesta di stato di logged:', xhr.responseJSON.error);
     }
   });
 }
 
 //removes a user's review
-function removeReview(bookName)
-{
+function removeReview(bookName) {
+
   //send an HTTP request to the server at the specified url to get logged value and check if the user is logged
-  $.ajax
-  ({
+  $.ajax ({
     url   :      'http://localhost:3000/removeReview',
     method:      'POST',
     contentType: 'application/json',
     data:        JSON.stringify({ bookName }),
 
     //if the logout works, it sends the user to "index.html"
-    success: function ()
-    {
+    success: function () {
       getInfo();
     },
-    error: function (xhr)
-    {
+    error: function (xhr) {
       console.error('Errore durante la richiesta di stato di logged:', xhr.responseJSON.error);
     }
   });
 }
 
 //starts automatically when the page is loaded, gets user's data and shows them in the page
-function getInfo()
-{
+function getInfo() {
   //send an HTTP request to the server at the specified url to get user's data
-  $.ajax
-  ({
+  $.ajax ({
     url   : 'http://localhost:3000/getInfo',
     method: 'POST',
-    success: function (data)
-    {
+    success: function (data) {
+
       //gets username, name and surname elements
       const usernameText = document.getElementById('acc_user'),
         nameText     = document.getElementById('acc_name'),
         surnameText  = document.getElementById('acc_surn');
 
       //checks if elements are correctly read
-      if (usernameText && nameText && surnameText)
-      {
+      if (usernameText && nameText && surnameText) {
         //shows user's data
         usernameText.textContent = 'Ciao ' + data.username;
         nameText.textContent     = data.nome;
         surnameText.textContent  = data.cognome;
-      }
-      else
-        console.log("Errore lettura informazioni utente");
+      } else
+          console.log("Errore lettura informazioni utente");
     },
-    error: function (xhr)
-    {
+    error: function (xhr) {
       console.error("Errore recupero dati utente:", xhr.responseJSON.error);
     }
   });
 }
 
 //shows user's reviews when the button is pressed
-function showUserReviews()
-{
+function showUserReviews() {
+
   //send an HTTP request to the server at the specified url to get user's data
-  $.ajax
-  ({
+  $.ajax ({
     url   : 'http://localhost:3000/getInfo',
     method: 'POST',
-    success: function (data)
-    {
+    success: function (data) {
+
       //gets username, name and surname elements
       const reviewList = document.getElementById('reviews_cronology');
       const noReviewsMessage = document.getElementById('no_reviews');
 
       //checks if elements are correctly read
-      if (reviewList && noReviewsMessage)
-      {
+      if (reviewList && noReviewsMessage) {
+
         //clears previous reviews
         reviewList.innerHTML = '';
+
+        //if there are no reviews, show a message
         if (data.recensioni.length === 0) {
-          // If there are no reviews, show the "Non ci sono recensioni" message
           noReviewsMessage.innerHTML = 'Nessuna recensione';
-        }
-        else {
-          // If there are reviews, hide the "Non ci sono recensioni" message
+        } else {
           noReviewsMessage.innerHTML = 'Le tue recensioni';
 
           //each review is inserted as a <li> element in a <ul> list
@@ -807,38 +779,34 @@ function showUserReviews()
       else
         console.log("Errore lettura informazioni utente");
     },
-    error: function (xhr)
-    {
+    error: function (xhr) {
       console.error("Errore recupero dati utente:", xhr.responseJSON.error);
     }
   });
 }
 
 //removes a book from the user's cart
-function removeBookFromCart(bookName)
-{
-  $.ajax
-  ({
+function removeBookFromCart(bookName) {
+
+  //sends an HTTP request to the server at the specified url to check if the book is in user's cart
+  $.ajax ({
     url:         'http://localhost:3000/removeBook',
     method:      'POST',
     contentType: 'application/json',
     data:        JSON.stringify({ bookName }),
 
     //if it works, it updates cart visualization
-    success: function (data)
-    {
+    success: function (data) {
       updateCartView(data.value);
     },
-    error: function (xhr)
-    {
+    error: function (xhr) {
       console.error('Errore nella rimozione del libro dal carrello:', xhr.responseJSON.error);
     }
   });
 }
 
-// Funzione per aggiornare la visualizzazione del carrello
-function updateCartView(cartItems)
-{
+function updateCartView(cartItems) {
+
   //gets cart element
   const cartList = document.getElementById("cart_list");
 
@@ -846,14 +814,13 @@ function updateCartView(cartItems)
   let totalPrice = 0;
 
   //checks if cart element is correctly read
-  if (cartList)
-  {
+  if (cartList) {
+
     //clears previous cart visualization
     cartList.innerHTML = '';
 
     //shows the updated cart
-    cartItems.forEach(ordine =>
-    {
+    cartItems.forEach(ordine => {
       const bookName       = document.createElement('h3'),
             bookPrice      = document.createElement('p'),
             spacer         = document.createElement('p'),
@@ -878,8 +845,7 @@ function updateCartView(cartItems)
       totalPrice += parseFloat(ordine.prezzo);
 
       //when a remove button is pressed, it removes the indicated book from user's cart
-      removeBook.onclick = function ()
-      {
+      removeBook.onclick = function () {
         removeBookFromCart(ordine.nome);
       };
 
@@ -900,37 +866,32 @@ function updateCartView(cartItems)
           clearCart  = document.getElementById('cart_clear');
 
     //if the cart isn't empty
-    if (parseFloat(totalPrice) > 0)
-    {
+    if (parseFloat(totalPrice) > 0) {
       //appends cart's total price and clear cart button
       cartTot.textContent    = 'Carrello: ' + (parseFloat(totalPrice)) + '€';
       cartSpacer.textContent = '|';
       clearCart.textContent  = 'Svuota';
 
       //when the clear cart button is pressed, it empties user's cart
-      clearCart.onclick = function ()
-      {
+      clearCart.onclick = function () {
         totalPrice = 0;
         cartTot.textContent    = 'Carrello vuoto';
         cartSpacer.textContent = '';
         clearCart.textContent  = '';
         emptyCart();
       };
-    }
-    else
-    {
+    } else {
       cartTot.textContent    = 'Carrello vuoto';
       cartSpacer.textContent = '';
       clearCart.textContent  = '';
     }
-  }
-  else
-    console.log("Errore cattura carrello");
+  } else
+      console.log("Errore cattura carrello");
 }
 
 //starts automatically when the page is loaded and gets user's cart
-function showCart()
-{
+function showCart() {
+
   //gets cart element
   const cartList = document.getElementById("cart_list");
 
@@ -938,18 +899,16 @@ function showCart()
   let totalPrice = 0;
 
   //checks if cart element is correctly read
-  if (cartList)
-  {
-    //sends an HTTP request to get user's cart
-    $.ajax
-    ({
+  if (cartList) {
+
+    //sends an HTTP request to the server at the specified url to get user's cart
+    $.ajax ({
       url: 'http://localhost:3000/showCart',
       method: 'POST',
-      success: function (data)
-      {
+      success: function (data) {
+
         //each book added to the cart is inserted as a <li> element in a <ul> list
-        data.value.forEach(ordine =>
-        {
+        data.value.forEach(ordine => {
           const bookName       = document.createElement('h3'),
             bookPrice      = document.createElement('p'),
             spacer         = document.createElement('p'),
@@ -975,8 +934,7 @@ function showCart()
           totalPrice += parseFloat(ordine.prezzo);
 
           //when a remove button is pressed, it removes the indicated book from user's cart
-          removeBook.onclick = function ()
-          {
+          removeBook.onclick = function () {
             removeBookFromCart(ordine.nome);
           };
 
@@ -997,32 +955,28 @@ function showCart()
           clearCart  = document.getElementById('cart_clear');
 
         //if the cart isn't empty
-        if (parseFloat(totalPrice) > 0)
-        {
+        if (parseFloat(totalPrice) > 0) {
+
           //appends cart's total price and clear cart button
           cartTot.textContent    = 'Carrello: ' + (parseFloat(totalPrice)) + '€';
           cartSpacer.textContent = '|';
           clearCart.textContent  = 'Svuota';
 
           //when the clear cart button is pressed, it empties user's cart
-          clearCart.onclick = function ()
-          {
+          clearCart.onclick = function () {
             totalPrice             = 0;
             cartTot.textContent    = 'Carrello vuoto';
             cartSpacer.textContent = '';
             clearCart.textContent  = '';
             emptyCart();
           };
-        }
-        else
-        {
+        } else {
           cartTot.textContent    = 'Carrello vuoto';
           cartSpacer.textContent = '';
           clearCart.textContent  = '';
         }
       },
-      error: function (xhr)
-      {
+      error: function (xhr) {
         console.error('Errore ottenimento carrello:', xhr.responseJSON.error);
       }
     });
