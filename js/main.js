@@ -514,7 +514,7 @@ function showBookReviews() {
             reviewTitle.textContent    = review.titolo;
             bookReview.textContent     = review.commento;
             spacer.id                  = 'book_spacer';
-            reviewUsername.id          = 'user_container';
+            reviewUsername.id          = review.utente;
             infoRevContainer.id        = 'inforev_container';
             reviewContainer.id         = 'review_container';
             manageContainer.id         = 'managerev_container';
@@ -559,7 +559,14 @@ function checkReview() {
       //if the user hasn't already reviewed the book, it sends him to "recensione.html"
       success: function(data) {
         if (!data.value)
+        {
           document.location.href = data.redirect;
+        }
+        else
+        {
+          let reviewAuthor = document.getElementById(data.user);
+          reviewAuthor.style.color = "red";
+        }
       },
       error: function (xhr) {
         console.error('Errore inserimento libro nel carrello:', xhr.responseJSON.error);

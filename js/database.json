@@ -13,6 +13,13 @@
       "username": "giopic02",
       "password": "aab2d72a64eabefa38f5a3694ab6874e17db854960f0a76fbcab83005e67620f",
       "carrello": []
+    },
+    {
+      "nome": "Domenico",
+      "cognome": "Risso",
+      "username": "domenicorissooo__",
+      "password": "3a62bc8e9690488cb734dcc1c5c808849fb3923614a08783af38ab2ae3d29809",
+      "carrello": []
     }
   ],
   "libri": [
@@ -23,7 +30,20 @@
       "anno": "2002",
       "pagine": "1380",
       "prezzo": "10€",
-      "recensioni": [],
+      "recensioni": [
+        {
+          "titolo": "Stupefacente!",
+          "commento": "Ho apprezzato davvero molto la trama, i personaggi sono ben caratterizzati. Stra consigliato!",
+          "data": "12/12/2023",
+          "utente": "gaetano22"
+        },
+        {
+          "titolo": "finalmente",
+          "commento": "figlio è morto e gaetano si è messo le mani nel culo",
+          "data": "12/12/2023",
+          "utente": "domenicorissooo__"
+        }
+      ],
       "percorso": "pdf/Il_signore_degli_anelli_anteprima.pdf"
     },
     {

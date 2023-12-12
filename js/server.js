@@ -324,7 +324,7 @@ app.post('/checkReview', (req, res) => {
       const checkReview = checkBook.recensioni.find(review => review.utente === username);
 
       //if he hasn't, he can write a review
-      res.json({ value: checkReview, redirect: 'recensione.html' });
+      res.json({ value: checkReview, user:username, redirect: 'recensione.html' });
     } else
       printError(res, 'Nome del libro non trovati nella richiesta HTTP o accesso non effettuato');
   }
