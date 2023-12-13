@@ -5,14 +5,14 @@ window.onload = () => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service_worker.js').then(function (registration) {
 
-        //service worker registered correctly
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      },
-      function (err) {
+          //service worker registered correctly
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        },
+        function (err) {
 
-        //troubles in registering the service worker
-        console.log('ServiceWorker registration failed: ', err);
-      });
+          //troubles in registering the service worker
+          console.log('ServiceWorker registration failed: ', err);
+        });
   }
 }
 
@@ -34,8 +34,8 @@ function showNavbar() {
 
   //gets navbar's button's elements
   const accountButton = document.getElementById('nav_account'),
-    shopButton    = document.getElementById('nav_shop'),
-    loginButton   = document.getElementById('nav_login');
+      shopButton    = document.getElementById('nav_shop'),
+      loginButton   = document.getElementById('nav_login');
 
   //checks if each buttons is correctly get
   if (accountButton && shopButton && loginButton) {
@@ -52,9 +52,8 @@ function showNavbar() {
       shopButton.style.display = "none";
       accountButton.style.display = "none";
     }
-  }
-  else
-    console.log("Errore cattura elementi bottoni navbar");
+  } else
+      console.log("Errore cattura elementi bottoni navbar");
 }
 
 function initializeCarousel(wrapperSelector) {
@@ -62,21 +61,21 @@ function initializeCarousel(wrapperSelector) {
   //gets each carousel's elements
   const wrapper = document.querySelector(wrapperSelector),
 
-    //carousel's class of element
-    carousel = wrapper.querySelector(".carousel"),
+      //carousel's class of element
+      carousel = wrapper.querySelector(".carousel"),
 
-    //carousel's first image
-    firstImg = carousel.querySelectorAll("img")[0],
+      //carousel's first image
+      firstImg = carousel.querySelectorAll("img")[0],
 
-    //arrow to scroll images
-    arrowIcons = wrapper.querySelectorAll("i");
+      //arrow to scroll images
+      arrowIcons = wrapper.querySelectorAll("i");
 
   //variables to track drag states and positions
   let isDragStart = false,
-    isDragging = false,
-    prevPageX,
-    prevScrollLeft,
-    positionDiff;
+      isDragging = false,
+      prevPageX,
+      prevScrollLeft,
+      positionDiff;
 
   //shows or hides navigation icons based on carousel scroll position
   const showHideIcons = () => {
@@ -225,7 +224,7 @@ function login() {
 
   //gets user's username and password from the page
   const username = document.getElementById('log_usr').value,
-    password = document.getElementById('log_passw').value;
+        password = document.getElementById('log_passw').value;
 
   //checks if entered values are correctly read
   if(username && password) {
@@ -235,11 +234,14 @@ function login() {
       url        : 'http://localhost:3000/login',
       method     : 'POST',
       contentType: 'application/json',
-      data       : JSON.stringify({username, password}),
+      data       : JSON.stringify ({ username: username, password: password }),
 
       //if the login works, it sends the user at "index.html"
       success: function (data) {
         sessionStorage.setItem('logged', 'true');
+        sessionStorage.setItem('name', data.name);
+        sessionStorage.setItem('surname', data.surname);
+        sessionStorage.setItem('username', username);
         document.location.href = data.redirect;
       },
 
@@ -262,16 +264,24 @@ function login() {
     console.log("Errore lettura username o password");
 }
 
-// make the password visible
-function togglePasswordVisibility()
-{
+//makes the password visible or invisible in login form
+function logTogglePasswordVisibility() {
   let passwordInput = document.getElementById("log_passw");
 
-  if (passwordInput.type === "password")
-  {
+  if (passwordInput.type === "password") {
     passwordInput.type = "text";
-  } else
-  {
+  } else {
+    passwordInput.type = "password";
+  }
+}
+
+//makes the password visible or invisible in sign up form
+function regTogglePasswordVisibility() {
+  let passwordInput = document.getElementById("reg_passw");
+
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+  } else {
     passwordInput.type = "password";
   }
 }
@@ -301,29 +311,32 @@ function checkPassword() {
 //executes the signup when the form's submit button is pressed
 function register() {
 
-  //gets user's name, surname, username and password from the page
-  const name     = document.getElementById('reg_name'   ).value,
-    surname  = document.getElementById('reg_surname').value,
-    username = document.getElementById('reg_usr'    ).value,
-    password = document.getElementById('reg_passw'  ).value;
+  //gets user's name, surname, username, and password from the page
+  const name   = document.getElementById('reg_name').value,
+      surname  = document.getElementById('reg_surname').value,
+      username = document.getElementById('reg_usr').value,
+      password = document.getElementById('reg_passw').value;
 
   //checks if entered values are correctly read
   if (name && surname && username && password) {
 
-    //checks if the password respects the standard
+    //checks if the password respects the standard using the checkPassword() function
     if (checkPassword()) {
 
-      //sends an HTTP request to the server at the specified url to check if the sign-up works
-      $.ajax ({
-        url:          'http://localhost:3000/register',
-        method:       'POST',
-        contentType:  'application/json',
-        data:         JSON.stringify({name, surname, username, password}),
+      //sends an HTTP request to the server at the specified URL to check if the sign-up works
+      $.ajax({
+        url: 'http://localhost:3000/register',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify ({ name: name, surname: surname, username: username, password: password }),
 
-        //if the sign-up works, it sends the user at the page "index.html"
+        //if the sign-up works, it sends the user to the page "index.html"
         success: function (data) {
           sessionStorage.setItem('logged', 'true');
-          window.location.href = data.redirect;
+          sessionStorage.setItem('name', name);
+          sessionStorage.setItem('surname', surname);
+          sessionStorage.setItem('username', username);
+          document.location.href = data.redirect;
         },
         error: function (xhr) {
           console.error("Errore durante l'autenticazione:", xhr.responseJSON.error);
@@ -333,15 +346,14 @@ function register() {
 
           //checks if the register error element is correctly read and shows the error message
           if (regError) {
-            regError.innerText     = 'Username non disponibile o uso di caratteri non consentiti per nome e cognome';
+            regError.innerText = 'Username non disponibile o uso di caratteri non consentiti per nome e cognome';
             regError.style.display = 'block';
           }
         }
       });
     }
-  }
-  else
-    console.log("Errore lettura dati utente");
+  } else
+      console.log("Errore lettura dati utente");
 }
 //------------------------------------------------REGISTRAZIONE.HTML----------------------------------------------------
 
@@ -363,8 +375,8 @@ function clearReviewList() {
 function getSuggestions() {
 
   //gets book's name and suggestions list element
-  const input          = document.getElementById('search_in').value,
-    suggestionList = document.getElementById('suggestion_list');
+  const input = document.getElementById('search_in').value,
+      suggestionList = document.getElementById('suggestion_list');
 
   //checks if book's name and suggestions list element are correctly read
   if(input.trim() !== '' && suggestionList)
@@ -377,7 +389,7 @@ function getSuggestions() {
       url:         'http://localhost:3000/getSuggestions',
       method:      'POST',
       contentType: 'application/json',
-      data:        JSON.stringify({input}),
+      data:        JSON.stringify({input: input}),
       success: function (data) {
 
         //each suggestion is inserted as a <li> element in a <ul> list
@@ -409,20 +421,18 @@ function searchBook() {
 
   //gets book's name
   const bookName = document.getElementById('search_in').value;
-
-  //checks if book's name is correctly read
   if (bookName) {
 
     //gets book's information
     const bookImage        = document.getElementById("preview_image"),
-      bookNameAppear   = document.getElementById('book_name'),
-      bookAuthorAppear = document.getElementById('book_author'),
-      bookTypeAppear   = document.getElementById('book_type'),
-      bookYearAppear   = document.getElementById('book_year'),
-      bookPageAppear   = document.getElementById('book_page'),
-      bookPriceAppear  = document.getElementById('book_price'),
-      pdfView          = document.getElementById('pdf_viewer'),
-      pdfAppear        = document.getElementById('pdf_hidden');
+        bookNameAppear   = document.getElementById('book_name'),
+        bookAuthorAppear = document.getElementById('book_author'),
+        bookTypeAppear   = document.getElementById('book_type'),
+        bookYearAppear   = document.getElementById('book_year'),
+        bookPageAppear   = document.getElementById('book_page'),
+        bookPriceAppear  = document.getElementById('book_price'),
+        pdfView          = document.getElementById('pdf_viewer'),
+        pdfAppear        = document.getElementById('pdf_hidden');
 
     //checks if every book's piece of information is correctly read
     if(bookImage && bookNameAppear && bookAuthorAppear && bookTypeAppear && bookYearAppear && bookPageAppear && bookPriceAppear && pdfView && pdfAppear) {
@@ -431,7 +441,7 @@ function searchBook() {
         url:          'http://localhost:3000/searchBook',
         method:       'POST',
         contentType:  'application/json',
-        data:         JSON.stringify({bookName}),
+        data:         JSON.stringify({bookName: bookName}),
         success: function (data) {
 
           //clears preview reviews list
@@ -481,6 +491,7 @@ function searchBook() {
 
 //allows the user to add a book in his cart
 function addBook() {
+
   //gets the book searched by the user
   const bookName = document.getElementById("search_in").value;
 
@@ -491,34 +502,30 @@ function addBook() {
       url:         'http://localhost:3000/addBook',
       method:      'POST',
       contentType: 'application/JSON',
-      data:         JSON.stringify({ bookName }),
+      data:         JSON.stringify({ bookName: bookName, username: sessionStorage.getItem('username') }),
       error: function (xhr) {
         console.error('Errore inserimento libro nel carrello:', xhr.responseJSON.error);
       }
     });
-  }
-  else
-    console.log("Errore lettura nome libro");
+  } else
+      console.log("Errore lettura nome libro");
 }
 
 //shows book's reviews
-function showBookReviews()
-{
+function showBookReviews() {
   // gets book's name and reviews list element
   const bookName = document.getElementById('search_in').value;
 
-  if (bookName)
-  {
+  if (bookName) {
     // sends an HTTP request at the specified url to get logged value and check if the user is logged
-    $.ajax
-    ({
+    $.ajax ({
       url:         'http://localhost:3000/showBookReviews',
       method:      'POST',
       contentType: 'application/JSON',
-      data:        JSON.stringify({ bookName }),
+      data:        JSON.stringify({ bookName: bookName }),
 
-      success: function (data)
-      {
+      success: function (data) {
+
         // clears previous reviews list
         clearReviewList();
 
@@ -536,13 +543,13 @@ function showBookReviews()
           data.value.forEach((review) =>
           {
             const bookReview     = document.createElement('p'),
-              reviewTitle      = document.createElement('h3'),
-              reviewUsername   = document.createElement('p'),
-              spacer           = document.createElement('p'),
-              reviewData       = document.createElement('p'),
-              infoRevContainer = document.createElement('div'),
-              reviewContainer  = document.createElement('div'),
-              manageContainer  = document.createElement('div');
+                reviewTitle      = document.createElement('h3'),
+                reviewUsername   = document.createElement('p'),
+                spacer           = document.createElement('p'),
+                reviewData       = document.createElement('p'),
+                infoRevContainer = document.createElement('div'),
+                reviewContainer  = document.createElement('div'),
+                manageContainer  = document.createElement('div');
 
             // sets review's information
             reviewUsername.textContent = review.utente;
@@ -565,15 +572,12 @@ function showBookReviews()
             reviewContainer.appendChild(bookReview);
             reviewsList.appendChild(reviewContainer);
           });
-        }
-        else
-        {
+        } else {
           // Display "Nessuna recensione" message
           noReviewsMessage.textContent = 'Nessuna recensione';
         }
       },
-      error: function (xhr)
-      {
+      error: function (xhr) {
         console.error('Errore ricerca recensioni libro:', xhr.responseJSON.error);
       },
     });
@@ -597,7 +601,7 @@ function checkReview() {
       url:         'http://localhost:3000/checkReview',
       method:      'POST',
       contentType: 'application/JSON',
-      data:         JSON.stringify({ bookName }),
+      data:         JSON.stringify({ bookName: bookName, username: sessionStorage.getItem('username') }),
 
       //if the user hasn't already reviewed the book, it sends him to "recensione.html"
       success: function(data) {
@@ -628,7 +632,7 @@ function checkSearch() {
 
   //gets book's name searched by the user from session storage
   const checkBook1 = sessionStorage.getItem('bookSearch'),
-    checkBook2 = sessionStorage.getItem('bookName');
+      checkBook2 = sessionStorage.getItem('bookName');
 
   //checks if the user has accessed this page from "index.html"
   if (checkBook1) {
@@ -664,8 +668,8 @@ function writeReview() {
 
   //gets book's review and name
   const reviewTitle = document.getElementById('review_title').value,
-    review      = document.getElementById('review').value,
-    bookName    = sessionStorage.getItem('bookName');
+      review      = document.getElementById('review').value,
+      bookName    = sessionStorage.getItem('bookName');
 
   //checks if book's review and name are correctly read
   if (bookName && review && reviewTitle) {
@@ -675,7 +679,7 @@ function writeReview() {
       url: 'http://localhost:3000/writeReview',
       method: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify({bookName, review, reviewTitle}),
+      data: JSON.stringify({ bookName: bookName, review: review, reviewTitle: reviewTitle, username: sessionStorage.getItem('username') }),
       success: function(data) {
         document.location.href = data.redirect;
       },
@@ -694,6 +698,9 @@ function logout() {
   sessionStorage.removeItem('bookName');
   sessionStorage.removeItem('bookSearch');
   sessionStorage.removeItem('logged');
+  sessionStorage.removeItem('username');
+  sessionStorage.removeItem('name');
+  sessionStorage.removeItem('surname');
   window.location.href = "index.html";
 }
 
@@ -704,6 +711,7 @@ function emptyCart() {
   $.ajax ({
     url   : 'http://localhost:3000/emptyCart',
     method: 'POST',
+    data: JSON.stringify( {username: sessionStorage.getItem('username') }),
 
     //if the logout works, it sends the user to "index.html"
     success: function () {
@@ -723,7 +731,7 @@ function removeReview(bookName) {
     url   :      'http://localhost:3000/removeReview',
     method:      'POST',
     contentType: 'application/json',
-    data:        JSON.stringify({ bookName }),
+    data:        JSON.stringify({ bookName: bookName, username: sessionStorage.getItem('username') }),
 
     //if the logout works, it sends the user to "index.html"
     success: function () {
@@ -737,23 +745,25 @@ function removeReview(bookName) {
 
 //starts automatically when the page is loaded, gets user's data and shows them in the page
 function getInfo() {
+
   //send an HTTP request to the server at the specified url to get user's data
   $.ajax ({
     url   : 'http://localhost:3000/getInfo',
     method: 'POST',
-    success: function (data) {
+    data: { username: sessionStorage.getItem('username') },
+    success: function () {
 
       //gets username, name and surname elements
       const usernameText = document.getElementById('acc_user'),
-        nameText     = document.getElementById('acc_name'),
-        surnameText  = document.getElementById('acc_surn');
+          nameText     = document.getElementById('acc_name'),
+          surnameText  = document.getElementById('acc_surn');
 
       //checks if elements are correctly read
       if (usernameText && nameText && surnameText) {
         //shows user's data
-        usernameText.textContent = 'Ciao ' + data.username;
-        nameText.textContent     = data.nome;
-        surnameText.textContent  = data.cognome;
+        usernameText.textContent = 'Ciao ' + sessionStorage.getItem('username');
+        nameText.textContent     = sessionStorage.getItem('name');
+        surnameText.textContent  = sessionStorage.getItem('surname');
       } else
         console.log("Errore lettura informazioni utente");
     },
@@ -766,39 +776,43 @@ function getInfo() {
 //shows user's reviews when the button is pressed
 //shows user's reviews when the button is pressed
 function showUserReviews() {
-  //send an HTTP request to the server at the specified url to get user's data
-  $.ajax
-  ({
+
+  //sends an HTTP request to the server at the specified url to get user's data
+  $.ajax ({
     url   : 'http://localhost:3000/getInfo',
     method: 'POST',
+    data: { username: sessionStorage.getItem('username') },
     success: function (data) {
+
       //gets username, name and surname elements
       const reviewList = document.getElementById('reviews_cronology');
       const noReviewsMessage = document.getElementById('no_reviews');
 
       //checks if elements are correctly read
       if (reviewList && noReviewsMessage) {
+
         //clears previous reviews
         reviewList.innerHTML = '';
         if (data.recensioni.length === 0) {
-          // If there are no reviews, show the "Non ci sono recensioni" message
+
+          //if there are no reviews, show the "Non ci sono recensioni" message
           noReviewsMessage.innerHTML = 'Nessuna recensione';
-        }
-        else {
-          // If there are reviews, hide the "Non ci sono recensioni" message
+        } else {
+
+          //if there are reviews, hide the "Non ci sono recensioni" message
           noReviewsMessage.innerHTML = 'Le tue recensioni';
 
           //each review is inserted as a <li> element in a <ul> list
           data.recensioni.forEach(book => {
             const reviewItem      = document.createElement('li'),
-              removeButton      = document.createElement('button'),
-              bookCover         = document.createElement('img'),
-              bookName          = document.createElement('h3'),
-              reviewName        = document.createElement('p'),
-              spacer            = document.createElement('p'),
-              imageContainer    = document.createElement('div'),
-              revContainer      = document.createElement('div'),
-              remTitleContainer = document.createElement('div');
+                removeButton      = document.createElement('button'),
+                bookCover         = document.createElement('img'),
+                bookName          = document.createElement('h3'),
+                reviewName        = document.createElement('p'),
+                spacer            = document.createElement('p'),
+                imageContainer    = document.createElement('div'),
+                revContainer      = document.createElement('div'),
+                remTitleContainer = document.createElement('div');
 
             bookCover.src               = 'images/' + book.genere + '/' + book.nome + '.webp';
             bookCover.alt               = book.nome;
@@ -830,9 +844,8 @@ function showUserReviews() {
             };
           })
         }
-      }
-      else
-        console.log("Errore lettura informazioni utente");
+      } else
+          console.log("Errore lettura informazioni utente");
     },
     error: function (xhr) {
       console.error("Errore recupero dati utente:", xhr.responseJSON.error);
@@ -848,7 +861,7 @@ function removeBookFromCart(bookName) {
     url:         'http://localhost:3000/removeBook',
     method:      'POST',
     contentType: 'application/json',
-    data:        JSON.stringify({ bookName }),
+    data:        JSON.stringify({ bookName: bookName, username: sessionStorage.getItem('username') }),
 
     //if it works, it updates cart visualization
     success: function (data) {
@@ -877,13 +890,13 @@ function updateCartView(cartItems) {
     //shows the updated cart
     cartItems.forEach(ordine => {
       const bookName       = document.createElement('h3'),
-        bookPrice      = document.createElement('p'),
-        spacer         = document.createElement('p'),
-        removeBook     = document.createElement('button'),
-        insertImage    = document.createElement('img'),
-        imageContainer = document.createElement('div'),
-        infoContainer  = document.createElement('div'),
-        priceContainer = document.createElement('div');
+          bookPrice      = document.createElement('p'),
+          spacer         = document.createElement('p'),
+          removeBook     = document.createElement('button'),
+          insertImage    = document.createElement('img'),
+          imageContainer = document.createElement('div'),
+          infoContainer  = document.createElement('div'),
+          priceContainer = document.createElement('div');
 
       //shows book's information
       bookName.textContent     = ordine.nome;
@@ -917,8 +930,8 @@ function updateCartView(cartItems) {
 
     //gets total price and clear cart button elements
     const cartTot    = document.getElementById('cart_price'),
-      cartSpacer = document.getElementById('book_spacer1'),
-      clearCart  = document.getElementById('cart_clear');
+        cartSpacer = document.getElementById('book_spacer1'),
+        clearCart  = document.getElementById('cart_clear');
 
     //if the cart isn't empty
     if (parseFloat(totalPrice) > 0) {
@@ -960,18 +973,19 @@ function showCart() {
     $.ajax ({
       url: 'http://localhost:3000/showCart',
       method: 'POST',
+      data: { username: sessionStorage.getItem('username') },
       success: function (data) {
 
         //each book added to the cart is inserted as a <li> element in a <ul> list
         data.value.forEach(ordine => {
           const bookName       = document.createElement('h3'),
-            bookPrice      = document.createElement('p'),
-            spacer         = document.createElement('p'),
-            removeBook     = document.createElement('button'),
-            insertImage    = document.createElement('img'),
-            imageContainer = document.createElement('div'),
-            infoContainer  = document.createElement('div'),
-            priceContainer = document.createElement('div');
+              bookPrice      = document.createElement('p'),
+              spacer         = document.createElement('p'),
+              removeBook     = document.createElement('button'),
+              insertImage    = document.createElement('img'),
+              imageContainer = document.createElement('div'),
+              infoContainer  = document.createElement('div'),
+              priceContainer = document.createElement('div');
 
           //shows book's information
           bookName.textContent     = ordine.nome;
@@ -1006,8 +1020,8 @@ function showCart() {
 
         //gets total price and clear cart button elements
         const cartTot    = document.getElementById('cart_price'),
-          cartSpacer = document.getElementById('book_spacer1'),
-          clearCart  = document.getElementById('cart_clear');
+            cartSpacer = document.getElementById('book_spacer1'),
+            clearCart  = document.getElementById('cart_clear');
 
         //if the cart isn't empty
         if (parseFloat(totalPrice) > 0) {

@@ -8,18 +8,17 @@
       "carrello": []
     },
     {
-      "nome": "Giovanni",
-      "cognome": "Picardi",
-      "username": "giopic02",
-      "password": "aab2d72a64eabefa38f5a3694ab6874e17db854960f0a76fbcab83005e67620f",
-      "carrello": []
-    },
-    {
       "nome": "Domenico",
       "cognome": "Risso",
-      "username": "domenicorissooo__",
-      "password": "3a62bc8e9690488cb734dcc1c5c808849fb3923614a08783af38ab2ae3d29809",
-      "carrello": []
+      "username": "giopic02",
+      "password": "6d7d0f5d454250e4759be6b457bc3ce01d8db8a9c3dfe7a017c840c2ba1a8ff8",
+      "carrello": [
+        {
+          "nome": "Il signore degli anelli",
+          "prezzo": "10€",
+          "genere": "Avventura e Azione"
+        }
+      ]
     }
   ],
   "libri": [
