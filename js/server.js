@@ -152,6 +152,7 @@ app.post('/searchBook', (req, res) => {
           percorso: checkBook.percorso,
           autore:   checkBook.autore,
           genere:   checkBook.genere,
+          pagine:   checkBook.pagine,
           anno:     checkBook.anno,
           prezzo:   checkBook.prezzo
         });

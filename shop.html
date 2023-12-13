@@ -40,7 +40,7 @@
   <!-- Search bar -->
   <form id="search_box" method="post">
     <label for = "search_in"><input type="text" id="search_in" name="search" required placeholder="Libro da ricercare..." oninput="getSuggestions()"></label>
-    <button type="button" id="search_bnt" onclick="searchBook()"><img src="images/magnifying-glass-solid.svg" alt="search_button"></button>
+    <button type="button" id="search_bnt" onclick="searchBook()"><img src="images/Button%20icons/magnifying-glass-solid.svg" alt="search_button" loading="lazy"></button>
   </form>
   <!-- Search bar -->
 </div>
@@ -51,7 +51,10 @@
 <div id="pdf_hidden">
   <div id="pdf_container">
     <div id="shop_elements">
-      <iframe id="pdf_viewer"></iframe>
+      <div id="viewer_container">
+        <p id="no_preview"></p>
+        <iframe id="pdf_viewer"></iframe>
+      </div>
       <div id="preview_data">
         <div id="preview">
           <h1>Preview</h1>
@@ -76,7 +79,7 @@
               <div id="previews_manage">
                 <button class="previews_btn" onclick="checkReview()">Recensisci il libro</button>
               </div>
-              <button id="cart_btn" onclick="addBook()">Aggiungi al carrello</button>
+              <button id="cart_btn" onclick="addBook()"><img src="images/Button%20icons/cart-shopping-solid.svg" alt="search_button" loading="lazy">Aggiungi al carrello</button>
             </div>
           </div>
         </div>
@@ -94,22 +97,22 @@
     </div>
   </div>
 </div>
-  <!-- PDF -->
+<!-- PDF -->
 
-  <!-- JavaScript Client Side -->
-  <script>
-    window.addEventListener('load', function() {
-      checkLogged();
-    });
+<!-- JavaScript Client Side -->
+<script>
+  window.addEventListener('load', function() {
+    checkLogged();
+  });
 
-    document.addEventListener('DOMContentLoaded', function () {
-      checkSearch();
-    });
-  </script>
-  <!-- JavaScript Client Side -->
+  document.addEventListener('DOMContentLoaded', function () {
+    checkSearch();
+  });
+</script>
+<!-- JavaScript Client Side -->
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/server.js"></script>
-  <script src="js/main.js"></script>
+<script defer src="js/jquery.min.js"></script>
+<script defer src="js/server.js"></script>
+<script defer src="js/main.js"></script>
 </body>
 </html>

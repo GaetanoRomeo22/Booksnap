@@ -1,66 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Page's title -->
-    <title>PreviewReading</title>
+<head>
+  <!-- Page's title -->
+  <title>PreviewReading</title>
 
-    <!-- Link to manifest and css file -->
-    <link rel = "manifest" href = "manifest.json">
-    <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+  <!-- Link to manifest and css file -->
+  <link rel = "manifest" href = "manifest.json">
+  <link rel = "stylesheet" type = "text/css" href = "css/style.css">
 
-    <!-- Character codific -->
-    <meta charset="UTF-8">
+  <!-- Character codific -->
+  <meta charset="UTF-8">
 
-    <!-- Meta tag for PWA -->
-    <meta name = "viewport"    content = "width = device-width, initial-scale = 1.0">
-    <meta name = "theme-color" content = "white">
-    <meta name = "description" content = "PreviewReading">
+  <!-- Meta tag for PWA -->
+  <meta name = "viewport"    content = "width = device-width, initial-scale = 1.0">
+  <meta name = "theme-color" content = "white">
+  <meta name = "description" content = "PreviewReading">
 
-    <!--Specific meta tag for IOS -->
-    <link rel="apple-touch-icon" href="images/logo.webp">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="PreviewReading">
+  <!--Specific meta tag for IOS -->
+  <link rel="apple-touch-icon" href="images/logo.webp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="PreviewReading">
 
-    <!-- Specific meta tag for OS Windows -->
-    <meta name="application-name" content="PreviewReading">
-    <meta name="msapplication-TileImage" content="images/144x144.png">
-    <meta name="msapplication-TileColor" content="#cc194b">
-  </head>
-  <body>
-  <!-- Sign up Form -->
-  <div class="box_form">
-    <a href="index.html"><img class="logo" src="images/booksnap.webp" alt="logo" loading="lazy"></a>
-    <h2>Accedi al tuo account</h2>
-    <form id="login_form" method="post">
-      <div class="user_label">
-        <label for="log_usr"  ><input type="text"     class="account" id="log_usr"   name="username" required placeholder="Username"></label>
+  <!-- Specific meta tag for OS Windows -->
+  <meta name="application-name" content="PreviewReading">
+  <meta name="msapplication-TileImage" content="images/144x144.png">
+  <meta name="msapplication-TileColor" content="#cc194b">
+</head>
+<body>
+<!-- Sign up Form -->
+<div class="box_form">
+  <a href="index.html"><img class="logo" src="images/booksnap.webp" alt="logo" loading="lazy"></a>
+  <h3>Accedi al tuo account</h3>
+  <form id="login_form" method="post">
+    <div class="user_label">
+      <label for="log_usr"  ><input type="text"     class="account" id="log_usr"   name="username" required placeholder="Username"></label>
+      <div class="password">
         <label for="log_passw"><input type="password" class="account" id="log_passw" name="password" required placeholder="Password"></label>
-        <input class="btn" type="submit" onclick="login()" value = "Accedi">
+        <button class="showhide_passw" type="button" onclick="togglePasswordVisibility()"><img src="images/Button%20icons/eye-regular.svg" alt="search_button" loading="lazy"></button>
       </div>
-      <div class="signin_signup_switch">
-        <p>Non hai un account?</p>
-        <a href='registrazione.html'>Registrati</a>
-      </div>
-      <a class="user_error" id="login_error"></a>
-    </form>
-  </div>
-  <!-- Sign up Form -->
+      <input class="btn" type="submit" onclick="login()" value = "Accedi">
+    </div>
+    <div class="signin_signup_switch">
+      <p>Non hai un account?</p>
+      <a href='registrazione.html'>Registrati</a>
+    </div>
+    <a class="user_error" id="login_error"></a>
+  </form>
+</div>
+<!-- Sign up Form -->
 
-    <!-- JavaScript Client Side -->
-    <script>
-      window.addEventListener('load', function() {
-        checkNotLogged();
-      });
+<!-- JavaScript Client Side -->
+<script>
+  window.addEventListener('load', function() {
+    checkNotLogged();
+  });
 
-      document.getElementById('login_form').addEventListener('submit', event => {
-        event.preventDefault();
-      });
-    </script>
-    <!-- JavaScript Client Side -->
+  document.getElementById('login_form').addEventListener('submit', event => {
+    event.preventDefault();
+  });
+</script>
+<!-- JavaScript Client Side -->
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/server.js"></script>
-    <script src="js/main.js"></script>
-  </body>
+<script src="js/jquery.min.js"></script>
+<script src="js/server.js"></script>
+<script src="js/main.js"></script>
+</body>
 </html>

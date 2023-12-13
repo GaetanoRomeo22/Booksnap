@@ -5,27 +5,27 @@ window.onload = () => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service_worker.js').then(function (registration) {
 
-      //service worker registered correctly
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    },
-    function (err) {
+        //service worker registered correctly
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      },
+      function (err) {
 
-      //troubles in registering the service worker
-      console.log('ServiceWorker registration failed: ', err);
-    });
+        //troubles in registering the service worker
+        console.log('ServiceWorker registration failed: ', err);
+      });
   }
 }
 
 //starts automatically when the page is loaded and checks if the user has access to the page (used by "cart.html", "account.html", "shop.html" e "recensione.html")
 function checkLogged() {
-    if (sessionStorage.getItem('logged') !== 'true')
-      document.location.href = "index.html";
+  if (sessionStorage.getItem('logged') !== 'true')
+    document.location.href = "index.html";
 }
 
 //starts automatically when the page is loaded and checks if the user is logged
 function checkNotLogged() {
-    if (sessionStorage.getItem('logged') === 'true')
-      document.location.href = "index.html";
+  if (sessionStorage.getItem('logged') === 'true')
+    document.location.href = "index.html";
 }
 
 //------------------------------------------------INDEX.HTML------------------------------------------------------------
@@ -34,8 +34,8 @@ function showNavbar() {
 
   //gets navbar's button's elements
   const accountButton = document.getElementById('nav_account'),
-        shopButton    = document.getElementById('nav_shop'),
-        loginButton   = document.getElementById('nav_login');
+    shopButton    = document.getElementById('nav_shop'),
+    loginButton   = document.getElementById('nav_login');
 
   //checks if each buttons is correctly get
   if (accountButton && shopButton && loginButton) {
@@ -62,14 +62,14 @@ function initializeCarousel(wrapperSelector) {
   //gets each carousel's elements
   const wrapper = document.querySelector(wrapperSelector),
 
-  //carousel's class of element
-  carousel = wrapper.querySelector(".carousel"),
+    //carousel's class of element
+    carousel = wrapper.querySelector(".carousel"),
 
-  //carousel's first image
-  firstImg = carousel.querySelectorAll("img")[0],
+    //carousel's first image
+    firstImg = carousel.querySelectorAll("img")[0],
 
-  //arrow to scroll images
-  arrowIcons = wrapper.querySelectorAll("i");
+    //arrow to scroll images
+    arrowIcons = wrapper.querySelectorAll("i");
 
   //variables to track drag states and positions
   let isDragStart = false,
@@ -102,7 +102,7 @@ function initializeCarousel(wrapperSelector) {
 
     //delays the execution of showHideIcons
     setTimeout(() => showHideIcons(), 60);
-    });
+  });
   });
 
   //manages automatic sliding based on the drag direction and position difference
@@ -194,28 +194,28 @@ initializeCarousel("#carousel7");
 function showBook(bookElement) {
 
   //checks if user is logged
-      if (sessionStorage.getItem('logged') === 'true') {
+  if (sessionStorage.getItem('logged') === 'true') {
 
-        //gets image's URL
-        let imageUrl = bookElement.src;
+    //gets image's URL
+    let imageUrl = bookElement.src;
 
-        //extracts book's name from the URL
-        let fileName = imageUrl.split('/').pop();
+    //extracts book's name from the URL
+    let fileName = imageUrl.split('/').pop();
 
-        //removes file's extension
-        let bookName = fileName.replace(/\.[^/.]+$/, "");
+    //removes file's extension
+    let bookName = fileName.replace(/\.[^/.]+$/, "");
 
-        //removes URL's escape characters
-        bookName = decodeURIComponent(bookName);
+    //removes URL's escape characters
+    bookName = decodeURIComponent(bookName);
 
-        //stores book's name into the session storage
-        sessionStorage.setItem('bookSearch', bookName);
+    //stores book's name into the session storage
+    sessionStorage.setItem('bookSearch', bookName);
 
-        //sends the user to "shop.html"
-        document.location.href = "shop.html";
-      }
-      else
-        document.location.href = "login.html";
+    //sends the user to "shop.html"
+    document.location.href = "shop.html";
+  }
+  else
+    document.location.href = "login.html";
 }
 //------------------------------------------------INDEX.HTML------------------------------------------------------------
 
@@ -225,7 +225,7 @@ function login() {
 
   //gets user's username and password from the page
   const username = document.getElementById('log_usr').value,
-        password = document.getElementById('log_passw').value;
+    password = document.getElementById('log_passw').value;
 
   //checks if entered values are correctly read
   if(username && password) {
@@ -261,6 +261,20 @@ function login() {
   else
     console.log("Errore lettura username o password");
 }
+
+// make the password visible
+function togglePasswordVisibility()
+{
+  let passwordInput = document.getElementById("log_passw");
+
+  if (passwordInput.type === "password")
+  {
+    passwordInput.type = "text";
+  } else
+  {
+    passwordInput.type = "password";
+  }
+}
 //------------------------------------------------LOGIN.HTML------------------------------------------------------------
 
 //------------------------------------------------REGISTRAZIONE.HTML----------------------------------------------------
@@ -289,9 +303,9 @@ function register() {
 
   //gets user's name, surname, username and password from the page
   const name     = document.getElementById('reg_name'   ).value,
-        surname  = document.getElementById('reg_surname').value,
-        username = document.getElementById('reg_usr'    ).value,
-        password = document.getElementById('reg_passw'  ).value;
+    surname  = document.getElementById('reg_surname').value,
+    username = document.getElementById('reg_usr'    ).value,
+    password = document.getElementById('reg_passw'  ).value;
 
   //checks if entered values are correctly read
   if (name && surname && username && password) {
@@ -350,7 +364,7 @@ function getSuggestions() {
 
   //gets book's name and suggestions list element
   const input          = document.getElementById('search_in').value,
-        suggestionList = document.getElementById('suggestion_list');
+    suggestionList = document.getElementById('suggestion_list');
 
   //checks if book's name and suggestions list element are correctly read
   if(input.trim() !== '' && suggestionList)
@@ -401,14 +415,14 @@ function searchBook() {
 
     //gets book's information
     const bookImage        = document.getElementById("preview_image"),
-          bookNameAppear   = document.getElementById('book_name'),
-          bookAuthorAppear = document.getElementById('book_author'),
-          bookTypeAppear   = document.getElementById('book_type'),
-          bookYearAppear   = document.getElementById('book_year'),
-          bookPageAppear   = document.getElementById('book_page'),
-          bookPriceAppear  = document.getElementById('book_price'),
-          pdfView          = document.getElementById('pdf_viewer'),
-          pdfAppear        = document.getElementById('pdf_hidden');
+      bookNameAppear   = document.getElementById('book_name'),
+      bookAuthorAppear = document.getElementById('book_author'),
+      bookTypeAppear   = document.getElementById('book_type'),
+      bookYearAppear   = document.getElementById('book_year'),
+      bookPageAppear   = document.getElementById('book_page'),
+      bookPriceAppear  = document.getElementById('book_price'),
+      pdfView          = document.getElementById('pdf_viewer'),
+      pdfAppear        = document.getElementById('pdf_hidden');
 
     //checks if every book's piece of information is correctly read
     if(bookImage && bookNameAppear && bookAuthorAppear && bookTypeAppear && bookYearAppear && bookPageAppear && bookPriceAppear && pdfView && pdfAppear) {
@@ -419,9 +433,27 @@ function searchBook() {
         contentType:  'application/json',
         data:         JSON.stringify({bookName}),
         success: function (data) {
+
           //clears preview reviews list
           clearReviewList();
           showBookReviews();
+
+          let noPreview = document.getElementById('no_preview');
+
+          //set book's information to make it visualizable
+          if(data.percorso)
+          {
+            pdfView.src = data.percorso;
+            noPreview.style.display = 'none';
+            pdfView.style.display = 'block';
+          }
+          else
+          {
+            pdfView.src = '';
+            noPreview.textContent = 'Preview non ancora disponibile';
+            noPreview.style.display = 'block';
+            pdfView.style.display = 'none';
+          }
 
           //set book's information to make it visualizable
           pdfView.src                  = data.percorso;
@@ -430,6 +462,7 @@ function searchBook() {
           bookNameAppear.textContent   = bookName;
           bookAuthorAppear.textContent = data.autore;
           bookTypeAppear.textContent   = 'Genere: ' + data.genere;
+          bookPageAppear.textContent   = 'Pagine: ' + data.pagine;
           bookYearAppear.textContent   = 'Anno Pubblicazione: ' + data.anno;
           bookPriceAppear.textContent  = 'Prezzo: ' + data.prezzo;
 
@@ -469,35 +502,39 @@ function addBook() {
 }
 
 //shows book's reviews
-function showBookReviews() {
-
-  //gets book's name and reviews list element
+function showBookReviews()
+{
+  // gets book's name and reviews list element
   const bookName = document.getElementById('search_in').value;
 
-  if (bookName) {
-
-    //sends an HTTP request at the specified url to get logged value and check if the user is logged
-    $.ajax ({
+  if (bookName)
+  {
+    // sends an HTTP request at the specified url to get logged value and check if the user is logged
+    $.ajax
+    ({
       url:         'http://localhost:3000/showBookReviews',
       method:      'POST',
       contentType: 'application/JSON',
       data:        JSON.stringify({ bookName }),
 
-      success: function (data) {
-
-        //clears previous reviews list
+      success: function (data)
+      {
+        // clears previous reviews list
         clearReviewList();
 
-        //gets reviews list element
+        // gets reviews list element
         const reviewsList      = document.getElementById('reviews_list');
         const noReviewsMessage = document.getElementById('no_reviews');
 
-        //checks if there are reviews
-        if (data.value.length > 0) {
+        // Check if there are reviews
+        if (data.value.length > 0)
+        {
+          // Display "Recensioni" message
           noReviewsMessage.textContent = 'Recensioni';
 
-          //each review is inserted as a <li> element in a <ul> list
-          data.value.forEach((review) => {
+          // each review is inserted as a <li> element in a <ul> list
+          data.value.forEach((review) =>
+          {
             const bookReview     = document.createElement('p'),
               reviewTitle      = document.createElement('h3'),
               reviewUsername   = document.createElement('p'),
@@ -507,19 +544,19 @@ function showBookReviews() {
               reviewContainer  = document.createElement('div'),
               manageContainer  = document.createElement('div');
 
-            //sets review's information
+            // sets review's information
             reviewUsername.textContent = review.utente;
             reviewData.textContent     = review.data;
             spacer.textContent         = '|';
             reviewTitle.textContent    = review.titolo;
             bookReview.textContent     = review.commento;
             spacer.id                  = 'book_spacer';
-            reviewUsername.id          = review.utente;
             infoRevContainer.id        = 'inforev_container';
-            reviewContainer.id         = 'review_container';
+            reviewContainer.id          = review.utente;
+            reviewContainer.classList  = 'review_container';
             manageContainer.id         = 'managerev_container';
 
-            //appends the review and its information
+            // appends the review and its information
             reviewContainer.appendChild(infoRevContainer);
             infoRevContainer.appendChild(reviewData);
             infoRevContainer.appendChild(spacer);
@@ -528,15 +565,21 @@ function showBookReviews() {
             reviewContainer.appendChild(bookReview);
             reviewsList.appendChild(reviewContainer);
           });
-        } else {
+        }
+        else
+        {
+          // Display "Nessuna recensione" message
           noReviewsMessage.textContent = 'Nessuna recensione';
         }
       },
-      error: function (xhr) {
+      error: function (xhr)
+      {
         console.error('Errore ricerca recensioni libro:', xhr.responseJSON.error);
       },
     });
-  } else {
+  }
+  else
+  {
     console.log('Errore lettura nome libro');
   }
 }
@@ -565,7 +608,12 @@ function checkReview() {
         else
         {
           let reviewAuthor = document.getElementById(data.user);
-          reviewAuthor.style.color = "red";
+          reviewAuthor.style.transition = 'color 0.5s ease';
+          reviewAuthor.style.color = '#ec3853';
+          setTimeout(function() {
+            reviewAuthor.style.color = '';
+          }, 700);
+          document.getElementById(data.user).scrollIntoView({ behavior: 'smooth' });
         }
       },
       error: function (xhr) {
@@ -580,7 +628,7 @@ function checkSearch() {
 
   //gets book's name searched by the user from session storage
   const checkBook1 = sessionStorage.getItem('bookSearch'),
-        checkBook2 = sessionStorage.getItem('bookName');
+    checkBook2 = sessionStorage.getItem('bookName');
 
   //checks if the user has accessed this page from "index.html"
   if (checkBook1) {
@@ -636,17 +684,17 @@ function writeReview() {
       }
     });
   } else
-      console.log("Errore lettura recensione o nome libro");
+    console.log("Errore lettura recensione o nome libro");
 }
 //------------------------------------------------RECENSIONE.HTML-------------------------------------------------------
 
 //------------------------------------------------ACCOUNT.HTML----------------------------------------------------------
 //executes the logout when the form's submit button is pressed
 function logout() {
-    sessionStorage.removeItem('bookName');
-    sessionStorage.removeItem('bookSearch');
-    sessionStorage.removeItem('logged');
-    window.location.href = "index.html";
+  sessionStorage.removeItem('bookName');
+  sessionStorage.removeItem('bookSearch');
+  sessionStorage.removeItem('logged');
+  window.location.href = "index.html";
 }
 
 //empties user's cart
@@ -707,7 +755,7 @@ function getInfo() {
         nameText.textContent     = data.nome;
         surnameText.textContent  = data.cognome;
       } else
-          console.log("Errore lettura informazioni utente");
+        console.log("Errore lettura informazioni utente");
     },
     error: function (xhr) {
       console.error("Errore recupero dati utente:", xhr.responseJSON.error);
@@ -716,41 +764,41 @@ function getInfo() {
 }
 
 //shows user's reviews when the button is pressed
+//shows user's reviews when the button is pressed
 function showUserReviews() {
-
   //send an HTTP request to the server at the specified url to get user's data
-  $.ajax ({
+  $.ajax
+  ({
     url   : 'http://localhost:3000/getInfo',
     method: 'POST',
     success: function (data) {
-
       //gets username, name and surname elements
       const reviewList = document.getElementById('reviews_cronology');
       const noReviewsMessage = document.getElementById('no_reviews');
 
       //checks if elements are correctly read
       if (reviewList && noReviewsMessage) {
-
         //clears previous reviews
         reviewList.innerHTML = '';
-
-        //if there are no reviews, show a message
         if (data.recensioni.length === 0) {
+          // If there are no reviews, show the "Non ci sono recensioni" message
           noReviewsMessage.innerHTML = 'Nessuna recensione';
-        } else {
+        }
+        else {
+          // If there are reviews, hide the "Non ci sono recensioni" message
           noReviewsMessage.innerHTML = 'Le tue recensioni';
 
           //each review is inserted as a <li> element in a <ul> list
           data.recensioni.forEach(book => {
             const reviewItem      = document.createElement('li'),
-                  removeButton      = document.createElement('button'),
-                  bookCover         = document.createElement('img'),
-                  bookName          = document.createElement('h3'),
-                  reviewName        = document.createElement('p'),
-                  spacer            = document.createElement('p'),
-                  imageContainer    = document.createElement('div'),
-                  revContainer      = document.createElement('div'),
-                  remTitleContainer = document.createElement('div');
+              removeButton      = document.createElement('button'),
+              bookCover         = document.createElement('img'),
+              bookName          = document.createElement('h3'),
+              reviewName        = document.createElement('p'),
+              spacer            = document.createElement('p'),
+              imageContainer    = document.createElement('div'),
+              revContainer      = document.createElement('div'),
+              remTitleContainer = document.createElement('div');
 
             bookCover.src               = 'images/' + book.genere + '/' + book.nome + '.webp';
             bookCover.alt               = book.nome;
@@ -829,13 +877,13 @@ function updateCartView(cartItems) {
     //shows the updated cart
     cartItems.forEach(ordine => {
       const bookName       = document.createElement('h3'),
-            bookPrice      = document.createElement('p'),
-            spacer         = document.createElement('p'),
-            removeBook     = document.createElement('button'),
-            insertImage    = document.createElement('img'),
-            imageContainer = document.createElement('div'),
-            infoContainer  = document.createElement('div'),
-            priceContainer = document.createElement('div');
+        bookPrice      = document.createElement('p'),
+        spacer         = document.createElement('p'),
+        removeBook     = document.createElement('button'),
+        insertImage    = document.createElement('img'),
+        imageContainer = document.createElement('div'),
+        infoContainer  = document.createElement('div'),
+        priceContainer = document.createElement('div');
 
       //shows book's information
       bookName.textContent     = ordine.nome;
@@ -869,8 +917,8 @@ function updateCartView(cartItems) {
 
     //gets total price and clear cart button elements
     const cartTot    = document.getElementById('cart_price'),
-          cartSpacer = document.getElementById('book_spacer1'),
-          clearCart  = document.getElementById('cart_clear');
+      cartSpacer = document.getElementById('book_spacer1'),
+      clearCart  = document.getElementById('cart_clear');
 
     //if the cart isn't empty
     if (parseFloat(totalPrice) > 0) {
@@ -893,7 +941,7 @@ function updateCartView(cartItems) {
       clearCart.textContent  = '';
     }
   } else
-      console.log("Errore cattura carrello");
+    console.log("Errore cattura carrello");
 }
 
 //starts automatically when the page is loaded and gets user's cart

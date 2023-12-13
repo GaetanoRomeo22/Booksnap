@@ -8,11 +8,12 @@ let filesToCache =
   './account.html',
   './recensione.html',
   'main.js',
-  './css',
-  './images'
+  './style.css',
+  './images',
+  './pdf'
 ];
 
-//starts the service worker and cache all of the app's content
+//starts the service worker and cache all the app's content
 self.addEventListener('install', function(e)
 {
   e.waitUntil(caches.open(cacheName).then(function(cache)
