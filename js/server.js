@@ -14,9 +14,9 @@ const app          = express(),
     jsonFilePath   = path.join(__dirname, 'database.json');        //JSON file's path
 //-----------------------------------------------------Variables--------------------------------------------------------
 
-app.use(bodyParser.urlencoded({ extended: true }));                  //allows to analize data passed in HTTP request and response
-app.use(bodyParser.json());                                          //allows to analize JSON format data
-app.use(cors());                                                     //allows connections by all origins
+app.use(bodyParser.urlencoded({ extended: true }));                //allows to analize data passed in HTTP request and response
+app.use(bodyParser.json());                                        //allows to analize JSON format data
+app.use(cors());                                                   //allows connections by all origins
 
 //checks if the operation works
 function errorHandler(res, err) {
@@ -308,11 +308,10 @@ app.post('/removeBook', (req, res) => {
 app.post('/showBookReviews', (req, res) => {
 
   //gets book's name from the request
-  const bookName = req.body.bookName,
-        username = req.body.username;
+  const bookName = req.body.bookName;
 
   //checks if the book's name is correctly read from the request and if the user is logged
-  if (bookName && username) {
+  if (bookName) {
 
     //tries to read the JSON file
     fs.readFile(jsonFilePath, 'utf8', (err, data) => {
@@ -531,7 +530,6 @@ app.post('/emptyCart', (req, res) => {
       //if it finds user's cart, it clears it
       if (checkCart) {
         checkCart.carrello = [];
-        res.json({ result: true });
         fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', (err) => {
 
           //checks if it works

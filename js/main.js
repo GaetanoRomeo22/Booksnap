@@ -436,6 +436,7 @@ function searchBook() {
 
     //checks if every book's piece of information is correctly read
     if(bookImage && bookNameAppear && bookAuthorAppear && bookTypeAppear && bookYearAppear && bookPageAppear && bookPriceAppear && pdfView && pdfAppear) {
+
       //sends an HTTP request to the server at the specified url to check if the login works
       $.ajax ({
         url:          'http://localhost:3000/searchBook',
@@ -513,6 +514,7 @@ function addBook() {
 
 //shows book's reviews
 function showBookReviews() {
+
   // gets book's name and reviews list element
   const bookName = document.getElementById('search_in').value;
 
@@ -523,7 +525,6 @@ function showBookReviews() {
       method:      'POST',
       contentType: 'application/JSON',
       data:        JSON.stringify({ bookName: bookName }),
-
       success: function (data) {
 
         // clears previous reviews list
@@ -712,8 +713,6 @@ function emptyCart() {
     url   : 'http://localhost:3000/emptyCart',
     method: 'POST',
     data: JSON.stringify( {username: sessionStorage.getItem('username') }),
-
-    //if the logout works, it sends the user to "index.html"
     success: function () {
       updateCartView();
     },
@@ -765,7 +764,7 @@ function getInfo() {
         nameText.textContent     = sessionStorage.getItem('name');
         surnameText.textContent  = sessionStorage.getItem('surname');
       } else
-        console.log("Errore lettura informazioni utente");
+          console.log("Errore lettura informazioni utente");
     },
     error: function (xhr) {
       console.error("Errore recupero dati utente:", xhr.responseJSON.error);
