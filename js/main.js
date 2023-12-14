@@ -36,8 +36,8 @@ function showNavbar() {
 
   //gets navbar's button's elements
   const accountButton = document.getElementById('nav_account'),
-        shopButton    = document.getElementById('nav_shop'),
-        loginButton   = document.getElementById('nav_login');
+      shopButton    = document.getElementById('nav_shop'),
+      loginButton   = document.getElementById('nav_login');
 
   //if the user is logged, it shows buttons that send the user to page for which login is needed
   if (sessionStorage.getItem('logged') === 'true') {
@@ -58,14 +58,14 @@ function initializeCarousel(wrapperSelector) {
   //gets each carousel's elements
   const wrapper = document.querySelector(wrapperSelector),
 
-  //carousel's class of element
-  carousel = wrapper.querySelector(".carousel"),
+      //carousel's class of element
+      carousel = wrapper.querySelector(".carousel"),
 
-  //carousel's first image
-  firstImg = carousel.querySelectorAll("img")[0],
+      //carousel's first image
+      firstImg = carousel.querySelectorAll("img")[0],
 
-  //arrow to scroll images
-  arrowIcons = wrapper.querySelectorAll("i");
+      //arrow to scroll images
+      arrowIcons = wrapper.querySelectorAll("i");
 
   //variables to track drag states and positions
   let isDragStart = false,
@@ -195,11 +195,11 @@ function showBook(bookElement) {
     //gets image's URL
     let imageUrl = bookElement.src,
 
-    //extracts book's name from the URL
-    fileName = imageUrl.split('/').pop(),
+        //extracts book's name from the URL
+        fileName = imageUrl.split('/').pop(),
 
-    //removes file's extension
-    bookName = fileName.replace(/\.[^/.]+$/, "");
+        //removes file's extension
+        bookName = fileName.replace(/\.[^/.]+$/, "");
 
     //removes URL's escape characters
     bookName = decodeURIComponent(bookName);
@@ -224,7 +224,7 @@ function login() {
 
   //gets user's username and password from the page
   const username = document.getElementById('log_usr').value,
-        password = document.getElementById('log_passw').value;
+      password = document.getElementById('log_passw').value;
 
   //sends an HTTP request to the server at the specified url to check if the login works
   $.ajax ({
@@ -256,21 +256,21 @@ function login() {
 //makes the password visible or invisible in login form
 function logTogglePasswordVisibility() {
   let password = document.getElementById("log_passw");
-    if (password.type === "password") {
-      password.type = "text";
-    } else {
-      password.type = "password";
-    }
+  if (password.type === "password") {
+    password.type = "text";
+  } else {
+    password.type = "password";
+  }
 }
 
 //makes the password visible or invisible in sign up form
 function regTogglePasswordVisibility() {
   let password = document.getElementById("reg_passw");
-    if (password.type === "password") {
-      password.type = "text";
-    } else {
-        password.type = "password";
-      }
+  if (password.type === "password") {
+    password.type = "text";
+  } else {
+    password.type = "password";
+  }
 }
 //------------------------------------------------LOGIN.HTML------------------------------------------------------------
 
@@ -280,7 +280,7 @@ function checkUsername() {
 
   //gets username and error message element
   const username = document.getElementById('reg_usr').value,
-        regError = document.getElementById('reg_error');
+      regError = document.getElementById('reg_error');
 
   //chechs if the username contains more of 15 characters
   if (username.length > 15) {
@@ -303,7 +303,7 @@ function checkPassword() {
 
   //gets password and error message element
   const password = document.getElementById('reg_passw').value,
-        regError = document.getElementById('reg_error');
+      regError = document.getElementById('reg_error');
 
   //checks if the password contains at least 8 letters, an upper case letter and a special character
   if (password.length < 8 || !/[A-Z]/.test(password) || !/[@#$%^&+=-_]/.test(password)) {
@@ -326,39 +326,39 @@ function register() {
 
   //gets user's name, surname, username, and password from the page
   const name     = document.getElementById('reg_name').value,
-        surname  = document.getElementById('reg_surname').value,
-        username = document.getElementById('reg_usr').value,
-        password = document.getElementById('reg_passw').value;
+      surname  = document.getElementById('reg_surname').value,
+      username = document.getElementById('reg_usr').value,
+      password = document.getElementById('reg_passw').value;
 
-    //checks if the password respects the standard using the checkPassword() function
-    if (checkUsername() && checkPassword()) {
+  //checks if the password respects the standard using the checkPassword() function
+  if (checkUsername() && checkPassword()) {
 
-      //sends an HTTP request to the server at the specified URL to check if the sign-up works
-      $.ajax({
-        url: 'http://localhost:3000/register',
-        method: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify ({ name: name, surname: surname, username: username, password: password }),
+    //sends an HTTP request to the server at the specified URL to check if the sign-up works
+    $.ajax({
+      url: 'http://localhost:3000/register',
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify ({ name: name, surname: surname, username: username, password: password }),
 
-        //if the sign-up works, it sends the user to the page "index.html"
-        success: function (data) {
-          sessionStorage.setItem('logged', 'true');
-          sessionStorage.setItem('name', name);
-          sessionStorage.setItem('surname', surname);
-          sessionStorage.setItem('username', username);
-          document.location.href = data.redirect;
-        },
+      //if the sign-up works, it sends the user to the page "index.html"
+      success: function (data) {
+        sessionStorage.setItem('logged', 'true');
+        sessionStorage.setItem('name', name);
+        sessionStorage.setItem('surname', surname);
+        sessionStorage.setItem('username', username);
+        document.location.href = data.redirect;
+      },
 
-        //if the sign-up doesn't work, shows the error message
-        error: function () {
-          const regError = document.getElementById('reg_error');
-          if (regError) {
-            regError.innerText = 'Username non disponibile o uso di caratteri non consentiti per nome e cognome';
-            regError.style.display = 'block';
-          }
+      //if the sign-up doesn't work, shows the error message
+      error: function () {
+        const regError = document.getElementById('reg_error');
+        if (regError) {
+          regError.innerText = 'Username non disponibile o uso di caratteri non consentiti per nome e cognome';
+          regError.style.display = 'block';
         }
-      });
-    }
+      }
+    });
+  }
 }
 //------------------------------------------------REGISTRAZIONE.HTML----------------------------------------------------
 
@@ -374,7 +374,7 @@ function getSuggestions() {
 
   //gets book's name and suggestions list element
   const input = document.getElementById('search_in').value,
-        suggestionList = document.getElementById('suggestion_list');
+      suggestionList = document.getElementById('suggestion_list');
   if(input.trim() !== '')
   {
     //clears previous suggestions
@@ -414,57 +414,90 @@ function searchBook() {
 
   //gets book's information
   const bookName         = document.getElementById('search_in').value,
-        bookImage        = document.getElementById("preview_image"),
-        bookNameAppear   = document.getElementById('book_name'),
-        bookAuthorAppear = document.getElementById('book_author'),
-        bookTypeAppear   = document.getElementById('book_type'),
-        bookYearAppear   = document.getElementById('book_year'),
-        bookPageAppear   = document.getElementById('book_page'),
-        bookPriceAppear  = document.getElementById('book_price'),
-        pdfView          = document.getElementById('pdf_viewer'),
-        pdfAppear        = document.getElementById('pdf_hidden');
+      bookImage        = document.getElementById("preview_image"),
+      bookNameAppear   = document.getElementById('book_name'),
+      bookAuthorAppear = document.getElementById('book_author'),
+      bookTypeAppear   = document.getElementById('book_type'),
+      bookYearAppear   = document.getElementById('book_year'),
+      bookPageAppear   = document.getElementById('book_page'),
+      bookPriceAppear  = document.getElementById('book_price'),
+      pdfView          = document.getElementById('pdf_viewer'),
+      pdfAppear        = document.getElementById('pdf_hidden'),
+      addbutton                          = document.getElementById('cart_btn');
 
-      //sends an HTTP request to the server at the specified url to check if the login works
-      $.ajax ({
-        url:          'http://localhost:3000/searchBook',
-        method:       'POST',
-        contentType:  'application/json',
-        data:         JSON.stringify({bookName: bookName}),
-        success: function (data) {
+  //sends an HTTP request to the server at the specified url to check if the login works
+  $.ajax ({
+    url:          'http://localhost:3000/searchBook',
+    method:       'POST',
+    contentType:  'application/json',
+    data:         JSON.stringify({bookName: bookName}),
+    success: function (data) {
 
-          //clears preview reviews list
-          clearReviewList();
-          showBookReviews();
+      //clears preview reviews list
+      clearReviewList();
+      showBookReviews();
+      checkBookInCart(data.nome);
 
-          let noPreview = document.getElementById('no_preview');
 
-          //set book's information to make it visualizable
-          if(data.percorso) {
-            pdfView.src = data.percorso;
-            noPreview.style.display = 'none';
-            pdfView.style.display = 'block';
-          } else {
-              pdfView.src = '';
-              noPreview.textContent = 'Preview non ancora disponibile';
-              noPreview.style.display = 'block';
-              pdfView.style.display = 'none';
-          }
+      let noPreview = document.getElementById('no_preview');
 
-          //set book's information to make it visualizable
-          pdfView.src                  = data.percorso;
-          pdfAppear.style.display      = "block";
-          bookImage.src                = 'images/' + data.genere + '/' + bookName + '.webp';
-          bookNameAppear.textContent   = bookName;
-          bookAuthorAppear.textContent = data.autore;
-          bookTypeAppear.textContent   = 'Genere: ' + data.genere;
-          bookPageAppear.textContent   = 'Pagine: ' + data.pagine;
-          bookYearAppear.textContent   = 'Anno Pubblicazione: ' + data.anno;
-          bookPriceAppear.textContent  = 'Prezzo: ' + data.prezzo;
+      //set book's information to make it visualizable
+      if(data.percorso) {
+        pdfView.src = data.percorso;
+        noPreview.style.display = 'none';
+        pdfView.style.display = 'block';
+      } else {
+        pdfView.src = '';
+        noPreview.textContent = 'Preview non ancora disponibile';
+        noPreview.style.display = 'block';
+        pdfView.style.display = 'none';
+      }
 
-          //stores book's name into the session's cache
-          sessionStorage.setItem('bookName', bookName);
-        }
-      });
+      //set book's information to make it visualizable
+      pdfView.src                  = data.percorso;
+      pdfAppear.style.display      = "block";
+      bookImage.src                = 'images/' + data.genere + '/' + bookName + '.webp';
+      bookNameAppear.textContent   = bookName;
+      bookAuthorAppear.textContent = data.autore;
+      bookTypeAppear.textContent   = 'Genere: ' + data.genere;
+      bookPageAppear.textContent   = 'Pagine: ' + data.pagine;
+      bookYearAppear.textContent   = 'Anno Pubblicazione: ' + data.anno;
+      bookPriceAppear.textContent  = 'Prezzo: ' + data.prezzo;
+
+      //stores book's name into the session's cache
+      sessionStorage.setItem('bookName', bookName);
+    }
+  });
+}
+
+
+// New function to check if the book is in the user's cart
+function checkBookInCart(bookName) {
+  const addButton = document.getElementById("cart_btn");
+  // Assume you have a function to retrieve the user's cart (e.g., getCartFromServer)
+  getCartFromServer(function (cart) {
+    const isBookInCart = cart.some(item => item.nome === bookName);
+
+    if (isBookInCart) {
+      addButton.innerText = "Libro aggiunto";
+    } else {
+      addButton.innerText = "Aggiungi al carrello";
+    }
+  });
+}
+
+function getCartFromServer(callback) {
+  $.ajax({
+    url: 'http://localhost:3000/showCart',
+    method: 'POST',
+    data: ({ username: sessionStorage.getItem('username') }),
+    success: function (data) {
+      callback(data.value);
+    },
+    error: function () {
+      console.error("Errore nel recupero del carrello:", error);
+    }
+  });
 }
 
 //allows the user to add a book in his cart
@@ -478,8 +511,13 @@ function addBook() {
     url:         'http://localhost:3000/addBook',
     method:      'POST',
     contentType: 'application/JSON',
-    data:         JSON.stringify({ bookName: bookName, username: sessionStorage.getItem('username') })
-  });
+    data:         JSON.stringify({ bookName: bookName, username: sessionStorage.getItem('username') }),
+
+    success: function (){
+      const addButton = document.getElementById("cart_btn");
+      addButton.innerHTML = "Libro aggiunto";
+    }
+  })
 }
 
 //shows book's reviews
@@ -510,13 +548,13 @@ function showBookReviews() {
         //each review is inserted as a <li> element in a <ul> list
         data.value.forEach((review) => {
           const bookReview     = document.createElement('p'),
-                reviewTitle      = document.createElement('h3'),
-                reviewUsername   = document.createElement('p'),
-                spacer           = document.createElement('p'),
-                reviewData       = document.createElement('p'),
-                infoRevContainer = document.createElement('div'),
-                reviewContainer  = document.createElement('div'),
-                manageContainer  = document.createElement('div');
+              reviewTitle      = document.createElement('h3'),
+              reviewUsername   = document.createElement('p'),
+              spacer           = document.createElement('p'),
+              reviewData       = document.createElement('p'),
+              infoRevContainer = document.createElement('div'),
+              reviewContainer  = document.createElement('div'),
+              manageContainer  = document.createElement('div');
 
           //sets review's information
           reviewUsername.textContent = review.utente;
@@ -540,7 +578,7 @@ function showBookReviews() {
           reviewsList.appendChild(reviewContainer);
         });
       } else {
-          noReviewsMessage.textContent = 'Nessuna recensione';
+        noReviewsMessage.textContent = 'Nessuna recensione';
       }
     }
   });
@@ -564,13 +602,13 @@ function checkReview() {
       if (!data.value) {
         document.location.href = data.redirect;
       } else {
-          let reviewAuthor = document.getElementById(data.user);
-          reviewAuthor.style.transition = 'color 0.5s ease';
-          reviewAuthor.style.color = '#ec3853';
-          setTimeout(function() {
-            reviewAuthor.style.color = '';
-          }, 700);
-          document.getElementById(data.user).scrollIntoView({ behavior: 'smooth' });
+        let reviewAuthor = document.getElementById(data.user);
+        reviewAuthor.style.transition = 'color 0.5s ease';
+        reviewAuthor.style.color = '#ec3853';
+        setTimeout(function() {
+          reviewAuthor.style.color = '';
+        }, 700);
+        document.getElementById(data.user).scrollIntoView({ behavior: 'smooth' });
       }
     }
   });
@@ -581,7 +619,7 @@ function checkSearch() {
 
   //gets book's name searched by the user from session storage
   const checkBook1 = sessionStorage.getItem('bookSearch'),
-        checkBook2 = sessionStorage.getItem('bookName');
+      checkBook2 = sessionStorage.getItem('bookName');
 
   //checks if the user has accessed this page from "index.html"
   if (checkBook1) {
@@ -617,8 +655,8 @@ function writeReview() {
 
   //gets book's review and name
   const reviewTitle = document.getElementById('review_title').value,
-        review      = document.getElementById('review').value,
-        bookName    = sessionStorage.getItem('bookName');
+      review      = document.getElementById('review').value,
+      bookName    = sessionStorage.getItem('bookName');
 
   //sends an HTTP request to the server at the specified url to store user's review
   $.ajax ({
@@ -675,7 +713,7 @@ function removeReview(bookName) {
     contentType: 'application/json',
     data:        JSON.stringify({ bookName: bookName, username: sessionStorage.getItem('username') }),
     success: function () {
-      getInfo();
+      showUserReviews();
     }
   });
 }
@@ -692,14 +730,14 @@ function getInfo() {
 
       //gets username, name and surname elements
       const usernameText = document.getElementById('acc_user'),
-            nameText     = document.getElementById('acc_name'),
-            surnameText  = document.getElementById('acc_surn');
+          nameText     = document.getElementById('acc_name'),
+          surnameText  = document.getElementById('acc_surn');
 
       //shows user's data
       usernameText.textContent = 'Ciao ' + sessionStorage.getItem('username');
       nameText.textContent     = sessionStorage.getItem('name');
       surnameText.textContent  = sessionStorage.getItem('surname');
-      }
+    }
   });
 }
 
@@ -726,52 +764,52 @@ function showUserReviews() {
         noReviewsMessage.innerHTML = 'Nessuna recensione';
       } else {
 
-          //if there are reviews, hide the "Non ci sono recensioni" message
-          noReviewsMessage.innerHTML = 'Le tue recensioni';
+        //if there are reviews, hide the "Non ci sono recensioni" message
+        noReviewsMessage.innerHTML = 'Le tue recensioni';
 
-          //each review is inserted as a <li> element in a <ul> list
-          data.recensioni.forEach(book => {
-            const reviewItem      = document.createElement('li'),
-                  removeButton      = document.createElement('button'),
-                  bookCover         = document.createElement('img'),
-                  bookName          = document.createElement('h3'),
-                  reviewName        = document.createElement('p'),
-                  spacer            = document.createElement('p'),
-                  imageContainer    = document.createElement('div'),
-                  revContainer      = document.createElement('div'),
-                  remTitleContainer = document.createElement('div');
+        //each review is inserted as a <li> element in a <ul> list
+        data.recensioni.forEach(book => {
+          const reviewItem      = document.createElement('li'),
+              removeButton      = document.createElement('button'),
+              bookCover         = document.createElement('img'),
+              bookName          = document.createElement('h3'),
+              reviewName        = document.createElement('p'),
+              spacer            = document.createElement('p'),
+              imageContainer    = document.createElement('div'),
+              revContainer      = document.createElement('div'),
+              remTitleContainer = document.createElement('div');
 
-            bookCover.src               = 'images/' + book.genere + '/' + book.nome + '.webp';
-            bookCover.alt               = book.nome;
-            bookName.textContent        = book.nome;
-            reviewName.textContent      = 'Titolo: ' + book.recensione;
-            removeButton.textContent    = 'Rimuovi';
-            spacer.textContent          = '|';
-            spacer.id                   = 'book_spacer';
-            bookCover.id                = 'cronology_rev_img';
-            reviewName.id               = 'book_price';
-            imageContainer.className    = 'image_container';
-            revContainer.className      = 'info_container';
-            remTitleContainer.className = 'price_container'
+          bookCover.src               = 'images/' + book.genere + '/' + book.nome + '.webp';
+          bookCover.alt               = book.nome;
+          bookName.textContent        = book.nome;
+          reviewName.textContent      = 'Titolo: ' + book.recensione;
+          removeButton.textContent    = 'Rimuovi';
+          spacer.textContent          = '|';
+          spacer.id                   = 'book_spacer';
+          bookCover.id                = 'cronology_rev_img';
+          reviewName.id               = 'book_price';
+          imageContainer.className    = 'image_container';
+          revContainer.className      = 'info_container';
+          remTitleContainer.className = 'price_container'
 
-            imageContainer.appendChild(bookCover);
-            imageContainer.appendChild(revContainer);
-            revContainer.appendChild(bookName);
-            revContainer.appendChild(remTitleContainer);
-            remTitleContainer.appendChild(removeButton);
-            remTitleContainer.appendChild(spacer);
-            remTitleContainer.appendChild(reviewName);
-            reviewList.appendChild(imageContainer);
-            reviewList.appendChild(reviewItem);
+          imageContainer.appendChild(bookCover);
+          imageContainer.appendChild(revContainer);
+          revContainer.appendChild(bookName);
+          revContainer.appendChild(remTitleContainer);
+          remTitleContainer.appendChild(removeButton);
+          remTitleContainer.appendChild(spacer);
+          remTitleContainer.appendChild(reviewName);
+          reviewList.appendChild(imageContainer);
+          reviewList.appendChild(reviewItem);
 
-            //when a remove button is pressed, it removes a user's review
-            removeButton.onclick = function () {
-              removeReview(book.nome);
-              showUserReviews();
-            };
-          })
-        }
+          //when a remove button is pressed, it removes a user's review
+          removeButton.onclick = function () {
+            removeReview(book.nome);
+            showUserReviews();
+          };
+        })
       }
+    }
   });
 }
 
@@ -804,13 +842,13 @@ function updateCartView(cartItems) {
   //shows the updated cart
   cartItems.forEach(ordine => {
     const bookName     = document.createElement('h3'),
-          bookPrice      = document.createElement('p'),
-          spacer         = document.createElement('p'),
-          removeBook     = document.createElement('button'),
-          insertImage    = document.createElement('img'),
-          imageContainer = document.createElement('div'),
-          infoContainer  = document.createElement('div'),
-          priceContainer = document.createElement('div');
+        bookPrice      = document.createElement('p'),
+        spacer         = document.createElement('p'),
+        removeBook     = document.createElement('button'),
+        insertImage    = document.createElement('img'),
+        imageContainer = document.createElement('div'),
+        infoContainer  = document.createElement('div'),
+        priceContainer = document.createElement('div');
 
     //shows book's information
     bookName.textContent     = ordine.nome;
@@ -844,8 +882,8 @@ function updateCartView(cartItems) {
 
   //gets total price and clear cart button elements
   const cartTot    = document.getElementById('cart_price'),
-        cartSpacer = document.getElementById('book_spacer1'),
-        clearCart  = document.getElementById('cart_clear');
+      cartSpacer = document.getElementById('book_spacer1'),
+      clearCart  = document.getElementById('cart_clear');
 
   //if the cart isn't empty
   if (parseFloat(totalPrice) > 0) {
@@ -864,9 +902,9 @@ function updateCartView(cartItems) {
       emptyCart();
     };
   } else {
-      cartTot.textContent    = 'Carrello vuoto';
-      cartSpacer.textContent = '';
-      clearCart.textContent  = '';
+    cartTot.textContent    = 'Carrello vuoto';
+    cartSpacer.textContent = '';
+    clearCart.textContent  = '';
   }
 }
 
@@ -889,13 +927,13 @@ function showCart() {
       //each book added to the cart is inserted as a <li> element in a <ul> list
       data.value.forEach(ordine => {
         const bookName     = document.createElement('h3'),
-              bookPrice      = document.createElement('p'),
-              spacer         = document.createElement('p'),
-              removeBook     = document.createElement('button'),
-              insertImage    = document.createElement('img'),
-              imageContainer = document.createElement('div'),
-              infoContainer  = document.createElement('div'),
-              priceContainer = document.createElement('div');
+            bookPrice      = document.createElement('p'),
+            spacer         = document.createElement('p'),
+            removeBook     = document.createElement('button'),
+            insertImage    = document.createElement('img'),
+            imageContainer = document.createElement('div'),
+            infoContainer  = document.createElement('div'),
+            priceContainer = document.createElement('div');
 
         //shows book's information
         bookName.textContent     = ordine.nome;
@@ -930,8 +968,8 @@ function showCart() {
 
       //gets total price and clear cart button elements
       const cartTot  = document.getElementById('cart_price'),
-            cartSpacer = document.getElementById('book_spacer1'),
-            clearCart  = document.getElementById('cart_clear');
+          cartSpacer = document.getElementById('book_spacer1'),
+          clearCart  = document.getElementById('cart_clear');
 
       //if the cart isn't empty
       if (parseFloat(totalPrice) > 0) {
@@ -950,9 +988,9 @@ function showCart() {
           emptyCart();
         };
       } else {
-          cartTot.textContent    = 'Carrello vuoto';
-          cartSpacer.textContent = '';
-          clearCart.textContent  = '';
+        cartTot.textContent    = 'Carrello vuoto';
+        cartSpacer.textContent = '';
+        clearCart.textContent  = '';
       }
     }
   });
