@@ -5,14 +5,14 @@ window.onload = () => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service_worker.js').then(function (registration) {
 
-          //service worker registered correctly
-          console.log('ServiceWorker registration successful with scope: ', registration.scope);
-        },
-        function (err) {
+      //service worker registered correctly
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    },
+    function (err) {
 
-          //troubles in registering the service worker
-          console.log('ServiceWorker registration failed: ', err);
-        });
+      //troubles in registering the service worker
+      console.log('ServiceWorker registration failed: ', err);
+    });
   }
 }
 
@@ -422,8 +422,7 @@ function searchBook() {
       bookPageAppear   = document.getElementById('book_page'),
       bookPriceAppear  = document.getElementById('book_price'),
       pdfView          = document.getElementById('pdf_viewer'),
-      pdfAppear        = document.getElementById('pdf_hidden'),
-      addbutton                          = document.getElementById('cart_btn');
+      pdfAppear        = document.getElementById('pdf_hidden');
 
   //sends an HTTP request to the server at the specified url to check if the login works
   $.ajax ({
@@ -493,9 +492,6 @@ function getCartFromServer(callback) {
     data: ({ username: sessionStorage.getItem('username') }),
     success: function (data) {
       callback(data.value);
-    },
-    error: function () {
-      console.error("Errore nel recupero del carrello:", error);
     }
   });
 }

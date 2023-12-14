@@ -1398,6 +1398,11 @@ nav input[type="button"]:hover
     font-size: 15px;
   }
 
+  .carousel
+  {
+    height: 13rem;
+  }
+
   .carousel img
   {
     width: calc(100% / 2);
