@@ -12,9 +12,29 @@
           "genere": "Avventura e Azione"
         },
         {
-          "nome": "Il mastino dei Baskerville",
-          "prezzo": "10€",
+          "nome": "Il grande sonno",
+          "prezzo": "8€",
           "genere": "Giallo"
+        },
+        {
+          "nome": "Venti mila leghe sotto i mari",
+          "prezzo": "9€",
+          "genere": "Avventura e Azione"
+        },
+        {
+          "nome": "Una piccola magia",
+          "prezzo": "25€",
+          "genere": "Fantasy"
+        },
+        {
+          "nome": "Libro",
+          "prezzo": "28€",
+          "genere": "Umoristico"
+        },
+        {
+          "nome": "Libro 2",
+          "prezzo": "26€",
+          "genere": "Umoristico"
         }
       ]
     }

@@ -472,14 +472,26 @@ function searchBook() {
 // New function to check if the book is in the user's cart
 function checkBookInCart(bookName) {
   const addButton = document.getElementById("cart_btn");
+
   // Assume you have a function to retrieve the user's cart (e.g., getCartFromServer)
   getCartFromServer(function (cart) {
     const isBookInCart = cart.some(item => item.nome === bookName);
+    addButton.innerHTML = "";
 
     if (isBookInCart) {
-      addButton.innerText = "Libro aggiunto";
+      const imgInCart = document.createElement("img");
+      const textInCart = document.createElement("cart_btn");
+      imgInCart.src = "images/Button%20icons/check-solid.svg";
+      textInCart.innerText = "Nel carrello";
+      addButton.appendChild(imgInCart);
+      addButton.appendChild(textInCart);
     } else {
-      addButton.innerText = "Aggiungi al carrello";
+      const imgInCart = document.createElement("img");
+      const textInCart = document.createElement("cart_btn");
+      imgInCart.src = "images/Button%20icons/cart-shopping-solid.svg";
+      textInCart.innerText = "Aggiungi al carrello";
+      addButton.appendChild(imgInCart);
+      addButton.appendChild(textInCart);
     }
   });
 }
@@ -510,7 +522,13 @@ function addBook() {
 
     success: function (){
       const addButton = document.getElementById("cart_btn");
-      addButton.innerHTML = "Libro aggiunto";
+      addButton.innerHTML = "";
+      const imgInCart = document.createElement("img");
+      const textInCart = document.createElement("cart_btn");
+      imgInCart.src = "images/Button%20icons/check-solid.svg";
+      textInCart.innerText = "Nel carrello";
+      addButton.appendChild(imgInCart);
+      addButton.appendChild(textInCart);
     }
   })
 }
