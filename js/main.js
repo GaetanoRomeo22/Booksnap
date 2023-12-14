@@ -18,14 +18,16 @@ window.onload = () => {
 
 //starts automatically when the page is loaded and checks if the user has access to the page (used by "cart.html", "account.html", "shop.html" e "recensione.html")
 function checkLogged() {
-  if (sessionStorage.getItem('logged') !== 'true')
+  if (sessionStorage.getItem('logged') !== 'true') {
     document.location.href = "index.html";
+  }
 }
 
 //starts automatically when the page is loaded and checks if the user is logged
 function checkNotLogged() {
-  if (sessionStorage.getItem('logged') === 'true')
+  if (sessionStorage.getItem('logged') === 'true') {
     document.location.href = "index.html";
+  }
 }
 
 //------------------------------------------------INDEX.HTML------------------------------------------------------------
@@ -34,10 +36,8 @@ function showNavbar() {
 
   //gets navbar's button's elements
   const accountButton = document.getElementById('nav_account'),
-      shopButton    = document.getElementById('nav_shop'),
-      loginButton   = document.getElementById('nav_login');
-
-  //checks if each buttons is correctly get
+        shopButton    = document.getElementById('nav_shop'),
+        loginButton   = document.getElementById('nav_login');
   if (accountButton && shopButton && loginButton) {
 
     //if the user is logged, it shows buttons that send the user to page for which login is needed
@@ -52,8 +52,7 @@ function showNavbar() {
       shopButton.style.display = "none";
       accountButton.style.display = "none";
     }
-  } else
-      console.log("Errore cattura elementi bottoni navbar");
+  }
 }
 
 function initializeCarousel(wrapperSelector) {
@@ -61,14 +60,14 @@ function initializeCarousel(wrapperSelector) {
   //gets each carousel's elements
   const wrapper = document.querySelector(wrapperSelector),
 
-      //carousel's class of element
-      carousel = wrapper.querySelector(".carousel"),
+  //carousel's class of element
+  carousel = wrapper.querySelector(".carousel"),
 
-      //carousel's first image
-      firstImg = carousel.querySelectorAll("img")[0],
+  //carousel's first image
+  firstImg = carousel.querySelectorAll("img")[0],
 
-      //arrow to scroll images
-      arrowIcons = wrapper.querySelectorAll("i");
+  //arrow to scroll images
+  arrowIcons = wrapper.querySelectorAll("i");
 
   //variables to track drag states and positions
   let isDragStart = false,
@@ -196,13 +195,13 @@ function showBook(bookElement) {
   if (sessionStorage.getItem('logged') === 'true') {
 
     //gets image's URL
-    let imageUrl = bookElement.src;
+    let imageUrl = bookElement.src,
 
     //extracts book's name from the URL
-    let fileName = imageUrl.split('/').pop();
+    fileName = imageUrl.split('/').pop(),
 
     //removes file's extension
-    let bookName = fileName.replace(/\.[^/.]+$/, "");
+    bookName = fileName.replace(/\.[^/.]+$/, "");
 
     //removes URL's escape characters
     bookName = decodeURIComponent(bookName);
@@ -213,8 +212,11 @@ function showBook(bookElement) {
     //sends the user to "shop.html"
     document.location.href = "shop.html";
   }
-  else
+
+  //if the user isn't logged, sends him to "login.html"
+  else {
     document.location.href = "login.html";
+  }
 }
 //------------------------------------------------INDEX.HTML------------------------------------------------------------
 
@@ -225,8 +227,6 @@ function login() {
   //gets user's username and password from the page
   const username = document.getElementById('log_usr').value,
         password = document.getElementById('log_passw').value;
-
-  //checks if entered values are correctly read
   if(username && password) {
 
     //sends an HTTP request to the server at the specified url to check if the login works
@@ -246,13 +246,8 @@ function login() {
       },
 
       //if the login doesn't work, it shows the error message
-      error: function (xhr) {
-        console.error("Errore durante l'autenticazione:", xhr.responseJSON.error);
-
-        //gets login error element
+      error: function () {
         const loginError = document.getElementById('login_error');
-
-        //checks if the login error element is correctly read and shows the error message
         if (loginError) {
           loginError.innerText     = 'Credenziali errate';
           loginError.style.display = 'block';
@@ -260,47 +255,77 @@ function login() {
       }
     });
   }
-  else
-    console.log("Errore lettura username o password");
 }
 
 //makes the password visible or invisible in login form
 function logTogglePasswordVisibility() {
-  let passwordInput = document.getElementById("log_passw");
-
-  if (passwordInput.type === "password") {
-    passwordInput.type = "text";
-  } else {
-    passwordInput.type = "password";
+  let password = document.getElementById("log_passw");
+  if (password) {
+    if (password.type === "password") {
+      password.type = "text";
+    } else {
+      password.type = "password";
+    }
   }
 }
 
 //makes the password visible or invisible in sign up form
 function regTogglePasswordVisibility() {
-  let passwordInput = document.getElementById("reg_passw");
-
-  if (passwordInput.type === "password") {
-    passwordInput.type = "text";
-  } else {
-    passwordInput.type = "password";
+  let password = document.getElementById("reg_passw");
+  if (password) {
+    if (password.type === "password") {
+      password.type = "text";
+    } else {
+      password.type = "password";
+    }
   }
 }
 //------------------------------------------------LOGIN.HTML------------------------------------------------------------
 
 //------------------------------------------------REGISTRAZIONE.HTML----------------------------------------------------
+//checks username's format
+function checkUsername() {
+
+  //gets username and error message element
+  const username = document.getElementById('reg_usr').value,
+        regError = document.getElementById('reg_error');
+  if (username && regError) {
+
+    //chechs if the username contains more of 15 characters
+    if (username.length > 15) {
+      regError.innerText     = "La dimensione dell'username eccede il limite massimo di 15 caratteri";
+      regError.style.display = 'block';
+      return false;
+    }
+
+    //checks if the username contains spaces
+    else if (/\s/.test(username)) {
+      regError.innerText     = "L'username non può contenere spazi";
+      regError.style.display = 'block';
+      return false;
+    }
+    return true;
+  }
+}
+
 //checks if the password respects the standard
 function checkPassword() {
 
   //gets password and error message element
-  let password   = document.getElementById('reg_passw').value;
-  const regError = document.getElementById('reg_error');
-
-  //checks if password and error message element are correctly read
+  const password = document.getElementById('reg_passw').value,
+        regError = document.getElementById('reg_error');
   if (password && regError) {
 
     //checks if the password contains at least 8 letters, an upper case letter and a special character
     if (password.length < 8 || !/[A-Z]/.test(password) || !/[@#$%^&+=-_]/.test(password)) {
       regError.innerText     = 'La password deve contenere almeno 8 caratteri, una lettera maiuscola e un carattere speciale';
+      regError.style.display = 'block';
+      return false;
+    }
+
+    //checks if the password contains spaces
+    else if (/\s/.test(password)) {
+      regError.innerText     = 'La password non può contenere spazi';
       regError.style.display = 'block';
       return false;
     }
@@ -312,16 +337,14 @@ function checkPassword() {
 function register() {
 
   //gets user's name, surname, username, and password from the page
-  const name   = document.getElementById('reg_name').value,
-      surname  = document.getElementById('reg_surname').value,
-      username = document.getElementById('reg_usr').value,
-      password = document.getElementById('reg_passw').value;
-
-  //checks if entered values are correctly read
+  const name = document.getElementById('reg_name').value,
+        surname  = document.getElementById('reg_surname').value,
+        username = document.getElementById('reg_usr').value,
+        password = document.getElementById('reg_passw').value;
   if (name && surname && username && password) {
 
     //checks if the password respects the standard using the checkPassword() function
-    if (checkPassword()) {
+    if (checkUsername() && checkPassword()) {
 
       //sends an HTTP request to the server at the specified URL to check if the sign-up works
       $.ajax({
@@ -338,13 +361,10 @@ function register() {
           sessionStorage.setItem('username', username);
           document.location.href = data.redirect;
         },
-        error: function (xhr) {
-          console.error("Errore durante l'autenticazione:", xhr.responseJSON.error);
 
-          //gets register error element
+        //if the sign-up doesn't work, shows the error message
+        error: function () {
           const regError = document.getElementById('reg_error');
-
-          //checks if the register error element is correctly read and shows the error message
           if (regError) {
             regError.innerText = 'Username non disponibile o uso di caratteri non consentiti per nome e cognome';
             regError.style.display = 'block';
@@ -352,23 +372,17 @@ function register() {
         }
       });
     }
-  } else
-      console.log("Errore lettura dati utente");
+  }
 }
 //------------------------------------------------REGISTRAZIONE.HTML----------------------------------------------------
 
 //------------------------------------------------SHOP.HTML-------------------------------------------------------------
 //clears the reviews list
 function clearReviewList() {
-
-  //gets reviews list element
   const reviewList = document.getElementById('reviews_list');
-
-  //checks if reviews list element is correctly read and clears the list
-  if(reviewList)
+  if(reviewList) {
     reviewList.innerHTML = '';
-  else
-    console.log("Errore lettura lista recensioni");
+  }
 }
 
 //shows suggestions to the user about the book he's searching
@@ -376,9 +390,7 @@ function getSuggestions() {
 
   //gets book's name and suggestions list element
   const input = document.getElementById('search_in').value,
-      suggestionList = document.getElementById('suggestion_list');
-
-  //checks if book's name and suggestions list element are correctly read
+        suggestionList = document.getElementById('suggestion_list');
   if(input.trim() !== '' && suggestionList)
   {
     //clears previous suggestions
@@ -408,9 +420,6 @@ function getSuggestions() {
           //appends the suggestion to the suggestion list
           suggestionList.appendChild(li);
         });
-      },
-      error: function (xhr) {
-        console.error("Errore nella ricerca del libro: ", xhr.responseJSON.error);
       }
     });
   }
@@ -433,8 +442,6 @@ function searchBook() {
         bookPriceAppear  = document.getElementById('book_price'),
         pdfView          = document.getElementById('pdf_viewer'),
         pdfAppear        = document.getElementById('pdf_hidden');
-
-    //checks if every book's piece of information is correctly read
     if(bookImage && bookNameAppear && bookAuthorAppear && bookTypeAppear && bookYearAppear && bookPageAppear && bookPriceAppear && pdfView && pdfAppear) {
 
       //sends an HTTP request to the server at the specified url to check if the login works
@@ -452,18 +459,15 @@ function searchBook() {
           let noPreview = document.getElementById('no_preview');
 
           //set book's information to make it visualizable
-          if(data.percorso)
-          {
+          if(data.percorso) {
             pdfView.src = data.percorso;
             noPreview.style.display = 'none';
             pdfView.style.display = 'block';
-          }
-          else
-          {
-            pdfView.src = '';
-            noPreview.textContent = 'Preview non ancora disponibile';
-            noPreview.style.display = 'block';
-            pdfView.style.display = 'none';
+          } else {
+              pdfView.src = '';
+              noPreview.textContent = 'Preview non ancora disponibile';
+              noPreview.style.display = 'block';
+              pdfView.style.display = 'none';
           }
 
           //set book's information to make it visualizable
@@ -479,15 +483,10 @@ function searchBook() {
 
           //stores book's name into the session's cache
           sessionStorage.setItem('bookName', bookName);
-        },
-        error: function (xhr) {
-          console.error("Errore nella ricerca del libro: ", xhr.responseJSON.error);
         }
       });
     }
   }
-  else
-    console.log("Errore lettura elementi informazioni libro");
 }
 
 //allows the user to add a book in his cart
@@ -495,31 +494,26 @@ function addBook() {
 
   //gets the book searched by the user
   const bookName = document.getElementById("search_in").value;
-
-  //checks if the book's name is correctly read
   if (bookName) {
+
     //sends an HTTP request at the specified url to add the book in user's cart
     $.ajax ({
       url:         'http://localhost:3000/addBook',
       method:      'POST',
       contentType: 'application/JSON',
-      data:         JSON.stringify({ bookName: bookName, username: sessionStorage.getItem('username') }),
-      error: function (xhr) {
-        console.error('Errore inserimento libro nel carrello:', xhr.responseJSON.error);
-      }
+      data:         JSON.stringify({ bookName: bookName, username: sessionStorage.getItem('username') })
     });
-  } else
-      console.log("Errore lettura nome libro");
+  }
 }
 
 //shows book's reviews
 function showBookReviews() {
 
-  // gets book's name and reviews list element
+  //gets book's name and reviews list element
   const bookName = document.getElementById('search_in').value;
-
   if (bookName) {
-    // sends an HTTP request at the specified url to get logged value and check if the user is logged
+
+    //sends an HTTP request at the specified url to get logged value and check if the user is logged
     $.ajax ({
       url:         'http://localhost:3000/showBookReviews',
       method:      'POST',
@@ -527,32 +521,29 @@ function showBookReviews() {
       data:        JSON.stringify({ bookName: bookName }),
       success: function (data) {
 
-        // clears previous reviews list
+        //clears previous reviews list
         clearReviewList();
 
-        // gets reviews list element
+        //gets reviews list element
         const reviewsList      = document.getElementById('reviews_list');
         const noReviewsMessage = document.getElementById('no_reviews');
 
-        // Check if there are reviews
-        if (data.value.length > 0)
-        {
-          // Display "Recensioni" message
+        //checks if there are reviews
+        if (data.value.length > 0) {
           noReviewsMessage.textContent = 'Recensioni';
 
-          // each review is inserted as a <li> element in a <ul> list
-          data.value.forEach((review) =>
-          {
+          //each review is inserted as a <li> element in a <ul> list
+          data.value.forEach((review) => {
             const bookReview     = document.createElement('p'),
-                reviewTitle      = document.createElement('h3'),
-                reviewUsername   = document.createElement('p'),
-                spacer           = document.createElement('p'),
-                reviewData       = document.createElement('p'),
-                infoRevContainer = document.createElement('div'),
-                reviewContainer  = document.createElement('div'),
-                manageContainer  = document.createElement('div');
+                  reviewTitle      = document.createElement('h3'),
+                  reviewUsername   = document.createElement('p'),
+                  spacer           = document.createElement('p'),
+                  reviewData       = document.createElement('p'),
+                  infoRevContainer = document.createElement('div'),
+                  reviewContainer  = document.createElement('div'),
+                  manageContainer  = document.createElement('div');
 
-            // sets review's information
+            //sets review's information
             reviewUsername.textContent = review.utente;
             reviewData.textContent     = review.data;
             spacer.textContent         = '|';
@@ -560,7 +551,7 @@ function showBookReviews() {
             bookReview.textContent     = review.commento;
             spacer.id                  = 'book_spacer';
             infoRevContainer.id        = 'inforev_container';
-            reviewContainer.id          = review.utente;
+            reviewContainer.id         = review.utente;
             reviewContainer.classList  = 'review_container';
             manageContainer.id         = 'managerev_container';
 
@@ -574,18 +565,10 @@ function showBookReviews() {
             reviewsList.appendChild(reviewContainer);
           });
         } else {
-          // Display "Nessuna recensione" message
           noReviewsMessage.textContent = 'Nessuna recensione';
         }
-      },
-      error: function (xhr) {
-        console.error('Errore ricerca recensioni libro:', xhr.responseJSON.error);
-      },
+      }
     });
-  }
-  else
-  {
-    console.log('Errore lettura nome libro');
   }
 }
 
@@ -594,7 +577,6 @@ function checkReview() {
 
   //gets book's name from the session storage
   const bookName = sessionStorage.getItem('bookName');
-
   if (bookName) {
 
     //sends an HTTP request at the specified url to check if user has already registered the book
@@ -606,23 +588,17 @@ function checkReview() {
 
       //if the user hasn't already reviewed the book, it sends him to "recensione.html"
       success: function(data) {
-        if (!data.value)
-        {
+        if (!data.value) {
           document.location.href = data.redirect;
+        } else {
+            let reviewAuthor = document.getElementById(data.user);
+            reviewAuthor.style.transition = 'color 0.5s ease';
+            reviewAuthor.style.color = '#ec3853';
+            setTimeout(function() {
+              reviewAuthor.style.color = '';
+            }, 700);
+            document.getElementById(data.user).scrollIntoView({ behavior: 'smooth' });
         }
-        else
-        {
-          let reviewAuthor = document.getElementById(data.user);
-          reviewAuthor.style.transition = 'color 0.5s ease';
-          reviewAuthor.style.color = '#ec3853';
-          setTimeout(function() {
-            reviewAuthor.style.color = '';
-          }, 700);
-          document.getElementById(data.user).scrollIntoView({ behavior: 'smooth' });
-        }
-      },
-      error: function (xhr) {
-        console.error('Errore inserimento libro nel carrello:', xhr.responseJSON.error);
       }
     });
   }
@@ -633,7 +609,7 @@ function checkSearch() {
 
   //gets book's name searched by the user from session storage
   const checkBook1 = sessionStorage.getItem('bookSearch'),
-      checkBook2 = sessionStorage.getItem('bookName');
+        checkBook2 = sessionStorage.getItem('bookName');
 
   //checks if the user has accessed this page from "index.html"
   if (checkBook1) {
@@ -671,8 +647,6 @@ function writeReview() {
   const reviewTitle = document.getElementById('review_title').value,
       review      = document.getElementById('review').value,
       bookName    = sessionStorage.getItem('bookName');
-
-  //checks if book's review and name are correctly read
   if (bookName && review && reviewTitle) {
 
     //sends an HTTP request to the server at the specified url to store user's review
@@ -681,20 +655,18 @@ function writeReview() {
       method: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({ bookName: bookName, review: review, reviewTitle: reviewTitle, username: sessionStorage.getItem('username') }),
+
+      //if it works, sends the user to "shop.html"
       success: function(data) {
         document.location.href = data.redirect;
-      },
-      error: function (xhr) {
-        console.error("Errore scrittura recensione: ", xhr.responseJSON.error);
       }
     });
-  } else
-    console.log("Errore lettura recensione o nome libro");
+  }
 }
 //------------------------------------------------RECENSIONE.HTML-------------------------------------------------------
 
 //------------------------------------------------ACCOUNT.HTML----------------------------------------------------------
-//executes the logout when the form's submit button is pressed
+//executes the logout when the form's submit button is pressed and frees session storage
 function logout() {
   sessionStorage.removeItem('bookName');
   sessionStorage.removeItem('bookSearch');
@@ -712,12 +684,9 @@ function emptyCart() {
   $.ajax ({
     url   : 'http://localhost:3000/emptyCart',
     method: 'POST',
-    data: JSON.stringify( {username: sessionStorage.getItem('username') }),
+    data: ( {username: sessionStorage.getItem('username') }),
     success: function () {
       updateCartView();
-    },
-    error: function (xhr) {
-      console.error('Errore durante la richiesta di stato di logged:', xhr.responseJSON.error);
     }
   });
 }
@@ -731,13 +700,8 @@ function removeReview(bookName) {
     method:      'POST',
     contentType: 'application/json',
     data:        JSON.stringify({ bookName: bookName, username: sessionStorage.getItem('username') }),
-
-    //if the logout works, it sends the user to "index.html"
     success: function () {
       getInfo();
-    },
-    error: function (xhr) {
-      console.error('Errore durante la richiesta di stato di logged:', xhr.responseJSON.error);
     }
   });
 }
@@ -754,20 +718,17 @@ function getInfo() {
 
       //gets username, name and surname elements
       const usernameText = document.getElementById('acc_user'),
-          nameText     = document.getElementById('acc_name'),
-          surnameText  = document.getElementById('acc_surn');
+            nameText     = document.getElementById('acc_name'),
+            surnameText  = document.getElementById('acc_surn');
 
       //checks if elements are correctly read
       if (usernameText && nameText && surnameText) {
+
         //shows user's data
         usernameText.textContent = 'Ciao ' + sessionStorage.getItem('username');
         nameText.textContent     = sessionStorage.getItem('name');
         surnameText.textContent  = sessionStorage.getItem('surname');
-      } else
-          console.log("Errore lettura informazioni utente");
-    },
-    error: function (xhr) {
-      console.error("Errore recupero dati utente:", xhr.responseJSON.error);
+      }
     }
   });
 }
@@ -786,8 +747,6 @@ function showUserReviews() {
       //gets username, name and surname elements
       const reviewList = document.getElementById('reviews_cronology');
       const noReviewsMessage = document.getElementById('no_reviews');
-
-      //checks if elements are correctly read
       if (reviewList && noReviewsMessage) {
 
         //clears previous reviews
@@ -804,14 +763,14 @@ function showUserReviews() {
           //each review is inserted as a <li> element in a <ul> list
           data.recensioni.forEach(book => {
             const reviewItem      = document.createElement('li'),
-                removeButton      = document.createElement('button'),
-                bookCover         = document.createElement('img'),
-                bookName          = document.createElement('h3'),
-                reviewName        = document.createElement('p'),
-                spacer            = document.createElement('p'),
-                imageContainer    = document.createElement('div'),
-                revContainer      = document.createElement('div'),
-                remTitleContainer = document.createElement('div');
+                  removeButton      = document.createElement('button'),
+                  bookCover         = document.createElement('img'),
+                  bookName          = document.createElement('h3'),
+                  reviewName        = document.createElement('p'),
+                  spacer            = document.createElement('p'),
+                  imageContainer    = document.createElement('div'),
+                  revContainer      = document.createElement('div'),
+                  remTitleContainer = document.createElement('div');
 
             bookCover.src               = 'images/' + book.genere + '/' + book.nome + '.webp';
             bookCover.alt               = book.nome;
@@ -843,11 +802,7 @@ function showUserReviews() {
             };
           })
         }
-      } else
-          console.log("Errore lettura informazioni utente");
-    },
-    error: function (xhr) {
-      console.error("Errore recupero dati utente:", xhr.responseJSON.error);
+      }
     }
   });
 }
@@ -861,13 +816,8 @@ function removeBookFromCart(bookName) {
     method:      'POST',
     contentType: 'application/json',
     data:        JSON.stringify({ bookName: bookName, username: sessionStorage.getItem('username') }),
-
-    //if it works, it updates cart visualization
     success: function (data) {
       updateCartView(data.value);
-    },
-    error: function (xhr) {
-      console.error('Errore nella rimozione del libro dal carrello:', xhr.responseJSON.error);
     }
   });
 }
@@ -888,14 +838,14 @@ function updateCartView(cartItems) {
 
     //shows the updated cart
     cartItems.forEach(ordine => {
-      const bookName       = document.createElement('h3'),
-          bookPrice      = document.createElement('p'),
-          spacer         = document.createElement('p'),
-          removeBook     = document.createElement('button'),
-          insertImage    = document.createElement('img'),
-          imageContainer = document.createElement('div'),
-          infoContainer  = document.createElement('div'),
-          priceContainer = document.createElement('div');
+      const bookName     = document.createElement('h3'),
+            bookPrice      = document.createElement('p'),
+            spacer         = document.createElement('p'),
+            removeBook     = document.createElement('button'),
+            insertImage    = document.createElement('img'),
+            imageContainer = document.createElement('div'),
+            infoContainer  = document.createElement('div'),
+            priceContainer = document.createElement('div');
 
       //shows book's information
       bookName.textContent     = ordine.nome;
@@ -928,9 +878,9 @@ function updateCartView(cartItems) {
     });
 
     //gets total price and clear cart button elements
-    const cartTot    = document.getElementById('cart_price'),
-        cartSpacer = document.getElementById('book_spacer1'),
-        clearCart  = document.getElementById('cart_clear');
+    const cartTot  = document.getElementById('cart_price'),
+          cartSpacer = document.getElementById('book_spacer1'),
+          clearCart  = document.getElementById('cart_clear');
 
     //if the cart isn't empty
     if (parseFloat(totalPrice) > 0) {
@@ -948,12 +898,11 @@ function updateCartView(cartItems) {
         emptyCart();
       };
     } else {
-      cartTot.textContent    = 'Carrello vuoto';
-      cartSpacer.textContent = '';
-      clearCart.textContent  = '';
+        cartTot.textContent    = 'Carrello vuoto';
+        cartSpacer.textContent = '';
+        clearCart.textContent  = '';
     }
-  } else
-    console.log("Errore cattura carrello");
+  }
 }
 
 //starts automatically when the page is loaded and gets user's cart
@@ -961,11 +910,6 @@ function showCart() {
 
   //gets cart element
   const cartList = document.getElementById("cart_list");
-
-  //total price of books in the cart
-  let totalPrice = 0;
-
-  //checks if cart element is correctly read
   if (cartList) {
 
     //sends an HTTP request to the server at the specified url to get user's cart
@@ -975,16 +919,19 @@ function showCart() {
       data: { username: sessionStorage.getItem('username') },
       success: function (data) {
 
+        //total price of books in the cart
+        let totalPrice = 0;
+
         //each book added to the cart is inserted as a <li> element in a <ul> list
         data.value.forEach(ordine => {
-          const bookName       = document.createElement('h3'),
-              bookPrice      = document.createElement('p'),
-              spacer         = document.createElement('p'),
-              removeBook     = document.createElement('button'),
-              insertImage    = document.createElement('img'),
-              imageContainer = document.createElement('div'),
-              infoContainer  = document.createElement('div'),
-              priceContainer = document.createElement('div');
+          const bookName     = document.createElement('h3'),
+                bookPrice      = document.createElement('p'),
+                spacer         = document.createElement('p'),
+                removeBook     = document.createElement('button'),
+                insertImage    = document.createElement('img'),
+                imageContainer = document.createElement('div'),
+                infoContainer  = document.createElement('div'),
+                priceContainer = document.createElement('div');
 
           //shows book's information
           bookName.textContent     = ordine.nome;
@@ -1018,9 +965,9 @@ function showCart() {
         });
 
         //gets total price and clear cart button elements
-        const cartTot    = document.getElementById('cart_price'),
-            cartSpacer = document.getElementById('book_spacer1'),
-            clearCart  = document.getElementById('cart_clear');
+        const cartTot  = document.getElementById('cart_price'),
+              cartSpacer = document.getElementById('book_spacer1'),
+              clearCart  = document.getElementById('cart_clear');
 
         //if the cart isn't empty
         if (parseFloat(totalPrice) > 0) {
@@ -1039,13 +986,10 @@ function showCart() {
             emptyCart();
           };
         } else {
-          cartTot.textContent    = 'Carrello vuoto';
-          cartSpacer.textContent = '';
-          clearCart.textContent  = '';
+            cartTot.textContent    = 'Carrello vuoto';
+            cartSpacer.textContent = '';
+            clearCart.textContent  = '';
         }
-      },
-      error: function (xhr) {
-        console.error('Errore ottenimento carrello:', xhr.responseJSON.error);
       }
     });
   }

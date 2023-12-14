@@ -1,35 +1,26 @@
 //-----------------------------------------------------Node.js Modules--------------------------------------------------
 const fs              = require('fs'),
-    express           = require('express'),
-    bodyParser        = require('body-parser'),
-    path              = require('path'),
-    cors              = require('cors'),
-    CryptoJS          = require('crypto-js'),
-    PasswordValidator = require('password-validator');
+      express           = require('express'),
+      bodyParser        = require('body-parser'),
+      path              = require('path'),
+      cors              = require('cors'),
+      CryptoJS          = require('crypto-js'),
+      PasswordValidator = require('password-validator');
 //-----------------------------------------------------Node.js Modules--------------------------------------------------
 
 //-----------------------------------------------------Variables--------------------------------------------------------
 const app          = express(),
-    port           = 3000,                                         //port number on witch the server answers
-    jsonFilePath   = path.join(__dirname, 'database.json');        //JSON file's path
+      port         = 3000,                                         //port number on witch the server answers
+      jsonFilePath = path.join(__dirname, 'database.json');        //JSON file's path
 //-----------------------------------------------------Variables--------------------------------------------------------
 
 app.use(bodyParser.urlencoded({ extended: true }));                //allows to analize data passed in HTTP request and response
 app.use(bodyParser.json());                                        //allows to analize JSON format data
 app.use(cors());                                                   //allows connections by all origins
 
-//checks if the operation works
-function errorHandler(res, err) {
-  if (err) {
-    console.error('Errore nella lettura del file JSON:', err);
-    return res.status(500).json({error: 'Errore del server'});
-  }
-}
-
 //shows the error message
-function printError(res, message) {
-  console.log(message);
-  res.status(404).json({error: message});
+function sendError(res) {
+  res.status(404).json({error: true});
 }
 
 //when the server receives an HTTP request to this url, it logs the user up
@@ -42,9 +33,6 @@ app.post("/login", (req, res) => {
 
     //reads the JSON file
     fs.readFile(jsonFilePath, 'utf8', (err, data) => {
-
-      //checks if it works
-      errorHandler(res, err);
 
       //parses the JSON data
       const info = JSON.parse(data),
@@ -64,13 +52,14 @@ app.post("/login", (req, res) => {
             name: checkUser.nome,
             surname: checkUser.cognome,
             redirect: 'index.html'});
-        } else
-          printError(res, 'Password errata');
-      } else
-        printError(res, 'Utente non registrato');
+        } else {
+            sendError(res);
+          }
+      } else {
+          sendError(res);
+        }
     });
-  } else
-    printError(res, 'Username o password non trovati nella richiesta HTTP o accesso già effettuato');
+  }
 });
 
 //when the server receives an HTTP request to this url, it logs the user in
@@ -78,9 +67,9 @@ app.post('/register', (req, res) => {
 
   //gets name, surname, username, and password from the request
   const name = req.body.name,
-      surname = req.body.surname,
-      username = req.body.username,
-      password = req.body.password;
+        surname = req.body.surname,
+        username = req.body.username,
+        password = req.body.password;
 
   //checks if the password respects the standard
   const checkPassword = new PasswordValidator();
@@ -91,9 +80,6 @@ app.post('/register', (req, res) => {
 
     //reads the JSON file
     fs.readFile(jsonFilePath, 'utf8', (err, data) => {
-
-      //checks if it works
-      errorHandler(res, err);
 
       //parses the JSON data
       const info = JSON.parse(data),
@@ -117,21 +103,15 @@ app.post('/register', (req, res) => {
         });
 
         //writes the updated data to the JSON file
-        fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', (err) => {
+        fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
 
-          //checks if it works
-          errorHandler(res, err);
-
-          //sends the user to "index.html"
-          res.json({redirect: 'index.html'});
-        });
-      } else {
-        printError(res, 'Utente già registrato');
+        //sends the user to "index.html"
+        res.json({redirect: 'index.html'});
       }
     });
   } else {
-    printError(res, "Dati dell'utente non trovati nella richiesta HTTP, password errata o accesso già effettuato");
-  }
+      sendError(res);
+    }
 });
 
 //when the server receives an HTTP request to this url, it shows the specified book's PDF
@@ -139,15 +119,10 @@ app.post('/searchBook', (req, res) => {
 
   //gets book's name from the request
   const bookName = req.body.bookName;
-
-  //checks if the book's name is correctly read from the request and if the user is logged
   if (bookName) {
 
     //reads the JSON file
     fs.readFile(jsonFilePath, 'utf8', (err, data) => {
-
-      //checks if it works
-      errorHandler(res, err);
 
       //parses the JSON data
       const info = JSON.parse(data),
@@ -165,11 +140,13 @@ app.post('/searchBook', (req, res) => {
           pagine:   checkBook.pagine,
           prezzo:   checkBook.prezzo
         });
-      } else
-          printError(res, 'Utente non trovato');
+      } else {
+          sendError(res);
+        }
     })
-  } else
-      printError(res, 'Nome del libro non trovato nella richiesta HTTP o accesso non effettuato');
+  } else {
+      sendError(res);
+    }
 });
 
 //when the server receives an HTTP request to this url, it shows to the user the suggestions of the book he's looking for
@@ -185,15 +162,17 @@ app.post('/getSuggestions', (req, res) => {
       //parses the JSON data
       const info = JSON.parse(data),
 
-          //searchs books that contain the input entered by the user, ignoring the difference between lowercase and uppercase
-          suggestions = info.libri.filter(b => b.nome.toLowerCase().includes(input.toLowerCase())).map(b => b.nome);
+      //searchs books that contain the input entered by the user, ignoring the difference between lowercase and uppercase
+      suggestions = info.libri.filter(b => b.nome.toLowerCase().includes(input.toLowerCase())).map(b => b.nome);
 
       //if it finds books, it sends the list of suggestions to the client
-      if (suggestions)
+      if (suggestions) {
         res.json({value: suggestions});
+      }
     });
-  } else
-      printError(res, 'Input non trovato nella richiesta HTTP o accesso non effettuato');
+  } else {
+      sendError(res);
+  }
 });
 
 //when the server receives an HTTP request to this url, it shows the user's cart
@@ -205,9 +184,6 @@ app.post('/showCart', (req, res) => {
     //reads the JSON file
     fs.readFile(jsonFilePath, 'utf8', (err, data) => {
 
-      //checks if it works
-      errorHandler(res, err);
-
       //parses the JSON data
       const info = JSON.parse(data),
 
@@ -217,8 +193,9 @@ app.post('/showCart', (req, res) => {
       //if it finds user's cart, it sends it to the client
       if (checkCart)
         res.json({value: checkCart.carrello});
-      else
-        printError(res, "Carrello dell'utente non trovato");
+      else {
+        sendError(res);
+      }
     });
   }
 });
@@ -232,9 +209,6 @@ app.post('/addBook', (req, res) => {
 
     //reads the JSON file
     fs.readFile(jsonFilePath, 'utf8', (err, data) => {
-
-      //checks if it works
-      errorHandler(res, err);
 
       //parses the JSON data
       const info = JSON.parse(data),
@@ -250,16 +224,12 @@ app.post('/addBook', (req, res) => {
           prezzo: checkBook.prezzo,
           genere: checkBook.genere
         });
-        fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', (err) => {
-
-          //checks if it works
-          errorHandler(res, err);
-        });
+        fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
       } else
-          printError(res, 'Libro gia presente nel carrello');
+          sendError(res);
     });
   } else
-      printError(res, 'Nome del libro non trovato nella richiesta HTTP o accesso non effettuato');
+      sendError(res);
 });
 
 //when the server receives an HTTP request to this url, it removes the specified book from the user's cart
@@ -267,9 +237,7 @@ app.post('/removeBook', (req, res) => {
 
   //gets book's name from the request
   const bookName = req.body.bookName,
-      username = req.body.username;
-
-  //checks if the book's name is correctly read and if the user is logged
+        username = req.body.username;
   if (username && bookName) {
 
     //reads the JSON file
@@ -278,7 +246,8 @@ app.post('/removeBook', (req, res) => {
       //parses the JSON data
       const info = JSON.parse(data),
 
-          checkUser = info.utenti.find(u => u.username === username); //searchs the user
+      //searchs the user
+      checkUser = info.utenti.find(u => u.username === username);
 
       //if it finds him
       if (checkUser) {
@@ -286,22 +255,25 @@ app.post('/removeBook', (req, res) => {
         //checks if the book to remove is in his cart
         const index = checkUser.carrello.findIndex(book => book.nome === bookName);
         if (index !== -1) {
+
           //removes the book from user's cart
           checkUser.carrello.splice(index, 1);
 
-          //reads the JSON file to apply the changes and sends the user's cart to the client
-          fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', (err) => {
-            //checks if it works
-            errorHandler(res, err);
-            res.json({value: checkUser.carrello});
-          });
-        } else
-          printError(res, 'Libro non trovato nel carrello');
-      } else
-        printError(res, 'Utente non trovato');
+          //reads the JSON file to apply the changes
+          fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
+
+          //sends the user's cart to the client
+          res.json({value: checkUser.carrello});
+        } else {
+            sendError(res);
+        }
+      } else {
+          sendError(res);
+      }
     });
-  } else
-    printError(res, 'Nome del libro non trovato nella richiesta HTTP o accesso non effettuato');
+  } else {
+      sendError(res);
+  }
 });
 
 //when the server receives an HTTP request to this url, it shows the book's reviews
@@ -309,28 +281,25 @@ app.post('/showBookReviews', (req, res) => {
 
   //gets book's name from the request
   const bookName = req.body.bookName;
-
-  //checks if the book's name is correctly read from the request and if the user is logged
   if (bookName) {
 
     //tries to read the JSON file
     fs.readFile(jsonFilePath, 'utf8', (err, data) => {
-
-      //checks if it works
-      errorHandler(res, err);
 
       //parses the JSON data
       const info = JSON.parse(data),
 
       //checks if the book is available and sends its reviews to the client
       checkBook = info.libri.find(b => b.nome === bookName);
-      if (checkBook)
+      if (checkBook) {
         res.json({value: checkBook.recensioni});
-      else
-        printError(res, 'Libro non trovato');
+      } else {
+          sendError(res);
+      }
     });
-  } else
-    printError(res, 'Nome del libro non trovato nella richiesta HTTP o accesso non effettuato');
+  } else {
+      sendError(res);
+  }
 });
 
 //when the server receives an HTTP request to this url, it shows the book's reviews
@@ -339,8 +308,6 @@ app.post('/checkReview', (req, res) => {
   //gets book's name from the request
   const bookName = req.body.bookName,
         username = req.body.username;
-
-  //checks if book's name and review are correctly read from the request and if the user is logged
   if (bookName && username) {
 
     //tries to read the JSON file
@@ -359,11 +326,12 @@ app.post('/checkReview', (req, res) => {
         const checkReview = checkBook.recensioni.find(review => review.utente === username);
 
         //if he hasn't, he can write a review
-        res.json({value: checkReview, user: username, redirect: 'recensione.html'});
+        res.json({ value: checkReview, user: username, redirect: 'recensione.html' });
       }
     });
-  } else
-      printError(res, 'Nome del libro non trovati nella richiesta HTTP o accesso non effettuato');
+  } else {
+      sendError(res);
+  }
 });
 
 //when the server receives an HTTP request to this url, it shows the book's reviews
@@ -371,11 +339,9 @@ app.post('/writeReview', (req, res) => {
 
   //gets book's name and review from the request
   const bookName    = req.body.bookName,
-      reviewTitle = req.body.reviewTitle,
-      review      = req.body.review,
-      username = req.body.username;
-
-  //checks if book's name and review are correctly read from the request and if the user is logged
+        reviewTitle = req.body.reviewTitle,
+        review      = req.body.review,
+        username = req.body.username;
   if (bookName && review && reviewTitle && username) {
 
     //tries to read the JSON file
@@ -392,9 +358,9 @@ app.post('/writeReview', (req, res) => {
 
         //gets the local date and hour
         const date = new Date(),
-            day = date.getDate(),
-            month = date.getMonth() + 1,
-            year = date.getFullYear();
+              day = date.getDate(),
+              month = date.getMonth() + 1,
+              year = date.getFullYear();
 
         //stores the review and its information
         checkBook.recensioni.push({
@@ -403,17 +369,13 @@ app.post('/writeReview', (req, res) => {
           data: day + "/" + month + "/" + year,
           utente: username
         })
-        fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', (err) => {
-
-          //checks if it works
-          errorHandler(res, err);
-        });
+        fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
 
         //sends the user to "shop.html"
-        res.json({redirect: 'shop.html'});
+        res.json({ redirect: 'shop.html' });
+      } else {
+          sendError(res);
       }
-      else
-        printError(res, 'Nome del libro o recensione non trovati nella richiesta HTTP o accesso non effettuato');
   });
 }
 });
@@ -423,7 +385,7 @@ app.post('/removeReview', (req, res) => {
 
   //gets book's name from the request
   const bookName = req.body.bookName,
-      username = req.body.username;
+        username = req.body.username;
   if (username && bookName) {
 
     //tries to read the JSON file
@@ -445,22 +407,22 @@ app.post('/removeReview', (req, res) => {
           //removes the book from user's cart
           checkBook.recensioni.splice(index, 1);
 
-          //reads the JSON file to apply the changes and sends the user's cart to the client
-          fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', (err) => {
+          //reads the JSON file to apply the changes
+          fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
 
-            //checks if it works
-            errorHandler(res, err);
-            res.json({value: checkBook.recensioni});
-          });
-        } else
-          printError(res, 'Recensione libro non trovata');
-      } else
-        printError(res, 'Utente non trovato');
+          //sends the user's cart to the client
+          res.json({value: checkBook.recensioni});
+        } else {
+            sendError(res);
+        }
+      } else {
+          sendError(res);
+      }
     });
-  } else
-    printError(res, 'Nome del libro non trovato nella richiesta HTTP o accesso non effettuato');
+  } else {
+      sendError(res);
+  }
 });
-
 
 //when the server receives an HTTP request to this url, it returns user's data
 app.post("/getInfo", (req, res) => {
@@ -470,9 +432,6 @@ app.post("/getInfo", (req, res) => {
 
     //reads the JSON file
     fs.readFile(jsonFilePath, 'utf8', (err, data) => {
-
-      //checks if it works
-      errorHandler(res, err);
 
       //parses the JSON data
       const info = JSON.parse(data),
@@ -499,14 +458,14 @@ app.post("/getInfo", (req, res) => {
         });
 
         //sends the information to the client
-        res.json ({
-          recensioni: reviewedBooks
-        });
-      } else
-          printError(res, 'Utente non trovato');
+        res.json ({ recensioni: reviewedBooks });
+      } else {
+          sendError(res);
+      }
     });
-  } else
-      printError(res, 'Username o password non trovati nella richiesta HTTP o accesso non effettuato');
+  } else {
+      sendError(res);
+  }
 });
 
 //when the server receives an HTTP request to this url, it clears user's cart
@@ -518,9 +477,6 @@ app.post('/emptyCart', (req, res) => {
     //reads the JSON file
     fs.readFile(jsonFilePath, 'utf8', (err, data) => {
 
-      //checks if it works
-      errorHandler(res, err);
-
       //parses the JSON data
       const info = JSON.parse(data),
 
@@ -530,16 +486,14 @@ app.post('/emptyCart', (req, res) => {
       //if it finds user's cart, it clears it
       if (checkCart) {
         checkCart.carrello = [];
-        fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', (err) => {
-
-          //checks if it works
-          errorHandler(res, err);
-        });
-      } else
-        printError(res, "Carrello dell'utente non trovato");
+        fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
+      } else {
+          sendError(res);
+      }
     });
-  } else
-    printError(res, 'Username o password non trovati nella richiesta HTTP o accesso non effettuato');
+  } else {
+      sendError(res);
+  }
 });
 
 app.listen(port, () => {

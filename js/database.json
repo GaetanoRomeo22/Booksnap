@@ -12,13 +12,7 @@
       "cognome": "Risso",
       "username": "giopic02",
       "password": "6d7d0f5d454250e4759be6b457bc3ce01d8db8a9c3dfe7a017c840c2ba1a8ff8",
-      "carrello": [
-        {
-          "nome": "Il signore degli anelli",
-          "prezzo": "10€",
-          "genere": "Avventura e Azione"
-        }
-      ]
+      "carrello": []
     }
   ],
   "libri": [
@@ -29,8 +23,7 @@
       "anno": "2002",
       "pagine": "1380",
       "prezzo": "10€",
-      "recensioni": [
-      ],
+      "recensioni": [],
       "percorso": "pdf/Il_signore_degli_anelli_anteprima.pdf"
     },
     {
