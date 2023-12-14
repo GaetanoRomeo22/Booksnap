@@ -172,7 +172,7 @@ app.post('/getSuggestions', (req, res) => {
     });
   } else {
       sendError(res);
-  }
+    }
 });
 
 //when the server receives an HTTP request to this url, it shows the user's cart
@@ -225,11 +225,13 @@ app.post('/addBook', (req, res) => {
           genere: checkBook.genere
         });
         fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
-      } else
+      } else {
           sendError(res);
+        }
     });
-  } else
+  } else {
       sendError(res);
+    }
 });
 
 //when the server receives an HTTP request to this url, it removes the specified book from the user's cart
@@ -266,14 +268,14 @@ app.post('/removeBook', (req, res) => {
           res.json({value: checkUser.carrello});
         } else {
             sendError(res);
-        }
+          }
       } else {
           sendError(res);
-      }
+        }
     });
   } else {
       sendError(res);
-  }
+    }
 });
 
 //when the server receives an HTTP request to this url, it shows the book's reviews
@@ -295,11 +297,11 @@ app.post('/showBookReviews', (req, res) => {
         res.json({value: checkBook.recensioni});
       } else {
           sendError(res);
-      }
+        }
     });
   } else {
       sendError(res);
-  }
+    }
 });
 
 //when the server receives an HTTP request to this url, it shows the book's reviews
@@ -331,7 +333,7 @@ app.post('/checkReview', (req, res) => {
     });
   } else {
       sendError(res);
-  }
+    }
 });
 
 //when the server receives an HTTP request to this url, it shows the book's reviews
@@ -375,7 +377,7 @@ app.post('/writeReview', (req, res) => {
         res.json({ redirect: 'shop.html' });
       } else {
           sendError(res);
-      }
+        }
   });
 }
 });
@@ -414,14 +416,14 @@ app.post('/removeReview', (req, res) => {
           res.json({value: checkBook.recensioni});
         } else {
             sendError(res);
-        }
+          }
       } else {
           sendError(res);
-      }
+        }
     });
   } else {
       sendError(res);
-  }
+    }
 });
 
 //when the server receives an HTTP request to this url, it returns user's data
@@ -461,11 +463,11 @@ app.post("/getInfo", (req, res) => {
         res.json ({ recensioni: reviewedBooks });
       } else {
           sendError(res);
-      }
+        }
     });
   } else {
       sendError(res);
-  }
+    }
 });
 
 //when the server receives an HTTP request to this url, it clears user's cart
@@ -489,11 +491,11 @@ app.post('/emptyCart', (req, res) => {
         fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
       } else {
           sendError(res);
-      }
+        }
     });
   } else {
       sendError(res);
-  }
+    }
 });
 
 app.listen(port, () => {
