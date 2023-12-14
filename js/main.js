@@ -649,17 +649,21 @@ function logout() {
 
 //empties user's cart
 function emptyCart() {
-
-  //sends an HTTP request to the server at the specified url to get logged value and check if the user is logged
-  $.ajax ({
-    url   : 'http://localhost:3000/emptyCart',
+  // Invia una richiesta al server per svuotare il carrello
+  $.ajax({
+    url: 'http://localhost:3000/emptyCart',
     method: 'POST',
-    data: ( {username: sessionStorage.getItem('username') }),
+    data: { username: sessionStorage.getItem('username') },
     success: function () {
+      // Chiamata completata con successo, ora aggiorna la visualizzazione del carrello
       updateCartView();
+    },
+    error: function () {
+      console.error('Errore durante lo svuotamento del carrello.');
     }
   });
 }
+
 
 //removes a user's review
 function removeReview(bookName) {

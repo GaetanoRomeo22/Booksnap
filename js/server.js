@@ -26,40 +26,38 @@ function sendError(res) {
 //when the server receives an HTTP request to this url, it logs the user up
 app.post("/login", (req, res) => {
 
-  //gets username and password from the request
-  const username = req.body.username,
-        password = req.body.password;
-  if (username && password) {
+//gets username and password from the request
+const username = req.body.username,
+      password = req.body.password;
 
-    //reads the JSON file
-    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+  //reads the JSON file
+  fs.readFile(jsonFilePath, 'utf8', (err, data) => {
 
-      //parses the JSON data
-      const info = JSON.parse(data),
+    //parses the JSON data
+    const info = JSON.parse(data),
 
-      //checks if the user is registered
-      checkUser = info.utenti.find(u => u.username === username);
+    //checks if the user is registered
+    checkUser = info.utenti.find(u => u.username === username);
 
-      //if the user is registered
-      if (checkUser) {
+    //if the user is registered
+    if (checkUser) {
 
-        //encrypts the password
-        const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+      //encrypts the password
+      const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
 
-        //checks if the entered password is correct and sends the user to "index.html"
-        if (checkUser.password === hashedPassword) {
-          res.json({
-            name: checkUser.nome,
-            surname: checkUser.cognome,
-            redirect: 'index.html'});
-        } else {
-            sendError(res);
-          }
+      //checks if the entered password is correct and sends the user to "index.html"
+      if (checkUser.password === hashedPassword) {
+        res.json({
+          name: checkUser.nome,
+          surname: checkUser.cognome,
+          redirect: 'index.html'});
       } else {
           sendError(res);
         }
-    });
-  }
+    } else {
+        sendError(res);
+      }
+  });
 });
 
 //when the server receives an HTTP request to this url, it logs the user in
@@ -119,34 +117,30 @@ app.post('/searchBook', (req, res) => {
 
   //gets book's name from the request
   const bookName = req.body.bookName;
-  if (bookName) {
 
-    //reads the JSON file
-    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+  //reads the JSON file
+  fs.readFile(jsonFilePath, 'utf8', (err, data) => {
 
-      //parses the JSON data
-      const info = JSON.parse(data),
+    //parses the JSON data
+    const info = JSON.parse(data),
 
-      //searchs the book
-      checkBook = info.libri.find(b => b.nome === bookName);
+    //searchs the book
+    checkBook = info.libri.find(b => b.nome === bookName);
 
-      //if it finds the book, it sends it's information to the client
-      if (checkBook) {
-        res.json ({
-          percorso: checkBook.percorso,
-          autore:   checkBook.autore,
-          genere:   checkBook.genere,
-          anno:     checkBook.anno,
-          pagine:   checkBook.pagine,
-          prezzo:   checkBook.prezzo
-        });
-      } else {
-          sendError(res);
-        }
-    })
-  } else {
-      sendError(res);
-    }
+    //if it finds the book, it sends it's information to the client
+    if (checkBook) {
+      res.json ({
+        percorso: checkBook.percorso,
+        autore:   checkBook.autore,
+        genere:   checkBook.genere,
+        anno:     checkBook.anno,
+        pagine:   checkBook.pagine,
+        prezzo:   checkBook.prezzo
+      });
+    } else {
+        sendError(res);
+      }
+  })
 });
 
 //when the server receives an HTTP request to this url, it shows to the user the suggestions of the book he's looking for
@@ -154,50 +148,44 @@ app.post('/getSuggestions', (req, res) => {
 
   //gets the user input from the request
   const input = req.body.input;
-  if (input) {
 
-    //reads the JSON file
-    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+  //reads the JSON file
+  fs.readFile(jsonFilePath, 'utf8', (err, data) => {
 
-      //parses the JSON data
-      const info = JSON.parse(data),
+    //parses the JSON data
+    const info = JSON.parse(data),
 
-      //searchs books that contain the input entered by the user, ignoring the difference between lowercase and uppercase
-      suggestions = info.libri.filter(b => b.nome.toLowerCase().includes(input.toLowerCase())).map(b => b.nome);
+    //searchs books that contain the input entered by the user, ignoring the difference between lowercase and uppercase
+    suggestions = info.libri.filter(b => b.nome.toLowerCase().includes(input.toLowerCase())).map(b => b.nome);
 
-      //if it finds books, it sends the list of suggestions to the client
-      if (suggestions) {
-        res.json({value: suggestions});
-      }
-    });
-  } else {
-      sendError(res);
+    //if it finds books, it sends the list of suggestions to the client
+    if (suggestions) {
+      res.json({value: suggestions});
     }
+  });
 });
 
 //when the server receives an HTTP request to this url, it shows the user's cart
 app.post('/showCart', (req, res) => {
 
   const username = req.body.username;
-  if (username) {
 
-    //reads the JSON file
-    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+  //reads the JSON file
+  fs.readFile(jsonFilePath, 'utf8', (err, data) => {
 
-      //parses the JSON data
-      const info = JSON.parse(data),
+    //parses the JSON data
+    const info = JSON.parse(data),
 
-      //searchs the user's cart
-      checkCart = info.utenti.find(u => u.username === username);
+    //searchs the user's cart
+    checkCart = info.utenti.find(u => u.username === username);
 
-      //if it finds user's cart, it sends it to the client
-      if (checkCart) {
-        res.json({value: checkCart.carrello});
-      } else {
-          sendError(res);
-        }
-    });
-  }
+    //if it finds user's cart, it sends it to the client
+    if (checkCart) {
+      res.json({value: checkCart.carrello});
+    } else {
+        sendError(res);
+      }
+  });
 });
 
 //when the server receives an HTTP request to this url, it adds the specified book to the user's cart
@@ -205,33 +193,29 @@ app.post('/addBook', (req, res) => {
 
   const bookName = req.body.bookName,
         username = req.body.username;
-  if (bookName && username) {
 
-    //reads the JSON file
-    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+  //reads the JSON file
+  fs.readFile(jsonFilePath, 'utf8', (err, data) => {
 
-      //parses the JSON data
-      const info = JSON.parse(data),
+    //parses the JSON data
+    const info = JSON.parse(data),
 
-      checkBook      = info.libri.find(b => b.nome === bookName),           //checks if the book is available
-      checkCart      = info.utenti.find(u => u.username === username),      //searchs the user's cart
-      checkDuplicate = checkCart.carrello.find(b => b.nome === bookName);   //checks if the user has already added the book at his cart
+    checkBook      = info.libri.find(b => b.nome === bookName),           //checks if the book is available
+    checkCart      = info.utenti.find(u => u.username === username),      //searchs the user's cart
+    checkDuplicate = checkCart.carrello.find(b => b.nome === bookName);   //checks if the user has already added the book at his cart
 
-      //if it finds user's cart, the book is available and the user hasn't already added it to him cart, it does it now
-      if (checkBook && checkCart && !checkDuplicate) {
-        checkCart.carrello.push ({
-          nome: bookName,
-          prezzo: checkBook.prezzo,
-          genere: checkBook.genere
-        });
-        fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
-      } else {
-          sendError(res);
-        }
-    });
-  } else {
-      sendError(res);
-    }
+    //if it finds user's cart, the book is available and the user hasn't already added it to him cart, it does it now
+    if (checkBook && checkCart && !checkDuplicate) {
+      checkCart.carrello.push ({
+        nome: bookName,
+        prezzo: checkBook.prezzo,
+        genere: checkBook.genere
+      });
+      fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
+    } else {
+        sendError(res);
+      }
+  });
 });
 
 //when the server receives an HTTP request to this url, it removes the specified book from the user's cart
@@ -240,42 +224,38 @@ app.post('/removeBook', (req, res) => {
   //gets book's name from the request
   const bookName = req.body.bookName,
         username = req.body.username;
-  if (username && bookName) {
 
-    //reads the JSON file
-    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+  //reads the JSON file
+  fs.readFile(jsonFilePath, 'utf8', (err, data) => {
 
-      //parses the JSON data
-      const info = JSON.parse(data),
+    //parses the JSON data
+    const info = JSON.parse(data),
 
-      //searchs the user
-      checkUser = info.utenti.find(u => u.username === username);
+    //searchs the user
+    checkUser = info.utenti.find(u => u.username === username);
 
-      //if it finds him
-      if (checkUser) {
+    //if it finds him
+    if (checkUser) {
 
-        //checks if the book to remove is in his cart
-        const index = checkUser.carrello.findIndex(book => book.nome === bookName);
-        if (index !== -1) {
+      //checks if the book to remove is in his cart
+      const index = checkUser.carrello.findIndex(book => book.nome === bookName);
+      if (index !== -1) {
 
-          //removes the book from user's cart
-          checkUser.carrello.splice(index, 1);
+        //removes the book from user's cart
+        checkUser.carrello.splice(index, 1);
 
-          //reads the JSON file to apply the changes
-          fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
+        //reads the JSON file to apply the changes
+        fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
 
-          //sends the user's cart to the client
-          res.json({value: checkUser.carrello});
-        } else {
-            sendError(res);
-          }
+        //sends the user's cart to the client
+        res.json({value: checkUser.carrello});
       } else {
           sendError(res);
         }
-    });
-  } else {
-      sendError(res);
-    }
+    } else {
+        sendError(res);
+      }
+  });
 });
 
 //when the server receives an HTTP request to this url, it shows the book's reviews
@@ -283,25 +263,21 @@ app.post('/showBookReviews', (req, res) => {
 
   //gets book's name from the request
   const bookName = req.body.bookName;
-  if (bookName) {
 
-    //tries to read the JSON file
-    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+  //tries to read the JSON file
+  fs.readFile(jsonFilePath, 'utf8', (err, data) => {
 
-      //parses the JSON data
-      const info = JSON.parse(data),
+    //parses the JSON data
+    const info = JSON.parse(data),
 
-      //checks if the book is available and sends its reviews to the client
-      checkBook = info.libri.find(b => b.nome === bookName);
-      if (checkBook) {
-        res.json({value: checkBook.recensioni});
-      } else {
-          sendError(res);
-        }
-    });
-  } else {
-      sendError(res);
-    }
+    //checks if the book is available and sends its reviews to the client
+    checkBook = info.libri.find(b => b.nome === bookName);
+    if (checkBook) {
+      res.json({value: checkBook.recensioni});
+    } else {
+        sendError(res);
+      }
+  });
 });
 
 //when the server receives an HTTP request to this url, it shows the book's reviews
@@ -310,30 +286,26 @@ app.post('/checkReview', (req, res) => {
   //gets book's name from the request
   const bookName = req.body.bookName,
         username = req.body.username;
-  if (bookName && username) {
 
-    //tries to read the JSON file
-    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+  //tries to read the JSON file
+  fs.readFile(jsonFilePath, 'utf8', (err, data) => {
 
-      //parses the JSON data
-      const info = JSON.parse(data),
+    //parses the JSON data
+    const info = JSON.parse(data),
 
-      //checks if the book is available
-      checkBook = info.libri.find(book => book.nome === bookName);
+    //checks if the book is available
+    checkBook = info.libri.find(book => book.nome === bookName);
 
-      //if it finds the book
-      if (checkBook) {
+    //if it finds the book
+    if (checkBook) {
 
-        //checks if the user has already reviewed it
-        const checkReview = checkBook.recensioni.find(review => review.utente === username);
+      //checks if the user has already reviewed it
+      const checkReview = checkBook.recensioni.find(review => review.utente === username);
 
-        //if he hasn't, he can write a review
-        res.json({ value: checkReview, user: username, redirect: 'recensione.html' });
-      }
-    });
-  } else {
-      sendError(res);
+      //if he hasn't, he can write a review
+      res.json({ value: checkReview, user: username, redirect: 'recensione.html' });
     }
+  });
 });
 
 //when the server receives an HTTP request to this url, it shows the book's reviews
@@ -344,42 +316,40 @@ app.post('/writeReview', (req, res) => {
         reviewTitle = req.body.reviewTitle,
         review      = req.body.review,
         username = req.body.username;
-  if (bookName && review && reviewTitle && username) {
 
-    //tries to read the JSON file
-    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+  //tries to read the JSON file
+  fs.readFile(jsonFilePath, 'utf8', (err, data) => {
 
-      //parses the JSON data
-      const info = JSON.parse(data),
+    //parses the JSON data
+    const info = JSON.parse(data),
 
-      //checks if the book is available
-      checkBook = info.libri.find(b => b.nome === bookName);
+    //checks if the book is available
+    checkBook = info.libri.find(b => b.nome === bookName);
 
-      //if the book is available
-      if (checkBook) {
+    //if the book is available
+    if (checkBook) {
 
-        //gets the local date and hour
-        const date = new Date(),
-              day = date.getDate(),
-              month = date.getMonth() + 1,
-              year = date.getFullYear();
+      //gets the local date and hour
+      const date = new Date(),
+            day = date.getDate(),
+            month = date.getMonth() + 1,
+            year = date.getFullYear();
 
-        //stores the review and its information
-        checkBook.recensioni.push({
-          titolo: reviewTitle,
-          commento: review,
-          data: day + "/" + month + "/" + year,
-          utente: username
-        })
-        fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
+      //stores the review and its information
+      checkBook.recensioni.push({
+        titolo: reviewTitle,
+        commento: review,
+        data: day + "/" + month + "/" + year,
+        utente: username
+      })
+      fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
 
-        //sends the user to "shop.html"
-        res.json({ redirect: 'shop.html' });
-      } else {
-          sendError(res);
-        }
+      //sends the user to "shop.html"
+      res.json({ redirect: 'shop.html' });
+    } else {
+        sendError(res);
+      }
   });
-}
 });
 
 //when the server receives an HTTP request to this url, it removes user's review
@@ -388,7 +358,6 @@ app.post('/removeReview', (req, res) => {
   //gets book's name from the request
   const bookName = req.body.bookName,
         username = req.body.username;
-  if (username && bookName) {
 
     //tries to read the JSON file
     fs.readFile(jsonFilePath, 'utf8', (err, data) => {
@@ -421,81 +390,71 @@ app.post('/removeReview', (req, res) => {
           sendError(res);
         }
     });
-  } else {
-      sendError(res);
-    }
 });
 
 //when the server receives an HTTP request to this url, it returns user's data
 app.post("/getInfo", (req, res) => {
 
   const username = req.body.username;
-  if (username) {
 
-    //reads the JSON file
-    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+  //reads the JSON file
+  fs.readFile(jsonFilePath, 'utf8', (err, data) => {
 
-      //parses the JSON data
-      const info = JSON.parse(data),
+    //parses the JSON data
+    const info = JSON.parse(data),
 
-      //gets user's information
-      checkUser = info.utenti.find(u => u.username === username);
+    //gets user's information
+    checkUser = info.utenti.find(u => u.username === username);
 
-      //if it finds the user, sends its data to the client
-      if (checkUser) {
+    //if it finds the user, sends its data to the client
+    if (checkUser) {
 
-        //array containing books reviewed by the user
-        let reviewedBooks = [];
+      //array containing books reviewed by the user
+      let reviewedBooks = [];
 
-        //each book reviewed by the user is added into the array
-        info.libri.forEach(book => {
-          book.recensioni.forEach(review => {
-            if (review.utente === checkUser.username)
-              reviewedBooks.push ({
-                recensione: review.titolo,
-                nome: book.nome,
-                genere: book.genere
-              });
-          });
+      //each book reviewed by the user is added into the array
+      info.libri.forEach(book => {
+        book.recensioni.forEach(review => {
+          if (review.utente === checkUser.username)
+            reviewedBooks.push ({
+              recensione: review.titolo,
+              nome: book.nome,
+              genere: book.genere
+            });
         });
+      });
 
-        //sends the information to the client
-        res.json ({ recensioni: reviewedBooks });
-      } else {
-          sendError(res);
-        }
-    });
-  } else {
-      sendError(res);
-    }
+      //sends the information to the client
+      res.json ({ recensioni: reviewedBooks });
+    } else {
+        sendError(res);
+      }
+  });
 });
 
 //when the server receives an HTTP request to this url, it clears user's cart
 app.post('/emptyCart', (req, res) => {
 
   const username = req.body.username;
-  if (username) {
 
-    //reads the JSON file
-    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+  //reads the JSON file
+  fs.readFile(jsonFilePath, 'utf8', (err, data) => {
 
-      //parses the JSON data
-      const info = JSON.parse(data),
+    //parses the JSON data
+    const info = JSON.parse(data),
 
-      //searchs the user's cart
-      checkCart = info.utenti.find(u => u.username === username);
+    //searchs the user's cart
+    checkCart = info.utenti.find(u => u.username === username);
 
-      //if it finds user's cart, it clears it
-      if (checkCart) {
-        checkCart.carrello = [];
-        fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
-      } else {
-          sendError(res);
-        }
-    });
-  } else {
-      sendError(res);
-    }
+    //if it finds user's cart, it clears it
+    if (checkCart) {
+      checkCart.carrello = [];
+      res.json({ result: true});
+      fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
+    } else {
+        sendError(res);
+      }
+  });
 });
 
 app.listen(port, () => {
