@@ -413,7 +413,7 @@ function getSuggestions() {
 function searchBook() {
 
   //gets book's information
-  const bookName         = document.getElementById('search_in').value,
+  const bookName       = document.getElementById('search_in').value,
       bookImage        = document.getElementById("preview_image"),
       bookNameAppear   = document.getElementById('book_name'),
       bookAuthorAppear = document.getElementById('book_author'),
@@ -436,7 +436,6 @@ function searchBook() {
       clearReviewList();
       showBookReviews();
       checkBookInCart(data.nome);
-
 
       let noPreview = document.getElementById('no_preview');
 

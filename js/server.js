@@ -135,7 +135,8 @@ app.post('/searchBook', (req, res) => {
         genere:   checkBook.genere,
         anno:     checkBook.anno,
         pagine:   checkBook.pagine,
-        prezzo:   checkBook.prezzo
+        prezzo:   checkBook.prezzo,
+        nome:     checkBook.nome
       });
     } else {
         sendError(res);
@@ -211,7 +212,9 @@ app.post('/addBook', (req, res) => {
         prezzo: checkBook.prezzo,
         genere: checkBook.genere
       });
-      fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
+      fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {
+        res.json({ result: true })
+      });
     } else {
         sendError(res);
       }

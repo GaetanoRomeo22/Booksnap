@@ -10,6 +10,11 @@
           "nome": "Il signore degli anelli",
           "prezzo": "10€",
           "genere": "Avventura e Azione"
+        },
+        {
+          "nome": "Il mastino dei Baskerville",
+          "prezzo": "10€",
+          "genere": "Giallo"
         }
       ]
     }

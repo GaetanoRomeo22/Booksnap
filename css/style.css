@@ -450,7 +450,7 @@ nav input[type="button"]:hover
   justify-content: center;
   width: 3rem;
   margin-left: 0;
-  padding: 16px;
+  padding: 15px;
   border: none;
   border-bottom-right-radius: 100px;
   border-top-right-radius: 100px;
@@ -498,6 +498,7 @@ nav input[type="button"]:hover
   margin-bottom: 0.5rem;
   box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
   border-radius: 100px;
+  height: 100%;
 }
 
 /* login e signup nella pagina login (accesso) */
