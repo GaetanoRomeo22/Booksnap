@@ -1,5 +1,5 @@
 //-----------------------------------------------------Node.js Modules--------------------------------------------------
-const fs              = require('fs'),
+const fs                = require('fs'),
       express           = require('express'),
       bodyParser        = require('body-parser'),
       path              = require('path'),
@@ -76,7 +76,7 @@ app.post('/register', (req, res) => {
   checkPassword.is().min(8).has().uppercase().has().symbols();
 
   //checks if name, surname, username, and password are correctly read and if the user isn't logged
-  if (name.trim() !== '' && surname.trim() !== '' && username.trim() !== '' && checkPassword.validate(password)) {
+  if (name.trim() !== '' && surname.trim() !== '' && username.trim() !== '' && checkPassword.validate(password) && username.length < 15 && /\s/.test(username)) {
 
     //reads the JSON file
     fs.readFile(jsonFilePath, 'utf8', (err, data) => {
@@ -191,11 +191,11 @@ app.post('/showCart', (req, res) => {
       checkCart = info.utenti.find(u => u.username === username);
 
       //if it finds user's cart, it sends it to the client
-      if (checkCart)
+      if (checkCart) {
         res.json({value: checkCart.carrello});
-      else {
-        sendError(res);
-      }
+      } else {
+          sendError(res);
+        }
     });
   }
 });
