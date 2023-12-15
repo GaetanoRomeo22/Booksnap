@@ -803,8 +803,12 @@ function showUserReviews() {
               remTitleContainer = document.createElement('div');
 
           bookCover.src               = 'images/' + book.genere + '/' + book.nome + '.webp';
+          bookName.setAttribute('onclick', 'redirectBook()');
+          bookCover.setAttribute('onclick', 'showBook(this)');
           bookCover.alt               = book.nome;
           bookName.textContent        = book.nome;
+          bookName.classList          = 'book_name'
+          bookName.classList          = 'book_name'
           reviewName.textContent      = 'Titolo: ' + book.recensione;
           removeButton.textContent    = 'Rimuovi';
           spacer.textContent          = '|';
@@ -875,6 +879,8 @@ function updateCartView(cartItems) {
 
     //shows book's information
     bookName.textContent     = ordine.nome;
+    bookName.setAttribute('onclick', 'redirectBook()');
+    insertImage.setAttribute('onclick', 'showBook(this)');
     bookPrice.textContent    = 'Prezzo: ' + ordine.prezzo;
     spacer.textContent       = '|';
     removeBook.textContent   = 'Rimuovi';
@@ -960,6 +966,9 @@ function showCart() {
 
         //shows book's information
         bookName.textContent     = ordine.nome;
+        bookName.classList       = 'book_name';
+        bookName.setAttribute('onclick', 'redirectBook()');
+        insertImage.setAttribute('onclick', 'showBook(this)');
         bookPrice.textContent    = 'Prezzo: ' + ordine.prezzo;
         bookPrice.id             = 'book_price';
         spacer.textContent       = '|';
@@ -1017,5 +1026,84 @@ function showCart() {
       }
     }
   });
+}
+
+function redirectBook(bookElement) {
+
+  //checks if user is logged
+  if (sessionStorage.getItem('logged') === 'true') {
+
+    //gets image's URL
+    let bookName = document.getElementById('book_name');
+
+    //stores book's name into the session storage
+    sessionStorage.setItem('redirectBook', bookName);
+
+    //sends the user to "shop.html"
+    document.location.href = "shop.html";
+  }
+
+  //if the user isn't logged, sends him to "login.html"
+  else {
+    document.location.href = "login.html";
+  }
+}
+
+function checkUserChange() {
+
+  //gets username and error message element
+  const username = document.getElementById('change_username').value,
+      changeError = document.getElementById('change_error');
+
+  //chechs if the username contains more of 15 characters
+  if (username.length > 10) {
+    changeError.innerText     = "La dimensione dell'username eccede il limite massimo di 10 caratteri";
+    changeError.style.display = 'block';
+    return false;
+  }
+
+  //checks if the username contains spaces
+  else if (/\s/.test(username)) {
+    changeError.innerText     = "L'username non può contenere spazi";
+    changeError.style.display = 'block';
+    return false;
+  }
+  return true;
+}
+
+function changeCredential() {
+
+  //gets user's name, surname, username, and password from the page
+  const name   = document.getElementById('change_name').value,
+      surname  = document.getElementById('change_surname').value,
+      username = document.getElementById('change_username').value;
+
+  //checks if the password respects the standard using the checkPassword() function
+  if (checkUserChange()) {
+
+    //sends an HTTP request to the server at the specified URL to check if the sign-up works
+    $.ajax({
+      url: 'http://localhost:3000/changeCredential',
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify ({ name: name, surname: surname, username: username, currentUsername: sessionStorage.getItem('username')}),
+      //if the sign-up works, it sends the user to the page "index.html"
+      success: function (data) {
+        sessionStorage.setItem('name',     name);
+        sessionStorage.setItem('surname',  surname);
+        sessionStorage.setItem('username', username);
+        document.location.href = data.redirect;
+      },
+
+      //if the sign-up doesn't work, shows the error message
+      error: function () {
+        const changeError = document.getElementById('change_error');
+        if (changeError) {
+          changeError.innerText = 'Username non disponibile o uso di caratteri non consentiti per nome e cognome';
+          changeError.style.display = 'block';
+        }
+      }
+    });
+  }
 }
 //------------------------------------------------ACCOUNT.HTML----------------------------------------------------------

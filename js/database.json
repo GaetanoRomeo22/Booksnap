@@ -17,13 +17,13 @@
           "genere": "Giallo"
         },
         {
-          "nome": "Venti mila leghe sotto i mari",
-          "prezzo": "9€",
-          "genere": "Avventura e Azione"
+          "nome": "Dark ladies",
+          "prezzo": "15€",
+          "genere": "Horror"
         },
         {
-          "nome": "Una piccola magia",
-          "prezzo": "25€",
+          "nome": "Il guardiano degli innocenti",
+          "prezzo": "15€",
           "genere": "Fantasy"
         },
         {
@@ -37,6 +37,13 @@
           "genere": "Umoristico"
         }
       ]
+    },
+    {
+      "nome": "Domenico",
+      "cognome": "Risso",
+      "username": "OOOOOOOOOO",
+      "password": "db33b5bb82bf6f64998adebfc6a226f9bb24e1c5bce96eaaf7cd76bc63c6004c",
+      "carrello": []
     }
   ],
   "libri": [
@@ -645,7 +652,14 @@
       "anno": "2002",
       "pagine": "1380",
       "prezzo": "26€",
-      "recensioni": []
+      "recensioni": [
+        {
+          "titolo": "beh",
+          "commento": "suppongo che don maccio sarà il primo a denunciarci",
+          "data": "15/12/2023",
+          "utente": "gaetano22"
+        }
+      ]
     },
     {
       "nome": "Fantozzi",
