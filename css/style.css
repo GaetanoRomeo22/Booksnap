@@ -673,9 +673,39 @@ nav input[type="button"]:hover
   margin: 3px;
 }
 
+.data_insert a
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#change_btn
+{
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  color: white;
+  padding: 0;
+  margin-top: 1rem;
+  margin-bottom: 5px;
+}
+
+#change_btn:hover
+{
+  color: #ec3853;
+  transition: 0.2s;
+  text-decoration: underline;
+}
+
 #acc_user
 {
-  width: 100%;
+  width: 21rem;
   text-align: center;
   margin-bottom: 1rem;
 }
@@ -729,7 +759,6 @@ nav input[type="button"]:hover
   text-align: center;
   width: 80%;
   box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
-  margin-top: 1rem;
 }
 
 #button_logout:hover
@@ -758,10 +787,12 @@ nav input[type="button"]:hover
   display: flex;
   flex-flow: column;
   list-style-type: none;
-  height: 90%;
-  width: 95%;
-  margin-top: 1rem;
+  height: 100%;
+  width: 97%;
   overflow: auto;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .acc_container::-webkit-scrollbar
@@ -817,6 +848,7 @@ nav input[type="button"]:hover
 {
   color: #ec3853;
   transition: 0.2s;
+  text-decoration: underline;
 }
 
 .image_container
@@ -824,7 +856,17 @@ nav input[type="button"]:hover
   display: flex;
   flex-flow: row;
   align-items: center;
-  margin-bottom: 1rem;
+  margin: 0.5rem;
+}
+
+.image_container img
+{
+  transition: transform 0.1s ease-in-out;
+}
+
+.image_container img:hover
+{
+  transform: scale(1.05);
 }
 
 #cronology_rev_img
@@ -863,11 +905,19 @@ nav input[type="button"]:hover
 {
   color: #ec3853;
   transition: 0.2s;
+  text-decoration: underline;
 }
 
 .info_container h3
 {
   margin: 0;
+}
+
+.info_container h3:hover
+{
+  color: #ec3853;
+  transition: 0.2s;
+  text-decoration: underline;
 }
 
 .info_container p
@@ -1197,6 +1247,7 @@ nav input[type="button"]:hover
 {
   color: #ec3853;
   transition: 0.2s;
+  text-decoration: underline;
 }
 
 /* recensioni */

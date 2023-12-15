@@ -80,7 +80,6 @@ app.post('/register', (req, res) => {
       username.trim() !== ''            &&
       checkPassword.validate(password)  &&
       username.length < 15              &&
-      /\s/.test(username)               &&
       password === confirmPassword) {
 
     //reads the JSON file
@@ -117,6 +116,48 @@ app.post('/register', (req, res) => {
   } else {
       sendError(res);
     }
+});
+
+app.post('/changeCredential', (req, res) => {
+
+  //gets name, surname, username, and password from the request
+  const name = req.body.name,
+      surname = req.body.surname,
+      username = req.body.username,
+      currentUsername = req.body.currentUsername;
+  console.log(currentUsername);
+
+  //checks if name, surname, username, and password are correctly read and if the user isn't logged
+  if (name.trim() !== '' && surname.trim() !== '' && username.trim() !== '') {
+
+    //reads the JSON file
+    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+
+      //parses the JSON data
+      const info = JSON.parse(data),
+          checkUserIndex = info.utenti.findIndex(u => u.username === currentUsername);
+      let checkUser = info.utenti.find(u => u.username === username);
+
+      //if the user isn't registered
+      if (checkUserIndex !== - 1 && !checkUser) {
+
+        //stores the user and his information into the JSON file
+        info.utenti[checkUserIndex].nome     = name;
+        info.utenti[checkUserIndex].cognome  = surname;
+        info.utenti[checkUserIndex].username = username;
+
+        //writes the updated data to the JSON file
+        fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
+
+        //sends the user to "index.html"
+        res.json({redirect: 'account.html'});
+      }else {
+        sendError(res);
+      }
+    });
+  } else {
+      sendError(res);
+  }
 });
 
 //when the server receives an HTTP request to this url, it shows the specified book's PDF
