@@ -479,7 +479,7 @@ nav input[type="button"]:hover
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 }
 
-#reg_passw
+.lable_passw
 {
   width: 27rem;
   margin: 0;
@@ -885,14 +885,14 @@ nav input[type="button"]:hover
 
 #book_spacer
 {
-  margin-right: 0.3rem;
-  margin-left: 0.3rem;
+  margin: 0 0.3rem;
   margin-bottom: 2px;
 }
 
 #book_spacer1
 {
   margin: 0 0.3rem;
+  margin-bottom: 2px;
 }
 
 #review_acc
