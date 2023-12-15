@@ -67,14 +67,21 @@ app.post('/register', (req, res) => {
   const name = req.body.name,
         surname = req.body.surname,
         username = req.body.username,
-        password = req.body.password;
+        password = req.body.password,
+        confirmPassword = req.body.confirmPassword;
 
   //checks if the password respects the standard
   const checkPassword = new PasswordValidator();
   checkPassword.is().min(8).has().uppercase().has().symbols();
 
   //checks if name, surname, username, and password are correctly read and if the user isn't logged
-  if (name.trim() !== '' && surname.trim() !== '' && username.trim() !== '' && checkPassword.validate(password) && username.length < 15 && /\s/.test(username)) {
+  if (name.trim() !== ''                &&
+      surname.trim() !== ''             &&
+      username.trim() !== ''            &&
+      checkPassword.validate(password)  &&
+      username.length < 15              &&
+      /\s/.test(username)               &&
+      password === confirmPassword) {
 
     //reads the JSON file
     fs.readFile(jsonFilePath, 'utf8', (err, data) => {

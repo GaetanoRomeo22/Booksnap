@@ -272,6 +272,15 @@ function regTogglePasswordVisibility() {
     password.type = "password";
   }
 }
+
+function confRegTogglePasswordVisibility() {
+  let password = document.getElementById("conf_passw");
+  if (password.type === "password") {
+    password.type = "text";
+  } else {
+    password.type = "password";
+  }
+}
 //------------------------------------------------LOGIN.HTML------------------------------------------------------------
 
 //------------------------------------------------REGISTRAZIONE.HTML----------------------------------------------------
@@ -325,26 +334,27 @@ function checkPassword() {
 function register() {
 
   //gets user's name, surname, username, and password from the page
-  const name     = document.getElementById('reg_name').value,
-      surname  = document.getElementById('reg_surname').value,
-      username = document.getElementById('reg_usr').value,
-      password = document.getElementById('reg_passw').value;
+  const name          = document.getElementById('reg_name').value,
+      surname         = document.getElementById('reg_surname').value,
+      username        = document.getElementById('reg_usr').value,
+      password        = document.getElementById('reg_passw').value,
+      confirmPassword = document.getElementById('conf_passw').value;
 
   //checks if the password respects the standard using the checkPassword() function
-  if (checkUsername() && checkPassword()) {
+  if (checkUsername() && checkPassword() && password === confirmPassword) {
 
     //sends an HTTP request to the server at the specified URL to check if the sign-up works
     $.ajax({
       url: 'http://localhost:3000/register',
       method: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify ({ name: name, surname: surname, username: username, password: password }),
+      data: JSON.stringify ({ name: name, surname: surname, username: username, password: password, confirmPassword: confirmPassword}),
 
       //if the sign-up works, it sends the user to the page "index.html"
       success: function (data) {
-        sessionStorage.setItem('logged', 'true');
-        sessionStorage.setItem('name', name);
-        sessionStorage.setItem('surname', surname);
+        sessionStorage.setItem('logged',   'true');
+        sessionStorage.setItem('name',     name);
+        sessionStorage.setItem('surname',  surname);
         sessionStorage.setItem('username', username);
         document.location.href = data.redirect;
       },
@@ -472,14 +482,26 @@ function searchBook() {
 // New function to check if the book is in the user's cart
 function checkBookInCart(bookName) {
   const addButton = document.getElementById("cart_btn");
+
   // Assume you have a function to retrieve the user's cart (e.g., getCartFromServer)
   getCartFromServer(function (cart) {
     const isBookInCart = cart.some(item => item.nome === bookName);
+    addButton.innerHTML = "";
 
     if (isBookInCart) {
-      addButton.innerText = "Libro aggiunto";
+      const imgInCart = document.createElement("img");
+      const textInCart = document.createElement("cart_btn");
+      imgInCart.src = "images/Button%20icons/check-solid.svg";
+      textInCart.innerText = "Nel carrello";
+      addButton.appendChild(imgInCart);
+      addButton.appendChild(textInCart);
     } else {
-      addButton.innerText = "Aggiungi al carrello";
+      const imgInCart = document.createElement("img");
+      const textInCart = document.createElement("cart_btn");
+      imgInCart.src = "images/Button%20icons/cart-shopping-solid.svg";
+      textInCart.innerText = "Aggiungi al carrello";
+      addButton.appendChild(imgInCart);
+      addButton.appendChild(textInCart);
     }
   });
 }
@@ -510,7 +532,13 @@ function addBook() {
 
     success: function (){
       const addButton = document.getElementById("cart_btn");
-      addButton.innerHTML = "Libro aggiunto";
+      addButton.innerHTML = "";
+      const imgInCart = document.createElement("img");
+      const textInCart = document.createElement("cart_btn");
+      imgInCart.src = "images/Button%20icons/check-solid.svg";
+      textInCart.innerText = "Nel carrello";
+      addButton.appendChild(imgInCart);
+      addButton.appendChild(textInCart);
     }
   })
 }
