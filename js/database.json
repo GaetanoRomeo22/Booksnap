@@ -41,9 +41,15 @@
     {
       "nome": "Domenico",
       "cognome": "Risso",
-      "username": "OOOOOOOOOO",
-      "password": "db33b5bb82bf6f64998adebfc6a226f9bb24e1c5bce96eaaf7cd76bc63c6004c",
-      "carrello": []
+      "username": "dom",
+      "password": "f4656d1b780bd0e192657a8f8e092466cc89a595f46543507b95f65f21552a36",
+      "carrello": [
+        {
+          "nome": "Il signore degli anelli",
+          "prezzo": "10€",
+          "genere": "Avventura e Azione"
+        }
+      ]
     }
   ],
   "libri": [
@@ -54,7 +60,14 @@
       "anno": "2002",
       "pagine": "1380",
       "prezzo": "10€",
-      "recensioni": [],
+      "recensioni": [
+        {
+          "titolo": "a",
+          "commento": "a",
+          "data": "16/12/2023",
+          "utente": "dom"
+        }
+      ],
       "percorso": "pdf/Il_signore_degli_anelli_anteprima.pdf"
     },
     {

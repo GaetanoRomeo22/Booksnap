@@ -46,12 +46,18 @@
       <div class="data_insert">
         <p class="data_form">Nome:</p>
         <p class="data_form" id="acc_name"></p>
+        <a href="change_name.html"><button class="change_btn">></button></a>
       </div>
       <div class="data_insert">
         <p class="data_form">Cognome:</p>
         <p class="data_form" id="acc_surn"></p>
+        <a href="change_surname.html"><button class="change_btn">></button></a>
       </div>
-      <a href="credential.html"><button id="change_btn">Modifica credenziali</button></a>
+      <div class="change_container">
+        <a href="change_username.html"><button class="change_btn">Modifica username</button></a>
+        <p id="book_spacer">|</p>
+        <a href="change_password.html"><button class="change_btn">Modifica password</button></a>
+      </div>
       <input type = "submit" value="logout" id="button_logout" onclick="logout()">
     </div>
   </div>

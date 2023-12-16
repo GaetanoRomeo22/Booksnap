@@ -253,6 +253,16 @@ function login() {
   });
 }
 
+//makes the password visible or invisible in sign up form
+function oldTogglePasswordVisibility() {
+  let password = document.getElementById("old_passw");
+  if (password.type === "password") {
+    password.type = "text";
+  } else {
+    password.type = "password";
+  }
+}
+
 //makes the password visible or invisible in login form
 function logTogglePasswordVisibility() {
   let password = document.getElementById("log_passw");
@@ -275,6 +285,24 @@ function regTogglePasswordVisibility() {
 
 function confRegTogglePasswordVisibility() {
   let password = document.getElementById("conf_passw");
+  if (password.type === "password") {
+    password.type = "text";
+  } else {
+    password.type = "password";
+  }
+}
+
+function newTogglePasswordVisibility() {
+  let password = document.getElementById("new_passw");
+  if (password.type === "password") {
+    password.type = "text";
+  } else {
+    password.type = "password";
+  }
+}
+
+function confNewTogglePasswordVisibility() {
+  let password = document.getElementById("confnew_passw");
   if (password.type === "password") {
     password.type = "text";
   } else {
@@ -803,7 +831,7 @@ function showUserReviews() {
               remTitleContainer = document.createElement('div');
 
           bookCover.src               = 'images/' + book.genere + '/' + book.nome + '.webp';
-          bookName.setAttribute('onclick', 'redirectBook()');
+          bookName.addEventListener('click', function() { redirectBook(bookName.textContent); });
           bookCover.setAttribute('onclick', 'showBook(this)');
           bookCover.alt               = book.nome;
           bookName.textContent        = book.nome;
@@ -879,8 +907,6 @@ function updateCartView(cartItems) {
 
     //shows book's information
     bookName.textContent     = ordine.nome;
-    bookName.setAttribute('onclick', 'redirectBook()');
-    insertImage.setAttribute('onclick', 'showBook(this)');
     bookPrice.textContent    = 'Prezzo: ' + ordine.prezzo;
     spacer.textContent       = '|';
     removeBook.textContent   = 'Rimuovi';
@@ -967,7 +993,7 @@ function showCart() {
         //shows book's information
         bookName.textContent     = ordine.nome;
         bookName.classList       = 'book_name';
-        bookName.setAttribute('onclick', 'redirectBook()');
+        bookName.addEventListener('click', function() { redirectBook(bookName.textContent); });
         insertImage.setAttribute('onclick', 'showBook(this)');
         bookPrice.textContent    = 'Prezzo: ' + ordine.prezzo;
         bookPrice.id             = 'book_price';
@@ -1033,11 +1059,8 @@ function redirectBook(bookElement) {
   //checks if user is logged
   if (sessionStorage.getItem('logged') === 'true') {
 
-    //gets image's URL
-    let bookName = document.getElementById('book_name');
-
     //stores book's name into the session storage
-    sessionStorage.setItem('redirectBook', bookName);
+    sessionStorage.setItem('bookSearch', bookElement);
 
     //sends the user to "shop.html"
     document.location.href = "shop.html";
@@ -1071,7 +1094,118 @@ function checkUserChange() {
   return true;
 }
 
-function changeCredential() {
+function changeName() {
+
+  //gets user's name, surname, username, and password from the page
+  const name   = document.getElementById('change_name').value;
+
+    //sends an HTTP request to the server at the specified URL to check if the sign-up works
+    $.ajax({
+      url: 'http://localhost:3000/changeName',
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify ({ name: name, currentUsername: sessionStorage.getItem('username')}),
+      //if the sign-up works, it sends the user to the page "index.html"
+      success: function (data) {
+        sessionStorage.setItem('name', name);
+        document.location.href = data.redirect;
+      },
+
+      //if the sign-up doesn't work, shows the error message
+      error: function () {
+        const changeError = document.getElementById('change_error');
+        if (changeError) {
+          changeError.innerText = 'Caratteri non consentiti per il nome';
+          changeError.style.display = 'block';
+        }
+      }
+    });
+}
+
+function changeSurname() {
+
+  //gets user's name, surname, username, and password from the page
+  const surname  = document.getElementById('change_surname').value;
+
+    //sends an HTTP request to the server at the specified URL to check if the sign-up works
+    $.ajax({
+      url: 'http://localhost:3000/changeSurname',
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify ({  surname: surname, currentUsername: sessionStorage.getItem('username')}),
+      //if the sign-up works, it sends the user to the page "index.html"
+      success: function (data) {
+        sessionStorage.setItem('surname', surname);
+        document.location.href = data.redirect;
+      },
+
+      //if the sign-up doesn't work, shows the error message
+      error: function () {
+        const changeError = document.getElementById('change_error');
+        if (changeError) {
+          changeError.innerText = 'Caratteri non consentiti per il cognome';
+          changeError.style.display = 'block';
+        }
+      }
+    });
+}
+
+function changeUsername() {
+
+  //gets user's name, surname, username, and password from the page
+  const username = document.getElementById('change_username').value;
+
+  //checks if the password respects the standard using the checkPassword() function
+  if (checkUserChange()) {
+
+    //sends an HTTP request to the server at the specified URL to check if the sign-up works
+    $.ajax({
+      url: 'http://localhost:3000/changeUsername',
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify ({ username: username, currentUsername: sessionStorage.getItem('username')}),
+      //if the sign-up works, it sends the user to the page "index.html"
+      success: function (data) {
+        sessionStorage.setItem('username', username);
+        document.location.href = data.redirect;
+      },
+
+      //if the sign-up doesn't work, shows the error message
+      error: function () {
+        const changeError = document.getElementById('change_error');
+        if (changeError) {
+          changeError.innerText = 'Username non disponibile';
+          changeError.style.display = 'block';
+        }
+      }
+    });
+  }
+}
+
+function changePassword() {
+
+  //gets user's name, surname, username, and password from the page
+  const currentPassword  = document.getElementById('current_passw').value,
+      newPassword        = document.getElementById('new_passw').value,
+      confirmNewPassword = document.getElementById('confnew_passw').value;
+
+  //sends an HTTP request to the server at the specified URL to check if the sign-up works
+  $.ajax({
+    url: 'http://localhost:3000/changePassword',
+    method: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify ({ currentPassword: currentPassword, newPassword: newPassword, confirmNewPassword: confirmNewPassword, currentUsername: sessionStorage.getItem('username')}),
+    //if the sign-up works, it sends the user to the page "index.html"
+    error: function () {
+      const changeError = document.getElementById('change_error');
+      if (changeError) {
+        changeError.innerText = 'Le password non corrispondono';
+        changeError.style.display = 'block';
+      }
+    }
+  });
+}
+/*function changeCredential() {
 
   //gets user's name, surname, username, and password from the page
   const name   = document.getElementById('change_name').value,
@@ -1105,5 +1239,5 @@ function changeCredential() {
       }
     });
   }
-}
+}*/
 //------------------------------------------------ACCOUNT.HTML----------------------------------------------------------

@@ -118,17 +118,15 @@ app.post('/register', (req, res) => {
     }
 });
 
-app.post('/changeCredential', (req, res) => {
+app.post('/changeName', (req, res) => {
 
   //gets name, surname, username, and password from the request
   const name = req.body.name,
-      surname = req.body.surname,
       username = req.body.username,
       currentUsername = req.body.currentUsername;
-  console.log(currentUsername);
 
   //checks if name, surname, username, and password are correctly read and if the user isn't logged
-  if (name.trim() !== '' && surname.trim() !== '' && username.trim() !== '') {
+  if (name.trim() !== '') {
 
     //reads the JSON file
     fs.readFile(jsonFilePath, 'utf8', (err, data) => {
@@ -142,9 +140,7 @@ app.post('/changeCredential', (req, res) => {
       if (checkUserIndex !== - 1 && !checkUser) {
 
         //stores the user and his information into the JSON file
-        info.utenti[checkUserIndex].nome     = name;
-        info.utenti[checkUserIndex].cognome  = surname;
-        info.utenti[checkUserIndex].username = username;
+        info.utenti[checkUserIndex].nome = name;
 
         //writes the updated data to the JSON file
         fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
@@ -156,8 +152,131 @@ app.post('/changeCredential', (req, res) => {
       }
     });
   } else {
-      sendError(res);
+    sendError(res);
   }
+});
+
+app.post('/changeSurname', (req, res) => {
+
+  //gets name, surname, username, and password from the request
+  const surname = req.body.surname,
+      username = req.body.username,
+      currentUsername = req.body.currentUsername;
+
+  //checks if name, surname, username, and password are correctly read and if the user isn't logged
+  if (surname.trim() !== '') {
+
+    //reads the JSON file
+    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+
+      //parses the JSON data
+      const info = JSON.parse(data),
+          checkUserIndex = info.utenti.findIndex(u => u.username === currentUsername);
+      let checkUser = info.utenti.find(u => u.username === username);
+
+      //if the user isn't registered
+      if (checkUserIndex !== - 1 && !checkUser) {
+
+        //stores the user and his information into the JSON file
+        info.utenti[checkUserIndex].cognome = surname;
+
+        //writes the updated data to the JSON file
+        fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
+
+        //sends the user to "index.html"
+        res.json({redirect: 'account.html'});
+      }else {
+        sendError(res);
+      }
+    });
+  } else {
+    sendError(res);
+  }
+});
+
+app.post('/changeUsername', (req, res) => {
+
+  //gets name, surname, username, and password from the request
+  const username = req.body.username,
+      currentUsername = req.body.currentUsername;
+
+  //checks if name, surname, username, and password are correctly read and if the user isn't logged
+  if (username.trim() !== '') {
+
+    //reads the JSON file
+    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+
+      //parses the JSON data
+      const info = JSON.parse(data),
+          checkUserIndex = info.utenti.findIndex(u => u.username === currentUsername);
+      let checkUser = info.utenti.find(u => u.username === username);
+
+      //if the user isn't registered
+      if (checkUserIndex !== - 1 && !checkUser) {
+
+        //stores the user and his information into the JSON file
+        info.utenti[checkUserIndex].username = username;
+
+        //writes the updated data to the JSON file
+        fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
+
+        //sends the user to "account.html"
+        res.json({redirect: 'account.html'});
+      } else {
+        sendError(res);
+      }
+    });
+  } else {
+    sendError(res);
+  }
+});
+
+app.post('/changePassword', (req, res) => {
+
+  //gets name, surname, username, and password from the request
+  const currentPassword  = req.body.currentPassword,
+      newPassword        = req.body.newPassword,
+      confirmNewPassword = req.body.confirmNewPassword,
+      username           = req.body.username,
+      currentUsername    = req.body.currentUsername;
+
+    //reads the JSON file
+    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+
+      //parses the JSON data
+      const info = JSON.parse(data),
+          checkUserIndex = info.utenti.findIndex(u => u.username === currentUsername);
+      let checkUser = info.utenti.find(u => u.username === username);
+      let tempPassword = CryptoJS.SHA256(currentPassword).toString(CryptoJS.enc.Hex);
+
+      //to change password, need to put the current password
+      if (tempPassword === info.utenti[checkUserIndex].password) {
+
+        //if the user isn't registered
+        if (checkUserIndex !== - 1 && !checkUser) {
+
+          //confirm new password
+          if (newPassword === confirmNewPassword) {
+
+            //stores the user and his information into the JSON file
+            info.utenti[checkUserIndex].password = CryptoJS.SHA256(newPassword).toString(CryptoJS.enc.Hex);
+
+            //writes the updated data to the JSON file
+            fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {
+            });
+
+            //sends the user to "account.html"
+            res.json({redirect: 'account.html'});
+          } else {
+            sendError(res);
+          }
+        }else {
+          sendError(res);
+        }
+      } else {
+        sendError(res);
+      }
+    });
 });
 
 //when the server receives an HTTP request to this url, it shows the specified book's PDF
