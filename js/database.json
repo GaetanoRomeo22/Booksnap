@@ -42,14 +42,8 @@
       "nome": "Domenico",
       "cognome": "Risso",
       "username": "dom",
-      "password": "f4656d1b780bd0e192657a8f8e092466cc89a595f46543507b95f65f21552a36",
-      "carrello": [
-        {
-          "nome": "Il signore degli anelli",
-          "prezzo": "10€",
-          "genere": "Avventura e Azione"
-        }
-      ]
+      "password": "7d034aee0ff23b75d9a7061c8610869dbe37453443cbe3edb33503926b117c78",
+      "carrello": []
     }
   ],
   "libri": [
