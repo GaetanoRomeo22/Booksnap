@@ -687,26 +687,15 @@ nav input[type="button"]:hover
   justify-content: center;
   align-items: center;
   color: white;
-  margin-top: 0.5rem;
   font-size: 13px;
   width: 80%;
+  margin-top: 0.25rem;
  }
 
-.change_container a
+.passuser_change:hover
 {
-  display: flex;
-  flex-flow: row;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  width: 50%;
-}
-
-#change_userpassw
-{
-  display: flex;
-  flex-flow: row;
-  justify-content: center;
+  background-color: #ec3853;
+  transition: 0.2s;
 }
 
 .change_btn
@@ -718,7 +707,7 @@ nav input[type="button"]:hover
   background-color: rgba(0, 0, 0, 0);
   border: none;
   cursor: pointer;
-  color: white;
+  color: black;
   padding: 0;
   font-size: 13px;
 }
@@ -727,21 +716,72 @@ nav input[type="button"]:hover
 {
   color: #ec3853;
   transition: 0.2s;
+}
+
+.dropdown
+{
+  position: relative;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.drop_btn
+{
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.drop_btn:hover
+{
+  color: #ec3853;
+  transition: 0.2s;
   text-decoration: underline;
 }
 
-.passuser_change
+.dropdown_content
 {
-  background-color: rgba(171, 171, 171, 0.82);
-  color: white;
-  padding: 5px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 16px;
-  text-align: center;
-  width: 100%;
+  display: none;
+  position: absolute;
+  background-color: white;
+  width: 15rem;
   box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  border-radius: 20px;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.dropdown_content a
+{
+  color: black;
+  height: 1rem;
+  margin: 1rem;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown_content a:hover
+{
+  color: #ec3853;
+  transition: 0.2s;
+}
+
+.dropdown:hover .dropdown_content
+{
+  display: block;
+}
+
+.change_container
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #acc_user
@@ -790,9 +830,9 @@ nav input[type="button"]:hover
 
 #logout_btn
 {
-  background-color: rgba(171, 171, 171, 0.82);
+  background-color: #abababd1;
   color: white;
-  padding: 5px 15px;
+  padding: 5px;
   border: none;
   border-radius: 20px;
   cursor: pointer;
@@ -800,10 +840,9 @@ nav input[type="button"]:hover
   text-align: center;
   width: 80%;
   box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
-  margin-top: 1rem;
 }
 
-#button_logout:hover
+#logout_btn:hover
 {
   background-color: #ec3853;
   transition: 0.2s;
@@ -1247,7 +1286,6 @@ nav input[type="button"]:hover
   width: 100%;
   height: 20px;
   margin-top: 5px;
-  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
 }
 
 #cart_btn:hover

@@ -7,6 +7,7 @@
   <!-- Link to manifest and css file -->
   <link rel = "manifest" href = "manifest.json">
   <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+  <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
   <!-- Character encode -->
   <meta charset="UTF-8">
@@ -38,6 +39,7 @@
 <div id="account_elements">
   <!-- User -->
   <div id="user_data">
+    <img id="acc_avatar">
     <div id="datauser_container">
       <div class="data_insert">
         <h1 class="data_form" id="acc_user"></h1>
@@ -45,18 +47,22 @@
       <div class="data_insert">
         <p class="data_form">Nome:</p>
         <p class="data_form" id="acc_name"></p>
-        <a href="change_name.html"><button class="change_btn">></button></a>
       </div>
       <div class="data_insert">
         <p class="data_form">Cognome:</p>
         <p class="data_form" id="acc_surn"></p>
-        <a href="change_surname.html"><button class="change_btn">></button></a>
       </div>
-      <input type = "submit" value="logout" id="logout_btn" onclick="logout()">
-      <div class="change_container">
-        <a href="change_username.html"><button class="passuser_change">Modifica username</button></a>
-        <a href="change_password.html"><button class="passuser_change">Modifica password</button></a>
+      <div class="dropdown">
+        <!-- Button that triggers the dropdown -->
+        <button class="drop_btn">Modifica credenziali <i class="fa-solid fa-angle-down"></i></button>
+        <div class="dropdown_content">
+          <a href="change_name.html"><button class="change_btn">Modifica nome</button></a>
+          <a href="change_surname.html"><button class="change_btn">Modifica cognome</button></a>
+          <a href="change_username.html"><button class="change_btn">Modifica username</button></a>
+          <a href="change_password.html"><button class="change_btn">Modifica password</button></a>
+        </div>
       </div>
+      <input type = "submit" value="Logout" id="logout_btn" onclick="logout()">
     </div>
   </div>
   <!-- User -->
