@@ -41,8 +41,8 @@
     {
       "nome": "Domenico",
       "cognome": "Risso",
-      "username": "OOOOOOOOOO",
-      "password": "db33b5bb82bf6f64998adebfc6a226f9bb24e1c5bce96eaaf7cd76bc63c6004c",
+      "username": "dom",
+      "password": "7d034aee0ff23b75d9a7061c8610869dbe37453443cbe3edb33503926b117c78",
       "carrello": []
     }
   ],
@@ -54,7 +54,14 @@
       "anno": "2002",
       "pagine": "1380",
       "prezzo": "10€",
-      "recensioni": [],
+      "recensioni": [
+        {
+          "titolo": "a",
+          "commento": "a",
+          "data": "16/12/2023",
+          "utente": "dom"
+        }
+      ],
       "percorso": "pdf/Il_signore_degli_anelli_anteprima.pdf"
     },
     {
