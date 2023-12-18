@@ -44,6 +44,13 @@
       "username": "dom",
       "password": "7d034aee0ff23b75d9a7061c8610869dbe37453443cbe3edb33503926b117c78",
       "carrello": []
+    },
+    {
+      "nome": "Alex",
+      "cognome": "Ben Baccar",
+      "username": "alex",
+      "password": "9dd3af8a9816e6bb6f23543a569cd217ee3e252e4efb440f6605bc491cb580a8",
+      "carrello": []
     }
   ],
   "libri": [

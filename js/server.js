@@ -14,8 +14,8 @@ const app          = express(),
       jsonFilePath = path.join(__dirname, 'database.json');        //JSON file's path
 //-----------------------------------------------------Variables--------------------------------------------------------
 
-app.use(bodyParser.urlencoded({ extended: true }));                //allows to analize data passed in HTTP request and response
-app.use(bodyParser.json());                                        //allows to analize JSON format data
+app.use(bodyParser.urlencoded({ extended: true }));                //allows to analyze data passed in HTTP request and response
+app.use(bodyParser.json());                                        //allows to analyze JSON format data
 app.use(cors());                                                   //allows connections by all origins
 
 //shows the error message
@@ -291,7 +291,7 @@ app.post('/searchBook', (req, res) => {
     //parses the JSON data
     const info = JSON.parse(data),
 
-    //searchs the book
+    //searches the book
     checkBook = info.libri.find(b => b.nome === bookName);
 
     //if it finds the book, it sends it's information to the client
@@ -323,7 +323,7 @@ app.post('/getSuggestions', (req, res) => {
     //parses the JSON data
     const info = JSON.parse(data),
 
-    //searchs books that contain the input entered by the user, ignoring the difference between lowercase and uppercase
+    //searches books that contain the input entered by the user, ignoring the difference between lowercase and uppercase
     suggestions = info.libri.filter(b => b.nome.toLowerCase().includes(input.toLowerCase())).map(b => b.nome);
 
     //if it finds books, it sends the list of suggestions to the client
@@ -344,7 +344,7 @@ app.post('/showCart', (req, res) => {
     //parses the JSON data
     const info = JSON.parse(data),
 
-    //searchs the user's cart
+    //searches the user's cart
     checkCart = info.utenti.find(u => u.username === username);
 
     //if it finds user's cart, it sends it to the client
@@ -369,7 +369,7 @@ app.post('/addBook', (req, res) => {
     const info = JSON.parse(data),
 
     checkBook      = info.libri.find(b => b.nome === bookName),           //checks if the book is available
-    checkCart      = info.utenti.find(u => u.username === username),      //searchs the user's cart
+    checkCart      = info.utenti.find(u => u.username === username),      //searches the user's cart
     checkDuplicate = checkCart.carrello.find(b => b.nome === bookName);   //checks if the user has already added the book at his cart
 
     //if it finds user's cart, the book is available and the user hasn't already added it to him cart, it does it now
@@ -401,7 +401,7 @@ app.post('/removeBook', (req, res) => {
     //parses the JSON data
     const info = JSON.parse(data),
 
-    //searchs the user
+    //searches the user
     checkUser = info.utenti.find(u => u.username === username);
 
     //if it finds him
@@ -535,7 +535,7 @@ app.post('/removeReview', (req, res) => {
       //parses the JSON data
       const info = JSON.parse(data),
 
-      //searchs the book
+      //searches the book
       checkBook = info.libri.find(book => book.nome === bookName);
 
       //if it finds its
@@ -613,7 +613,7 @@ app.post('/emptyCart', (req, res) => {
     //parses the JSON data
     const info = JSON.parse(data),
 
-    //searchs the user's cart
+    //searches the user's cart
     checkCart = info.utenti.find(u => u.username === username);
 
     //if it finds user's cart, it clears it

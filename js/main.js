@@ -253,16 +253,6 @@ function login() {
   });
 }
 
-//makes the password visible or invisible in sign up form
-function oldTogglePasswordVisibility() {
-  let password = document.getElementById("old_passw");
-  if (password.type === "password") {
-    password.type = "text";
-  } else {
-    password.type = "password";
-  }
-}
-
 //makes the password visible or invisible in login form
 function logTogglePasswordVisibility() {
   let password = document.getElementById("log_passw");
@@ -1079,8 +1069,8 @@ function checkUserChange() {
       changeError = document.getElementById('change_error');
 
   //chechs if the username contains more of 15 characters
-  if (username.length > 10) {
-    changeError.innerText     = "La dimensione dell'username eccede il limite massimo di 10 caratteri";
+  if (username.length > 15) {
+    changeError.innerText     = "La dimensione dell'username eccede il limite massimo di 15 caratteri";
     changeError.style.display = 'block';
     return false;
   }
