@@ -356,7 +356,13 @@ function register() {
       surname         = document.getElementById('reg_surname').value,
       username        = document.getElementById('reg_usr').value,
       password        = document.getElementById('reg_passw').value,
-      confirmPassword = document.getElementById('conf_passw').value;
+      confirmPassword = document.getElementById('conf_passw').value,
+      avatarDiv       = document.getElementById('avatar'),
+
+      imgElements     = avatarDiv.getElementsByTagName('img'),
+      selectedImg     = imgElements[0],
+      fullImageUrl    = selectedImg.src,
+      avatar          = 'js/avatar/' + fullImageUrl.substring(fullImageUrl.lastIndexOf("/") + 1);
 
   //checks if the password respects the standard using the checkPassword() function
   if (checkUsername() && checkPassword() && password === confirmPassword) {
@@ -366,7 +372,7 @@ function register() {
       url: 'http://localhost:3000/register',
       method: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify ({ name: name, surname: surname, username: username, password: password, confirmPassword: confirmPassword}),
+      data: JSON.stringify ({ name: name, surname: surname, username: username, password: password, confirmPassword: confirmPassword, avatar: avatar}),
 
       //if the sign-up works, it sends the user to the page "index.html"
       success: function (data) {
@@ -374,6 +380,7 @@ function register() {
         sessionStorage.setItem('name',     name);
         sessionStorage.setItem('surname',  surname);
         sessionStorage.setItem('username', username);
+        sessionStorage.setItem('avatar',   avatar);
         document.location.href = data.redirect;
       },
 
@@ -723,6 +730,7 @@ function logout() {
   sessionStorage.removeItem('username');
   sessionStorage.removeItem('name');
   sessionStorage.removeItem('surname');
+  sessionStorage.removeItem('avatar');
   window.location.href = "index.html";
 }
 
@@ -771,13 +779,15 @@ function getInfo() {
 
       //gets username, name and surname elements
       const usernameText = document.getElementById('acc_user'),
-          nameText     = document.getElementById('acc_name'),
-          surnameText  = document.getElementById('acc_surn');
+            nameText     = document.getElementById('acc_name'),
+            surnameText  = document.getElementById('acc_surn'),
+            avatar       = document.getElementById('acc_avatar');
 
       //shows user's data
       usernameText.textContent = 'Ciao ' + sessionStorage.getItem('username');
       nameText.textContent     = sessionStorage.getItem('name');
       surnameText.textContent  = sessionStorage.getItem('surname');
+      avatar.src               = sessionStorage.getItem('avatar');
     }
   });
 }

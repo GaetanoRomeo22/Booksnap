@@ -68,7 +68,8 @@ app.post('/register', (req, res) => {
         surname = req.body.surname,
         username = req.body.username,
         password = req.body.password,
-        confirmPassword = req.body.confirmPassword;
+        confirmPassword = req.body.confirmPassword,
+        avatar = req.body.avatar;
 
   //checks if the password respects the standard
   const checkPassword = new PasswordValidator();
@@ -100,10 +101,11 @@ app.post('/register', (req, res) => {
         //stores the user and his information into the JSON file
         info.utenti.push({
           nome: name,
-          cognome: surname,
+          cognome:  surname,
           username: username,
           password: hashedPassword,
-          carrello: []
+          carrello: [],
+          avatar: avatar
         });
 
         //writes the updated data to the JSON file
