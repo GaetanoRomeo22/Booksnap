@@ -235,10 +235,11 @@ function login() {
 
     //if the login works, it sends the user at "index.html"
     success: function (data) {
-      sessionStorage.setItem('logged', 'true');
-      sessionStorage.setItem('name', data.name);
-      sessionStorage.setItem('surname', data.surname);
+      sessionStorage.setItem('logged',   'true');
+      sessionStorage.setItem('name',     data.name);
+      sessionStorage.setItem('surname',  data.surname);
       sessionStorage.setItem('username', username);
+      sessionStorage.setItem('avatar',   data.avatar);
       document.location.href = data.redirect;
     },
 
@@ -348,6 +349,9 @@ function checkPassword() {
   return true;
 }
 
+var indexSelector;
+function selectAvatar(imgElement) { indexSelector = imgElement; }
+
 //executes the signup when the form's submit button is pressed
 function register() {
 
@@ -357,12 +361,7 @@ function register() {
       username        = document.getElementById('reg_usr').value,
       password        = document.getElementById('reg_passw').value,
       confirmPassword = document.getElementById('conf_passw').value,
-      avatarDiv       = document.getElementById('avatar'),
-
-      imgElements     = avatarDiv.getElementsByTagName('img'),
-      selectedImg     = imgElements[0],
-      fullImageUrl    = selectedImg.src,
-      avatar          = 'js/avatar/' + fullImageUrl.substring(fullImageUrl.lastIndexOf("/") + 1);
+      avatar          =  'js/avatar/' + indexSelector + '.png';
 
   //checks if the password respects the standard using the checkPassword() function
   if (checkUsername() && checkPassword() && password === confirmPassword) {
@@ -395,6 +394,7 @@ function register() {
     });
   }
 }
+
 //------------------------------------------------REGISTRAZIONE.HTML----------------------------------------------------
 
 //------------------------------------------------SHOP.HTML-------------------------------------------------------------
@@ -791,9 +791,6 @@ function getInfo() {
     }
   });
 }
-
-//shows user's reviews when the button is pressed
-//shows user's reviews when the button is pressed
 function showUserReviews() {
 
   //sends an HTTP request to the server at the specified url to get user's data
@@ -1205,6 +1202,32 @@ function changePassword() {
     }
   });
 }
+
+var indexChange;
+function changeAvatarIndex(imgElement) { indexChange = imgElement; console.log(indexChange); }
+
+function changeAvatar() {
+
+  //gets user's name, surname, username, and password from the page
+  const avatar =  'js/avatar/' + indexChange + '.png';
+  document.getElementById('overlay').style.display = 'none';
+  document.getElementById('hide_avatar').style.display = 'none';
+  document.body.style.overflow = 'auto';
+
+    //sends an HTTP request to the server at the specified URL to check if the sign-up works
+    $.ajax({
+      url: 'http://localhost:3000/changeAvatar',
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify ({ avatar: avatar, currentUsername: sessionStorage.getItem('username')}),
+      //if the sign-up works, it sends the user to the page "index.html"
+      success: function (data) {
+        sessionStorage.setItem('avatar', avatar);
+        document.location.href = data.redirect;
+      },
+    });
+}
+
 /*function changeCredential() {
 
   //gets user's name, surname, username, and password from the page

@@ -50,6 +50,7 @@ const username = req.body.username,
         res.json({
           name: checkUser.nome,
           surname: checkUser.cognome,
+          avatar: checkUser.avatar,
           redirect: 'index.html'});
       } else {
           sendError(res);
@@ -279,6 +280,33 @@ app.post('/changePassword', (req, res) => {
         sendError(res);
       }
     });
+});
+
+app.post('/changeAvatar', (req, res) => {
+
+  //gets name, surname, username, and password from the request
+  const avatar = req.body.avatar,
+      username = req.body.username,
+      currentUsername = req.body.currentUsername;
+
+  //reads the JSON file
+  fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+
+    //parses the JSON data
+    const info = JSON.parse(data),
+          checkUserIndex = info.utenti.findIndex(u => u.username === currentUsername);
+    let checkUser = info.utenti.find(u => u.username === username);
+
+    //if the user isn't registered
+    if (checkUserIndex !== - 1 && !checkUser) {
+
+      //stores the user and his information into the JSON file
+      info.utenti[checkUserIndex].avatar = avatar;
+
+      //writes the updated data to the JSON file
+      fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
+    }
+  });
 });
 
 //when the server receives an HTTP request to this url, it shows the specified book's PDF

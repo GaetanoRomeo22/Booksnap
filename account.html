@@ -29,6 +29,36 @@
   <meta name="msapplication-TileColor" content="#cc194b">
 </head>
 <body>
+
+<div id="overlay"></div>
+<div id="hide_avatar">
+  <div id="avatar_container">
+    <div class="six_container">
+      <img class="avatar" src="js/avatar/1.png" onclick="changeAvatarIndex(1)" alt="1">
+      <img class="avatar" src="js/avatar/2.png" onclick="changeAvatarIndex(2)" alt="2">
+      <img class="avatar" src="js/avatar/3.png" onclick="changeAvatarIndex(3)" alt="3">
+      <img class="avatar" src="js/avatar/4.png" onclick="changeAvatarIndex(4)" alt="4">
+      <img class="avatar" src="js/avatar/5.png" onclick="changeAvatarIndex(5)" alt="5">
+    <div class="six_container">
+      <img class="avatar" src="js/avatar/7.png" onclick="changeAvatarIndex(7)" alt="7">
+      <img class="avatar" src="js/avatar/8.png" onclick="changeAvatarIndex(8)" alt="8">
+      <img class="avatar" src="js/avatar/9.png" onclick="changeAvatarIndex(9)" alt="9">
+      <img class="avatar" src="js/avatar/10.png" onclick="changeAvatarIndex(10)" alt="10">
+      <img class="avatar" src="js/avatar/11.png" onclick="changeAvatarIndex(11)" alt="11">
+      <img class="avatar" src="js/avatar/12.png" onclick="changeAvatarIndex(12)" alt="12">
+    </div>
+    <div class="six_container">
+      <img class="avatar" src="js/avatar/13.png" onclick="changeAvatarIndex(13)" alt="13">
+      <img class="avatar" src="js/avatar/14.png" onclick="changeAvatarIndex(14)" alt="14">
+      <img class="avatar" src="js/avatar/15.png" onclick="changeAvatarIndex(15)" alt="15">
+      <img class="avatar" src="js/avatar/16.png" onclick="changeAvatarIndex(16)" alt="16">
+      <img class="avatar" src="js/avatar/17.png" onclick="changeAvatarIndex(17)" alt="17">
+      <img class="avatar" src="js/avatar/18.png" onclick="changeAvatarIndex(18)" alt="18">
+    </div>
+    <input class="change_btn" type="submit" onclick="changeAvatar()" value ="Cambia avatar">
+  </div>
+</div>
+
 <!-- Navbar --->
 <nav class="navbar">
   <input type = "button" value="Home"    id="nav_home" onclick="window.location.href='index.html'">
@@ -39,7 +69,11 @@
 <div id="account_elements">
   <!-- User -->
   <div id="user_data">
-    <img id="acc_avatar">
+    <div id="container_acc_avatar">
+      <img id="acc_avatar">
+      <button id="edit_avatar"><i class="fa-solid fa-pencil"></i></button>
+    </div>
+
     <div id="datauser_container">
       <div class="data_insert">
         <h1 class="data_form" id="acc_user"></h1>
@@ -123,6 +157,21 @@
     getInfo();
     showUserReviews();
     showCart();
+
+    document.getElementById('edit_avatar').addEventListener('click', function() {
+
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('hide_avatar').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    });
+
+    document.getElementById('overlay').addEventListener('click', function() {
+
+      document.getElementById('overlay').style.display = 'none';
+      document.getElementById('hide_avatar').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+
   });
 </script>
 <!-- JavaScript Client Side -->
