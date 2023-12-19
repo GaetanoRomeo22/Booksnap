@@ -305,6 +305,7 @@ app.post('/changeAvatar', (req, res) => {
 
       //writes the updated data to the JSON file
       fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
+      res.json({avatar: info.utenti[checkUserIndex].avatar});
     }
   });
 });
