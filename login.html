@@ -7,6 +7,7 @@
   <!-- Link to manifest and css file -->
   <link rel = "manifest" href = "manifest.json">
   <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+  <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
   <!-- Character encode -->
   <meta charset="UTF-8">
@@ -37,7 +38,7 @@
       <label for="log_usr"><input type="text" class="account" id="log_usr" name="username" required placeholder="Username"></label>
       <div class="password">
         <label for="log_passw"><input type="password" class="account" id="log_passw" name="password" required placeholder="Password"></label>
-        <button class="showhide_passw" type="button" onclick="logTogglePasswordVisibility()"><img src="images/Button%20icons/eye-regular.svg" alt="search_button" loading="lazy"></button>
+        <button class="showhide_passw" type="button" onclick="logTogglePasswordVisibility()"><i class="fa-regular fa-eye"></i></button>
       </div>
       <input class="btn" type="submit" onclick="login()" value = "Accedi">
     </div>

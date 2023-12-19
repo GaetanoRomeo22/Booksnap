@@ -7,6 +7,7 @@
   <!-- Link to manifest and css file -->
   <link rel = "manifest" href = "manifest.json">
   <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+  <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
   <!-- Character encode -->
   <meta charset="UTF-8">
@@ -40,7 +41,7 @@
   <!-- Search bar -->
   <form id="search_box" method="post">
     <label for = "search_in"><input type="text" id="search_in" name="search" required placeholder="Libro da ricercare..." oninput="getSuggestions()"></label>
-    <button type="button" id="search_bnt" onclick="searchBook()"><img src="images/Button%20icons/magnifying-glass-solid.svg" alt="search_button" loading="lazy"></button>
+    <button type="button" id="search_bnt" onclick="searchBook()"><i class="fa-solid fa-magnifying-glass"></i></button>
   </form>
   <!-- Search bar -->
 </div>
