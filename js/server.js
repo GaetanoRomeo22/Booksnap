@@ -516,7 +516,8 @@ app.post('/writeReview', (req, res) => {
   const bookName    = req.body.bookName,
         reviewTitle = req.body.reviewTitle,
         review      = req.body.review,
-        username = req.body.username;
+        username    = req.body.username,
+        avatar      = req.body.avatar;
 
   //tries to read the JSON file
   fs.readFile(jsonFilePath, 'utf8', (err, data) => {
@@ -541,7 +542,8 @@ app.post('/writeReview', (req, res) => {
         titolo: reviewTitle,
         commento: review,
         data: day + "/" + month + "/" + year,
-        utente: username
+        utente: username,
+        avatar: avatar
       })
       fs.writeFile(jsonFilePath, JSON.stringify(info, null, 2), 'utf8', () => {});
 

@@ -144,10 +144,12 @@
           <!-- Button that triggers the dropdown -->
           <button class="drop_btn"><i class="fa-solid fa-angle-down"></i></button>
           <div class="dropdown_content">
-            <button id="edit_name"     class="change_btn">Modifica nome</button>
-            <button id="edit_surname"  class="change_btn">Modifica cognome</button>
-            <button id="edit_username" class="change_btn">Modifica username</button>
-            <button id="edit_password" class="change_btn">Modifica password</button>
+            <div id="dropdown_continer">
+              <button id="edit_name"     class="change_btn">Nome</button>
+              <button id="edit_surname"  class="change_btn">Cognome</button>
+              <button id="edit_username" class="change_btn">Username</button>
+              <button id="edit_password" class="change_btn">Password</button>
+            </div>
           </div>
         </div>
       </div>
@@ -255,6 +257,10 @@
       document.getElementById('hide_surname').style.display  = 'none';
       document.getElementById('hide_username').style.display = 'none';
       document.getElementById('hide_password').style.display = 'none';
+      var removeBorder = document.querySelectorAll('.avatar');
+      removeBorder.forEach(function (avatar) {
+        avatar.classList.remove('selected');
+      });
       document.body.style.overflow = 'auto';
     });
 
