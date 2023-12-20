@@ -1223,7 +1223,7 @@ function changeAvatar() {
       //if the sign-up works, it sends the user to the page "index.html"
       success: function (data) {
         sessionStorage.setItem('avatar', avatar);
-        document.location.href = data.redirect;
+        document.getElementById('acc_avatar').src = data.avatar;
       },
     });
 }

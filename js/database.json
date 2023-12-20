@@ -41,10 +41,44 @@
     {
       "nome": "Domenico",
       "cognome": "Risso",
-      "username": "dom",
+      "username": "domu",
+      "password": "7d034aee0ff23b75d9a7061c8610869dbe37453443cbe3edb33503926b117c78",
+      "carrello": [
+        {
+          "nome": "Il signore degli anelli",
+          "prezzo": "10€",
+          "genere": "Avventura e Azione"
+        },
+        {
+          "nome": "Il mastino dei Baskerville",
+          "prezzo": "10€",
+          "genere": "Giallo"
+        },
+        {
+          "nome": "Il problema dei tre corpi",
+          "prezzo": "21€",
+          "genere": "Fantascienza"
+        },
+        {
+          "nome": "2001 Odissea nello spazio",
+          "prezzo": "16€",
+          "genere": "Fantascienza"
+        },
+        {
+          "nome": "Il grande sonno",
+          "prezzo": "8€",
+          "genere": "Giallo"
+        }
+      ],
+      "avatar": "js/avatar/11.png"
+    },
+    {
+      "nome": "gaetano",
+      "cognome": "sas",
+      "username": "sdsd",
       "password": "7d034aee0ff23b75d9a7061c8610869dbe37453443cbe3edb33503926b117c78",
       "carrello": [],
-      "avatar": "js/avatar/9.png"
+      "avatar": "js/avatar/4.png"
     }
   ],
   "libri": [

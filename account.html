@@ -32,7 +32,7 @@
 
 <div id="overlay"></div>
 <div id="hide_avatar">
-  <div id="avatar_container">
+  <div class="avatar_container">
     <div class="six_container">
       <img class="avatar" src="js/avatar/1.png" onclick="changeAvatarIndex(1)" alt="1">
       <img class="avatar" src="js/avatar/2.png" onclick="changeAvatarIndex(2)" alt="2">
@@ -57,8 +57,58 @@
       <img class="avatar" src="js/avatar/17.png" onclick="changeAvatarIndex(17)" alt="17">
       <img class="avatar" src="js/avatar/18.png" onclick="changeAvatarIndex(18)" alt="18">
     </div>
-    <input class="change_btn" type="submit" onclick="changeAvatar()" value ="Cambia avatar">
   </div>
+  <input class="btn" type="submit" onclick="changeAvatar()" value ="Cambia avatar">
+</div>
+
+<div id="hide_name">
+  <form class="change_form" id="name_form" method="post">
+    <div class="user_label">
+      <label for="change_name"><input type="text" class="account" id="change_name" name="name" placeholder="Nuovo nome"></label>
+      <input class="btn" type="submit" onclick="changeName()" value = "Cambia nome">
+    </div>
+    <a class="user_error change_error"></a>
+  </form>
+</div>
+
+<div class="change_form" id="hide_surname">
+  <form id="surname_form" method="post">
+    <div class="user_label">
+      <label for="change_surname"><input type="text" class="account" id="change_surname" name="surname" placeholder="Nuovo cognome"></label>
+      <input class="btn" type="submit" onclick="changeSurname()" value = "Cambia cognome">
+    </div>
+    <a class="user_error change_error"></a>
+  </form>
+</div>
+
+<div id="hide_username">
+  <form class="change_form" id="username_form" method="post">
+    <div class="user_label">
+      <label for="change_username"><input type="text" class="account" id="change_username" name="username" placeholder="Nuovo username"></label>
+      <input class="btn" type="submit" onclick="changeUsername()" value = "Cambia username">
+    </div>
+    <a class="user_error change_error"></a>
+  </form>
+</div>
+
+<div id="hide_password">
+  <form class="change_form" id="password_form" method="post">
+    <div class="user_label">
+      <div>
+        <label for="current_passw"><input class="account" id="current_passw" name="password" required placeholder="Password attuale"></label>
+      </div>
+      <div class="password">
+        <label for="new_passw"><input type="password" class="account lable_passw" id="new_passw" name="password" required placeholder="Nuova assword"></label>
+        <button class="showhide_passw" type="button" onclick="newTogglePasswordVisibility()"><img src="images/Button%20icons/eye-regular.svg" alt="search_button" loading="lazy"></button>
+      </div>
+      <div class="password">
+        <label for="confnew_passw"><input type="password" class="account lable_passw" id="confnew_passw" name="confirmPassword" required placeholder="Conferma nuova password"></label>
+        <button class="showhide_passw" type="button" onclick="confNewTogglePasswordVisibility()"><img src="images/Button%20icons/eye-regular.svg" alt="search_button" loading="lazy"></button>
+      </div>
+    </div>
+    <input class="btn" type="submit" onclick="changePassword()" value = "Cambia password">
+    <a class="user_error change_error"></a>
+  </form>
 </div>
 
 <!-- Navbar --->
@@ -88,17 +138,19 @@
         <p class="data_form">Cognome:</p>
         <p class="data_form" id="acc_surn"></p>
       </div>
-      <div class="dropdown">
-        <!-- Button that triggers the dropdown -->
-        <button class="drop_btn">Modifica credenziali <i class="fa-solid fa-angle-down"></i></button>
-        <div class="dropdown_content">
-          <a href="change_name.html"><button class="change_btn">Modifica nome</button></a>
-          <a href="change_surname.html"><button class="change_btn">Modifica cognome</button></a>
-          <a href="change_username.html"><button class="change_btn">Modifica username</button></a>
-          <a href="change_password.html"><button class="change_btn">Modifica password</button></a>
+      <div id="account_manage">
+        <input type = "submit" value="Logout" class="logout_btn" onclick="logout()">
+        <div class="dropdown">
+          <!-- Button that triggers the dropdown -->
+          <button class="drop_btn"><i class="fa-solid fa-angle-down"></i></button>
+          <div class="dropdown_content">
+            <button id="edit_name"     class="change_btn">Modifica nome</button>
+            <button id="edit_surname"  class="change_btn">Modifica cognome</button>
+            <button id="edit_username" class="change_btn">Modifica username</button>
+            <button id="edit_password" class="change_btn">Modifica password</button>
+          </div>
         </div>
       </div>
-      <input type = "submit" value="Logout" id="logout_btn" onclick="logout()">
     </div>
   </div>
   <!-- User -->
@@ -167,10 +219,42 @@
       document.body.style.overflow = 'hidden';
     });
 
+    document.getElementById('edit_name').addEventListener('click', function() {
+
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('hide_name').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    });
+
+    document.getElementById('edit_surname').addEventListener('click', function() {
+
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('hide_surname').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    });
+
+    document.getElementById('edit_username').addEventListener('click', function() {
+
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('hide_username').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    });
+
+    document.getElementById('edit_password').addEventListener('click', function() {
+
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('hide_password').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    });
+
     document.getElementById('overlay').addEventListener('click', function() {
 
-      document.getElementById('overlay').style.display = 'none';
-      document.getElementById('hide_avatar').style.display = 'none';
+      document.getElementById('overlay').style.display       = 'none';
+      document.getElementById('hide_avatar').style.display   = 'none';
+      document.getElementById('hide_name').style.display     = 'none';
+      document.getElementById('hide_surname').style.display  = 'none';
+      document.getElementById('hide_username').style.display = 'none';
+      document.getElementById('hide_password').style.display = 'none';
       document.body.style.overflow = 'auto';
     });
 
