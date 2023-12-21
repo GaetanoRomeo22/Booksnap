@@ -5,14 +5,14 @@ window.onload = () => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service_worker.js').then(function (registration) {
 
-      //service worker registered correctly
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    },
-    function (err) {
+          //service worker registered correctly
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        },
+        function (err) {
 
-      //troubles in registering the service worker
-      console.log('ServiceWorker registration failed: ', err);
-    });
+          //troubles in registering the service worker
+          console.log('ServiceWorker registration failed: ', err);
+        });
   }
 }
 
@@ -789,9 +789,9 @@ function getInfo() {
 
       //gets username, name and surname elements
       const usernameText = document.getElementById('acc_user'),
-            nameText     = document.getElementById('acc_name'),
-            surnameText  = document.getElementById('acc_surn'),
-            avatar       = document.getElementById('acc_avatar');
+          nameText     = document.getElementById('acc_name'),
+          surnameText  = document.getElementById('acc_surn'),
+          avatar       = document.getElementById('acc_avatar');
 
       //shows user's data
       usernameText.textContent = 'Ciao ' + sessionStorage.getItem('username');
@@ -944,8 +944,8 @@ function updateCartView(cartItems) {
 
   //gets total price and clear cart button elements
   const cartTot    = document.getElementById('cart_price'),
-        cartSpacer = document.getElementById('book_spacer1'),
-        clearCart  = document.getElementById('cart_clear');
+      cartSpacer = document.getElementById('book_spacer1'),
+      clearCart  = document.getElementById('cart_clear');
 
   //if the cart isn't empty
   if (parseFloat(totalPrice) > 0) {
@@ -1106,27 +1106,27 @@ function changeName() {
   //gets user's name, surname, username, and password from the page
   const name   = document.getElementById('change_name').value;
 
-    //sends an HTTP request to the server at the specified URL to check if the sign-up works
-    $.ajax({
-      url: 'http://localhost:3000/changeName',
-      method: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify ({ name: name, currentUsername: sessionStorage.getItem('username')}),
-      //if the sign-up works, it sends the user to the page "index.html"
-      success: function (data) {
-        sessionStorage.setItem('name', name);
-        document.location.href = data.redirect;
-      },
+  //sends an HTTP request to the server at the specified URL to check if the sign-up works
+  $.ajax({
+    url: 'http://localhost:3000/changeName',
+    method: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify ({ name: name, currentUsername: sessionStorage.getItem('username')}),
+    //if the sign-up works, it sends the user to the page "index.html"
+    success: function (data) {
+      sessionStorage.setItem('name', name);
+      document.location.href = data.redirect;
+    },
 
-      //if the sign-up doesn't work, shows the error message
-      error: function () {
-        const changeError = document.getElementById('change_error');
-        if (changeError) {
-          changeError.innerText = 'Caratteri non consentiti per il nome';
-          changeError.style.display = 'block';
-        }
+    //if the sign-up doesn't work, shows the error message
+    error: function () {
+      const changeError = document.getElementById('change_error');
+      if (changeError) {
+        changeError.innerText = 'Caratteri non consentiti per il nome';
+        changeError.style.display = 'block';
       }
-    });
+    }
+  });
 }
 
 function changeSurname() {
@@ -1134,27 +1134,27 @@ function changeSurname() {
   //gets user's name, surname, username, and password from the page
   const surname  = document.getElementById('change_surname').value;
 
-    //sends an HTTP request to the server at the specified URL to check if the sign-up works
-    $.ajax({
-      url: 'http://localhost:3000/changeSurname',
-      method: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify ({  surname: surname, currentUsername: sessionStorage.getItem('username')}),
-      //if the sign-up works, it sends the user to the page "index.html"
-      success: function (data) {
-        sessionStorage.setItem('surname', surname);
-        document.location.href = data.redirect;
-      },
+  //sends an HTTP request to the server at the specified URL to check if the sign-up works
+  $.ajax({
+    url: 'http://localhost:3000/changeSurname',
+    method: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify ({  surname: surname, currentUsername: sessionStorage.getItem('username')}),
+    //if the sign-up works, it sends the user to the page "index.html"
+    success: function (data) {
+      sessionStorage.setItem('surname', surname);
+      document.location.href = data.redirect;
+    },
 
-      //if the sign-up doesn't work, shows the error message
-      error: function () {
-        const changeError = document.getElementById('change_error');
-        if (changeError) {
-          changeError.innerText = 'Caratteri non consentiti per il cognome';
-          changeError.style.display = 'block';
-        }
+    //if the sign-up doesn't work, shows the error message
+    error: function () {
+      const changeError = document.getElementById('change_error');
+      if (changeError) {
+        changeError.innerText = 'Caratteri non consentiti per il cognome';
+        changeError.style.display = 'block';
       }
-    });
+    }
+  });
 }
 
 function changeUsername() {
@@ -1234,53 +1234,17 @@ function changeAvatar() {
   document.getElementById('hide_avatar').style.display = 'none';
   document.body.style.overflow = 'auto';
 
-    //sends an HTTP request to the server at the specified URL to check if the sign-up works
-    $.ajax({
-      url: 'http://localhost:3000/changeAvatar',
-      method: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify ({ avatar: avatar, currentUsername: sessionStorage.getItem('username')}),
-      //if the sign-up works, it sends the user to the page "index.html"
-      success: function (data) {
-        sessionStorage.setItem('avatar', avatar);
-        document.getElementById('acc_avatar').src = data.avatar;
-      },
-    });
+  //sends an HTTP request to the server at the specified URL to check if the sign-up works
+  $.ajax({
+    url: 'http://localhost:3000/changeAvatar',
+    method: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify ({ avatar: avatar, currentUsername: sessionStorage.getItem('username')}),
+    //if the sign-up works, it sends the user to the page "index.html"
+    success: function (data) {
+      sessionStorage.setItem('avatar', avatar);
+      document.getElementById('acc_avatar').src = data.avatar;
+    },
+  });
 }
-
-/*function changeCredential() {
-
-  //gets user's name, surname, username, and password from the page
-  const name   = document.getElementById('change_name').value,
-      surname  = document.getElementById('change_surname').value,
-      username = document.getElementById('change_username').value;
-
-  //checks if the password respects the standard using the checkPassword() function
-  if (checkUserChange()) {
-
-    //sends an HTTP request to the server at the specified URL to check if the sign-up works
-    $.ajax({
-      url: 'http://localhost:3000/changeCredential',
-      method: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify ({ name: name, surname: surname, username: username, currentUsername: sessionStorage.getItem('username')}),
-      //if the sign-up works, it sends the user to the page "index.html"
-      success: function (data) {
-        sessionStorage.setItem('name',     name);
-        sessionStorage.setItem('surname',  surname);
-        sessionStorage.setItem('username', username);
-        document.location.href = data.redirect;
-      },
-
-      //if the sign-up doesn't work, shows the error message
-      error: function () {
-        const changeError = document.getElementById('change_error');
-        if (changeError) {
-          changeError.innerText = 'Username non disponibile o uso di caratteri non consentiti per nome e cognome';
-          changeError.style.display = 'block';
-        }
-      }
-    });
-  }
-}*/
 //------------------------------------------------ACCOUNT.HTML----------------------------------------------------------

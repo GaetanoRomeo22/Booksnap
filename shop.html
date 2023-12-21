@@ -29,91 +29,91 @@
   <meta name="msapplication-TileColor" content="#cc194b">
 </head>
 <body>
-<!-- Navbar --->
-<nav class="navbar">
-  <input type = "button" value="Home"       id="nav_shop"    onclick="window.location.href='index.html'">
-  <input type = "button" value="Account"    id="nav_account" onclick="window.location.href='account.html'">
-</nav>
-<!-- Navbar -->
+  <!-- Navbar --->
+  <nav class="navbar">
+    <input type = "button" value="Home"       id="nav_shop"    onclick="window.location.href='index.html'">
+    <input type = "button" value="Account"    id="nav_account" onclick="window.location.href='account.html'">
+  </nav>
+  <!-- Navbar -->
 
-<div id="shop_spacer">
-  <h1>Cerca qui il libro</h1>
-  <!-- Search bar -->
-  <form id="search_box" method="post">
-    <label for = "search_in"><input type="text" id="search_in" name="search" required placeholder="Libro da ricercare..." oninput="getSuggestions()"></label>
-    <button type="button" id="search_bnt" onclick="searchBook()"><i class="fa-solid fa-magnifying-glass"></i></button>
-  </form>
-  <!-- Search bar -->
-</div>
+  <div id="shop_spacer">
+    <h1>Cerca qui il libro</h1>
+    <!-- Search bar -->
+    <form id="search_box" method="post">
+      <label for = "search_in"><input type="text" id="search_in" name="search" required placeholder="Libro da ricercare..." oninput="getSuggestions()"></label>
+      <button type="button" id="search_bnt" onclick="searchBook()"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+    <!-- Search bar -->
+  </div>
 
-<ul id ="suggestion_list"></ul>
+  <ul id ="suggestion_list"></ul>
 
-<!-- PDF -->
-<div id="pdf_hidden">
-  <div id="pdf_container">
-    <div id="shop_elements">
-      <div id="viewer_container">
-        <p id="no_preview"></p>
-        <iframe id="pdf_viewer"></iframe>
-      </div>
-      <div id="preview_data">
-        <div id="preview">
-          <h1>Preview</h1>
-          <p class="explain_text">Abbiamo accuratamente selezionato le parti più rilevanti di questo libro per offrirti un'anteprima approfondita.
-            La nostra intenzione è fornirti un assaggio significativo che ti aiuterà a valutare se questo libro soddisfa o meno le tue esigenze.
-          </p>
+  <!-- PDF -->
+  <div id="pdf_hidden">
+    <div id="pdf_container">
+      <div id="shop_elements">
+        <div id="viewer_container">
+          <p id="no_preview"></p>
+          <iframe id="pdf_viewer"></iframe>
         </div>
-        <div id="book_data_img">
-          <div id="book_space">
-            <img id="preview_image" alt = "img" src = "">
+        <div id="preview_data">
+          <div id="preview">
+            <h1>Preview</h1>
+            <p class="explain_text">Abbiamo accuratamente selezionato le parti più rilevanti di questo libro per offrirti un'anteprima approfondita.
+              La nostra intenzione è fornirti un assaggio significativo che ti aiuterà a valutare se questo libro soddisfa o meno le tue esigenze.
+            </p>
           </div>
-          <div id="book_data">
-            <div id="name_author">
-              <div id="book_name"  ></div>
-              <div id="book_author"></div>
+          <div id="book_data_img">
+            <div id="book_space">
+              <img id="preview_image" alt = "img" src = "">
             </div>
-            <div id="other_data">
-              <div id="book_type"  ></div>
-              <div id="book_year"></div>
-              <div id="book_page"></div>
-              <div id="book_price" ></div>
-              <div id="previews_manage">
-                <button class="previews_btn" onclick="checkReview()">Recensisci il libro</button>
+            <div id="book_data">
+              <div id="name_author">
+                <div id="book_name"  ></div>
+                <div id="book_author"></div>
               </div>
-              <button id="cart_btn" onclick="addBook()"></button>
+              <div id="other_data">
+                <div id="book_type"  ></div>
+                <div id="book_year"></div>
+                <div id="book_page"></div>
+                <div id="book_price" ></div>
+                <div id="previews_manage">
+                  <button class="previews_btn" onclick="checkReview()">Recensisci il libro</button>
+                </div>
+                <button id="cart_btn" onclick="addBook()"></button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- Reviews -->
-      <div id="reviews_box">
-        <div id="shop_container">
-          <div id="reviews_list"></div>
-          <div class="price_clear_cart">
-            <p class="cart_price" id="no_reviews"></p>
+        <!-- Reviews -->
+        <div id="reviews_box">
+          <div id="shop_container">
+            <div id="reviews_list"></div>
+            <div class="price_clear_cart">
+              <p class="cart_price" id="no_reviews"></p>
+            </div>
           </div>
         </div>
+        <!-- Reviews -->
       </div>
-      <!-- Reviews -->
     </div>
   </div>
-</div>
-<!-- PDF -->
+  <!-- PDF -->
 
-<!-- JavaScript Client Side -->
-<script>
-  window.addEventListener('load', function() {
-    checkLogged();
-  });
+  <!-- JavaScript Client Side -->
+  <script>
+    window.addEventListener('load', function() {
+      checkLogged();
+    });
 
-  document.addEventListener('DOMContentLoaded', function () {
-    checkSearch();
-  });
-</script>
-<!-- JavaScript Client Side -->
+    document.addEventListener('DOMContentLoaded', function () {
+      checkSearch();
+    });
+  </script>
+  <!-- JavaScript Client Side -->
 
-<script defer src="js/jquery.min.js"></script>
-<script defer src="js/server.js"></script>
-<script defer src="js/main.js"></script>
+  <script defer src="js/jquery.min.js"></script>
+  <script defer src="js/server.js"></script>
+  <script defer src="js/main.js"></script>
 </body>
 </html>

@@ -877,7 +877,7 @@ nav input[type="button"]:hover
 }
 
 .change_container
- {
+{
   display: flex;
   flex-flow: row;
   justify-content: center;
@@ -886,7 +886,7 @@ nav input[type="button"]:hover
   font-size: 13px;
   width: 80%;
   margin-top: 0.25rem;
- }
+}
 
 .passuser_change:hover
 {
@@ -1234,14 +1234,12 @@ nav input[type="button"]:hover
 
 #book_spacer
 {
-  margin: 0 0.3rem;
-  margin-bottom: 2px;
+  margin: 0 0.3rem 2px;
 }
 
 #book_spacer1
 {
-  margin: 0 0.3rem;
-  margin-bottom: 2px;
+  margin: 0 0.3rem 2px;
 }
 
 #review_acc

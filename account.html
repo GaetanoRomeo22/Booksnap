@@ -122,7 +122,7 @@
   <!-- User -->
   <div id="user_data">
     <div id="container_acc_avatar">
-      <img id="acc_avatar">
+      <img id="acc_avatar" src="" alt="avatar">
       <button id="edit_avatar"><i class="fa-solid fa-pencil"></i></button>
     </div>
 
@@ -170,7 +170,7 @@
   </div>
   <!-- Cart -->
 
-  <!-- Reviews Cronology -->
+  <!-- Reviews Chronology -->
   <div class="style_cart">
     <div class="acc_container" id="user_reviews">
       <div id="reviews_cronology"></div>
@@ -180,7 +180,7 @@
     </div>
   </div>
 </div>
-<!-- Reviews Cronology -->
+<!-- Reviews Chronology -->
 
 <div class="footer">
   <div id="container_creators">
@@ -201,7 +201,7 @@
     </div>
   </div>
   <div id="linietta_footer"></div>
-  <p id="footer_explain">Copyright®2023 Progetto TechWeb anno accademico 2023/2024 università degli studi di napoli Parthenope, prof. Raffaele Montella. Autori: Domenico Risso matricola 0124002542; Vincenzo Figliolino matricola 0124002541; Gaetano Romeo matricola 0124002667. </p>
+  <p id="footer_explain">Copyright®2023 Progetto TechWeb anno accademico 2023/2024 università degli studi di Napoli Parthenope, prof. Raffaele Montella. Autori: Domenico Risso matricola 0124002542; Vincenzo Figliolino matricola 0124002541; Gaetano Romeo matricola 0124002667. </p>
   <img id="logo_footer" src="images/booksnap_white.webp" alt = "logo" width="150px">
 </div>
 
@@ -257,7 +257,7 @@
       document.getElementById('hide_surname').style.display  = 'none';
       document.getElementById('hide_username').style.display = 'none';
       document.getElementById('hide_password').style.display = 'none';
-      var removeBorder = document.querySelectorAll('.avatar');
+      const removeBorder = document.querySelectorAll('.avatar');
       removeBorder.forEach(function (avatar) {
         avatar.classList.remove('selected');
       });
