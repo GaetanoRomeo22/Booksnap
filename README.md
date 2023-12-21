@@ -4,7 +4,7 @@
 BookSnap is a progressive web app that empowers users to search for books, preview them, leave reviews, and, if desired, make purchases.
 
 ## Prerequisites
-### Languages Used
+### Used Languages
 - HTML5
 - CSS3
 - JavaScript
@@ -31,10 +31,10 @@ BookSnap is a progressive web app that empowers users to search for books, previ
     ```
 
     The repository consists of four directories: 
-    - `pdf`: Contains book previews
-    - `css`: Holds the site's styles 
+    - `pdf`: Contains books previews
+    - `css`: Holds the site's style 
     - `images`: Stores user avatars and book covers
-    - `js`: Includes the server (`server.js`), service worker, database file (`database.JSON`), client-side JavaScript (`main.js`), and jQuery file.
+    - `js`: Includes server (`server.js`), service worker (`service_worker.js`), database file (`database.JSON`), client-side JavaScript (`main.js`), and jQuery file.
 
 2. **Install Node.js**
     - [Download and Install Node.js](https://nodejs.org/en)
