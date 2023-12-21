@@ -5,43 +5,12 @@
       "cognome": "Romeo",
       "username": "gaetano22",
       "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
-      "carrello": [
-        {
-          "nome": "Il signore degli anelli",
-          "prezzo": "10€",
-          "genere": "Avventura e Azione"
-        },
-        {
-          "nome": "Il grande sonno",
-          "prezzo": "8€",
-          "genere": "Giallo"
-        },
-        {
-          "nome": "Dark ladies",
-          "prezzo": "15€",
-          "genere": "Horror"
-        },
-        {
-          "nome": "Il guardiano degli innocenti",
-          "prezzo": "15€",
-          "genere": "Fantasy"
-        },
-        {
-          "nome": "Libro",
-          "prezzo": "28€",
-          "genere": "Umoristico"
-        },
-        {
-          "nome": "Libro 2",
-          "prezzo": "26€",
-          "genere": "Umoristico"
-        }
-      ]
+      "carrello": []
     },
     {
       "nome": "Domenico",
       "cognome": "Risso",
-      "username": "domu",
+      "username": "domenico",
       "password": "7d034aee0ff23b75d9a7061c8610869dbe37453443cbe3edb33503926b117c78",
       "carrello": [
         {
@@ -55,30 +24,32 @@
           "genere": "Giallo"
         },
         {
-          "nome": "Il problema dei tre corpi",
-          "prezzo": "21€",
-          "genere": "Fantascienza"
+          "nome": "Il silenzio degli innocenti",
+          "prezzo": "11€",
+          "genere": "Thriller"
         },
         {
-          "nome": "2001 Odissea nello spazio",
-          "prezzo": "16€",
-          "genere": "Fantascienza"
+          "nome": "Libro",
+          "prezzo": "28€",
+          "genere": "Umoristico"
         },
         {
-          "nome": "Il grande sonno",
-          "prezzo": "8€",
-          "genere": "Giallo"
+          "nome": "Libro 2",
+          "prezzo": "26€",
+          "genere": "Umoristico"
+        },
+        {
+          "nome": "Robinson Crusoe",
+          "prezzo": "10€",
+          "genere": "Avventura e Azione"
+        },
+        {
+          "nome": "I tre moschettieri",
+          "prezzo": "9€",
+          "genere": "Avventura e Azione"
         }
       ],
       "avatar": "js/avatar/11.png"
-    },
-    {
-      "nome": "gaetano",
-      "cognome": "sas",
-      "username": "sdsd",
-      "password": "7d034aee0ff23b75d9a7061c8610869dbe37453443cbe3edb33503926b117c78",
-      "carrello": [],
-      "avatar": "js/avatar/4.png"
     }
   ],
   "libri": [
@@ -89,7 +60,22 @@
       "anno": "2002",
       "pagine": "1380",
       "prezzo": "10€",
-      "recensioni": [],
+      "recensioni": [
+        {
+          "titolo": "Ottimo!",
+          "commento": "Il libro mi è piaciuto davvero tanto, la trama è ben strutturata ed i personaggi sono definiti alla perfezione, stra consigliato!",
+          "data": "20/12/2023",
+          "utente": "domenico",
+          "avatar": "js/avatar/11.png"
+        },
+        {
+          "titolo": "Stupefacnte",
+          "commento": "Probabilmente uno dei migliori libri che abbia mai letto",
+          "data": "20/12/2023",
+          "utente": "vincenzo",
+          "avatar": "js/avatar/14.png"
+        }
+      ],
       "percorso": "pdf/Il_signore_degli_anelli_anteprima.pdf"
     },
     {
@@ -687,14 +673,7 @@
       "anno": "2002",
       "pagine": "1380",
       "prezzo": "26€",
-      "recensioni": [
-        {
-          "titolo": "beh",
-          "commento": "suppongo che don maccio sarà il primo a denunciarci",
-          "data": "15/12/2023",
-          "utente": "gaetano22"
-        }
-      ]
+      "recensioni": []
     },
     {
       "nome": "Fantozzi",

@@ -357,9 +357,28 @@ nav input[type="button"]:hover
   flex-flow: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100vh;
   background-color: rgba(255, 255, 255, 0);
+}
+
+.box_form_login
+{
+  height: 100vh;
+}
+
+.box_form_register
+{
+  height: 100%;
+  margin: 3rem;
+}
+
+.box_form_login
+{
+  height: 100vh;
+}
+
+.box_form_review
+{
+  height: 100vh;
 }
 
 .logo
@@ -562,6 +581,8 @@ nav input[type="button"]:hover
   margin: 0.5rem;
   border-radius: 20px;
   width: 32rem;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .six_container
@@ -579,12 +600,20 @@ nav input[type="button"]:hover
   margin: 0.7rem;
   box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
   border-radius: 100px;
+  box-sizing: border-box;
+}
+
+.avatar.selected
+{
+  border: 3px solid #ec3853;
+  box-sizing: border-box;
+  margin: 0.7rem;
 }
 
 /* login e signup nella pagina login (accesso) */
 .btn
 {
-  background-color: rgba(171, 171, 171, 0.82);
+  background-color: #abababd1;
   color: white;
   padding: 5px;
   border: none;
@@ -858,15 +887,17 @@ nav input[type="button"]:hover
 {
   display: block;
   color: white;
-  font-size: 16px;
+  font-size: 13px;
   background-color: rgba(255, 255, 255, 0);
   border: none;
-  margin: 0.5rem;
+  margin: 0.25rem;
+  padding: 0;
 }
 
 .change_btn:hover
 {
-  color: #b4b4b4;
+  color: #ec3853;
+  text-decoration: underline;
   transition: 0.2s;
 }
 
@@ -880,13 +911,33 @@ nav input[type="button"]:hover
 {
   display: none;
   position: absolute;
-  background-color: #8b8b8b;
-  width: 15rem;
+  background-color: black;
+  border: 1px solid;
+  width: 16rem;
+  height: 26px;
   box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
   z-index: 1;
-  border-radius: 10px;
+  border-radius: 100px;
   left: 50%;
   transform: translate(-50%);
+}
+
+#dropdown_continer
+{
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 255, 255, 0);
+}
+
+#dropdown_continer p
+{
+  margin: 0.5rem;
 }
 
 .dropdown:hover .dropdown_content
@@ -1526,10 +1577,19 @@ nav input[type="button"]:hover
   background-color: rgba(255, 255, 255, 0);
 }
 
+#avatar_review
+{
+  height: 40px;
+  margin-right: 0.5rem;
+  border-radius: 100px;
+}
+
 #inforev_container
 {
   display: flex;
   flex-flow: row;
+  justify-content: center;
+  align-items: center;
   padding: 0;
   font-weight: bold;
   margin-bottom: 0.5rem;
@@ -1539,6 +1599,7 @@ nav input[type="button"]:hover
 {
   display: flex;
   flex-flow: column;
+  align-items: flex-start;
   width: 95%;
   margin-bottom: 2rem;
 }

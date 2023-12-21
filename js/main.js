@@ -350,7 +350,17 @@ function checkPassword() {
 }
 
 var indexSelector;
-function selectAvatar(imgElement) { indexSelector = imgElement; }
+function selectAvatar(imgElement) {
+  indexSelector = imgElement;
+
+  var allTheAvatar = document.querySelectorAll('.avatar');
+  allTheAvatar.forEach(function (avatar) {
+    avatar.classList.remove('selected');
+  });
+
+  var thistAvatar = document.querySelector('.avatar[src="js/avatar/' + indexSelector + '.png"]');
+  thistAvatar.classList.add('selected');
+}
 
 //executes the signup when the form's submit button is pressed
 function register() {
@@ -598,6 +608,7 @@ function showBookReviews() {
           const bookReview     = document.createElement('p'),
               reviewTitle      = document.createElement('h3'),
               reviewUsername   = document.createElement('p'),
+              userAvatar       = document.createElement('img'),
               spacer           = document.createElement('p'),
               reviewData       = document.createElement('p'),
               infoRevContainer = document.createElement('div'),
@@ -605,11 +616,13 @@ function showBookReviews() {
               manageContainer  = document.createElement('div');
 
           //sets review's information
+          userAvatar.src             = review.avatar;
           reviewUsername.textContent = review.utente;
           reviewData.textContent     = review.data;
           spacer.textContent         = '|';
           reviewTitle.textContent    = review.titolo;
           bookReview.textContent     = review.commento;
+          userAvatar.id              = 'avatar_review'
           spacer.id                  = 'book_spacer';
           infoRevContainer.id        = 'inforev_container';
           reviewContainer.id         = review.utente;
@@ -618,6 +631,7 @@ function showBookReviews() {
 
           // appends the review and its information
           reviewContainer.appendChild(infoRevContainer);
+          infoRevContainer.appendChild(userAvatar);
           infoRevContainer.appendChild(reviewData);
           infoRevContainer.appendChild(spacer);
           infoRevContainer.appendChild(reviewUsername);
@@ -704,14 +718,15 @@ function writeReview() {
   //gets book's review and name
   const reviewTitle = document.getElementById('review_title').value,
       review      = document.getElementById('review').value,
-      bookName    = sessionStorage.getItem('bookName');
+      bookName    = sessionStorage.getItem('bookName'),
+      avatar      = sessionStorage.getItem('avatar');
 
   //sends an HTTP request to the server at the specified url to store user's review
   $.ajax ({
     url: 'http://localhost:3000/writeReview',
     method: 'POST',
     contentType: 'application/json',
-    data: JSON.stringify({ bookName: bookName, review: review, reviewTitle: reviewTitle, username: sessionStorage.getItem('username') }),
+    data: JSON.stringify({ bookName: bookName, review: review, reviewTitle: reviewTitle, avatar: avatar, username: sessionStorage.getItem('username') }),
 
     //if it works, sends the user to "shop.html"
     success: function(data) {
@@ -1204,7 +1219,17 @@ function changePassword() {
 }
 
 var indexChange;
-function changeAvatarIndex(imgElement) { indexChange = imgElement; console.log(indexChange); }
+function changeAvatarIndex(imgElement) {
+  indexChange = imgElement;
+
+  var allTheAvatar = document.querySelectorAll('.avatar');
+  allTheAvatar.forEach(function (avatar) {
+    avatar.classList.remove('selected');
+  });
+
+  var thistAvatar = document.querySelector('.avatar[src="js/avatar/' + indexChange + '.png"]');
+  thistAvatar.classList.add('selected');
+}
 
 function changeAvatar() {
 
