@@ -49,7 +49,7 @@
           "genere": "Avventura e Azione"
         }
       ],
-      "avatar": "js/avatar/11.png"
+      "avatar": "images/avatar/11.png"
     }
   ],
   "libri": [
@@ -66,14 +66,14 @@
           "commento": "Il libro mi è piaciuto davvero tanto, la trama è ben strutturata ed i personaggi sono definiti alla perfezione, stra consigliato!",
           "data": "20/12/2023",
           "utente": "domenico",
-          "avatar": "js/avatar/11.png"
+          "avatar": "images/avatar/11.png"
         },
         {
           "titolo": "Stupefacnte",
           "commento": "Probabilmente uno dei migliori libri che abbia mai letto",
           "data": "20/12/2023",
           "utente": "vincenzo",
-          "avatar": "js/avatar/14.png"
+          "avatar": "images/avatar/14.png"
         }
       ],
       "percorso": "pdf/Il_signore_degli_anelli_anteprima.pdf"

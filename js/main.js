@@ -358,7 +358,7 @@ function selectAvatar(imgElement) {
     avatar.classList.remove('selected');
   });
 
-  var thistAvatar = document.querySelector('.avatar[src="js/avatar/' + indexSelector + '.png"]');
+  var thistAvatar = document.querySelector('.avatar[src="images/avatar/' + indexSelector + '.png"]');
   thistAvatar.classList.add('selected');
 }
 
@@ -371,7 +371,7 @@ function register() {
       username        = document.getElementById('reg_usr').value,
       password        = document.getElementById('reg_passw').value,
       confirmPassword = document.getElementById('conf_passw').value,
-      avatar          =  'js/avatar/' + indexSelector + '.png';
+      avatar          =  'images/avatar/' + indexSelector + '.png';
 
   //checks if the password respects the standard using the checkPassword() function
   if (checkUsername() && checkPassword() && password === confirmPassword) {
@@ -751,18 +751,13 @@ function logout() {
 
 //empties user's cart
 function emptyCart() {
-  // Invia una richiesta al server per svuotare il carrello
+
   $.ajax({
     url: 'http://localhost:3000/emptyCart',
     method: 'POST',
     data: { username: sessionStorage.getItem('username') },
-    success: function () {
-      // Chiamata completata con successo, ora aggiorna la visualizzazione del carrello
-      updateCartView();
-    },
-    error: function () {
-      console.error('Errore durante lo svuotamento del carrello.');
-    }
+    success: function () { updateCartView(); },
+    error:   function () { console.error('Errore durante lo svuotamento del carrello.'); }
   });
 }
 
@@ -949,8 +944,8 @@ function updateCartView(cartItems) {
 
   //gets total price and clear cart button elements
   const cartTot    = document.getElementById('cart_price'),
-      cartSpacer = document.getElementById('book_spacer1'),
-      clearCart  = document.getElementById('cart_clear');
+        cartSpacer = document.getElementById('book_spacer1'),
+        clearCart  = document.getElementById('cart_clear');
 
   //if the cart isn't empty
   if (parseFloat(totalPrice) > 0) {
@@ -1227,14 +1222,14 @@ function changeAvatarIndex(imgElement) {
     avatar.classList.remove('selected');
   });
 
-  var thistAvatar = document.querySelector('.avatar[src="js/avatar/' + indexChange + '.png"]');
+  var thistAvatar = document.querySelector('.avatar[src="images/avatar/' + indexChange + '.png"]');
   thistAvatar.classList.add('selected');
 }
 
 function changeAvatar() {
 
   //gets user's name, surname, username, and password from the page
-  const avatar =  'js/avatar/' + indexChange + '.png';
+  const avatar =  'images/avatar/' + indexChange + '.png';
   document.getElementById('overlay').style.display = 'none';
   document.getElementById('hide_avatar').style.display = 'none';
   document.body.style.overflow = 'auto';
