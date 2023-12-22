@@ -382,11 +382,6 @@ nav input[type="button"]:hover
   margin: 3rem;
 }
 
-.box_form_login
-{
-  height: 100vh;
-}
-
 .box_form_review
 {
   height: 100vh;
@@ -479,7 +474,7 @@ nav input[type="button"]:hover
   align-items: center;
   justify-content: center;
   width: 3rem;
-  height: 100%;
+  height: 2.8rem;
   margin-left: 0;
   font-size: 13px;
   color: #626262;
@@ -496,7 +491,7 @@ nav input[type="button"]:hover
   transition: 0.5s;
 }
 
-#log_passw
+.passw
 {
   width: 27rem;
   margin: 0;
@@ -571,6 +566,17 @@ nav input[type="button"]:hover
 }
 
 #hide_password
+{
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1002;
+  width: 32rem;
+}
+
+#hide_review
 {
   display: none;
   position: fixed;
@@ -705,7 +711,7 @@ nav input[type="button"]:hover
   text-align: left;
   width: 33rem;
   margin: 0;
-  top: 13rem;
+  top: 12.5rem;
   position: absolute;
   z-index: 2;
   background-color: white;
@@ -1526,7 +1532,7 @@ nav input[type="button"]:hover
   margin-bottom: -3px;
 }
 
-.previews_btn
+#reviews_btn
 {
   background-color: rgba(255, 255, 255, 0);
   border: none;
@@ -1534,7 +1540,7 @@ nav input[type="button"]:hover
   color: black;
 }
 
-.previews_btn:hover
+#previews_btn:hover
 {
   color: #ec3853;
   transition: 0.2s;

@@ -3,7 +3,7 @@
     {
       "nome": "Gaetano",
       "cognome": "Romeo",
-      "username": "gaetano22",
+      "username": "gaetano",
       "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
       "carrello": [],
       "avatar": "images/avatar/1.png"
@@ -18,39 +18,17 @@
           "nome": "Il signore degli anelli",
           "prezzo": "10€",
           "genere": "Avventura e Azione"
-        },
-        {
-          "nome": "Il mastino dei Baskerville",
-          "prezzo": "10€",
-          "genere": "Giallo"
-        },
-        {
-          "nome": "Il silenzio degli innocenti",
-          "prezzo": "11€",
-          "genere": "Thriller"
-        },
-        {
-          "nome": "Libro",
-          "prezzo": "28€",
-          "genere": "Umoristico"
-        },
-        {
-          "nome": "Libro 2",
-          "prezzo": "26€",
-          "genere": "Umoristico"
-        },
-        {
-          "nome": "Robinson Crusoe",
-          "prezzo": "10€",
-          "genere": "Avventura e Azione"
-        },
-        {
-          "nome": "I tre moschettieri",
-          "prezzo": "9€",
-          "genere": "Avventura e Azione"
         }
       ],
       "avatar": "images/avatar/11.png"
+    },
+    {
+      "nome": "a",
+      "cognome": "a",
+      "username": "a",
+      "password": "7d034aee0ff23b75d9a7061c8610869dbe37453443cbe3edb33503926b117c78",
+      "carrello": [],
+      "avatar": "images/avatar/18.png"
     }
   ],
   "libri": [
@@ -63,18 +41,25 @@
       "prezzo": "10€",
       "recensioni": [
         {
-          "titolo": "Ottimo!",
-          "commento": "Il libro mi è piaciuto davvero tanto, la trama è ben strutturata ed i personaggi sono definiti alla perfezione, stra consigliato!",
-          "data": "20/12/2023",
-          "utente": "domenico",
-          "avatar": "images/avatar/11.png"
-        },
-        {
           "titolo": "Stupefacnte",
           "commento": "Probabilmente uno dei migliori libri che abbia mai letto",
           "data": "20/12/2023",
           "utente": "vincenzo",
           "avatar": "images/avatar/14.png"
+        },
+        {
+          "titolo": "Ottimo libro",
+          "commento": "La trama è fantastica, senza buchi ed avvincente; i personaggi sono caratterizzati alla perfezione. Stra consigliato",
+          "data": "22/12/2023",
+          "utente": "domenico",
+          "avatar": "images/avatar/11.png"
+        },
+        {
+          "titolo": "Boh",
+          "commento": "Non so leggere",
+          "data": "22/12/2023",
+          "utente": "gaetano",
+          "avatar": "images/avatar/1.png"
         }
       ],
       "percorso": "pdf/Il_signore_degli_anelli_anteprima.pdf"
