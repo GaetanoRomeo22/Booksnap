@@ -29,6 +29,19 @@
   <meta name="msapplication-TileColor" content="#cc194b">
 </head>
 <body>
+
+<div id="overlay"></div>
+<div id="hide_review">
+  <div class="box_form box_form_review">
+    <form id = "review_form" method="post">
+      <div class="user_label">
+        <label for="review_title"><input type="text" class="account" id="review_title" name="review_title" required placeholder="Titolo recensione"></label>
+        <label for="review"><textarea class="account" id="review" name="review" required placeholder="Inserisci la tua recensione"></textarea></label>
+        <input type = "submit" class="btn" onclick="writeReview()" value="Recensisci">
+      </div>
+    </form>
+  </div>
+</div>
   <!-- Navbar --->
   <nav class="navbar">
     <input type = "button" value="Home"       id="nav_shop"    onclick="window.location.href='index.html'">
@@ -78,7 +91,7 @@
                 <div id="book_page"></div>
                 <div id="book_price" ></div>
                 <div id="previews_manage">
-                  <button class="previews_btn" onclick="checkReview()">Recensisci il libro</button>
+                  <button id="reviews_btn" onclick="checkReview()">Recensisci il libro</button>
                 </div>
                 <button id="cart_btn" onclick="addBook()"></button>
               </div>
@@ -108,6 +121,12 @@
 
     document.addEventListener('DOMContentLoaded', function () {
       checkSearch();
+    });
+
+    document.getElementById('overlay').addEventListener('click', function() {
+
+      document.getElementById('overlay').style.display     = 'none';
+      document.getElementById('hide_review').style.display = 'none';
     });
   </script>
   <!-- JavaScript Client Side -->

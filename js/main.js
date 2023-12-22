@@ -662,7 +662,9 @@ function checkReview() {
     //if the user hasn't already reviewed the book, it sends him to "recensione.html"
     success: function(data) {
       if (!data.value) {
-        document.location.href = data.redirect;
+        document.getElementById('overlay').style.display = 'block';
+        document.getElementById('hide_review').style.display = 'block';
+        document.body.style.overflow = 'hidden';
       } else {
         let reviewAuthor = document.getElementById(data.user);
         reviewAuthor.style.transition = 'color 0.5s ease';
