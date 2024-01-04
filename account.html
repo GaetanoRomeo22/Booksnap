@@ -98,7 +98,7 @@
         <label for="current_passw"><input class="account" id="current_passw" name="password" required placeholder="Password attuale"></label>
       </div>
       <div class="password">
-        <label for="new_passw"><input type="password" class="account lable_passw" id="new_passw" name="password" required placeholder="Nuova assword"></label>
+        <label for="new_passw"><input type="password" class="account lable_passw" id="new_passw" name="password" required placeholder="Nuova password"></label>
         <button class="showhide_passw" type="button" onclick="newTogglePasswordVisibility()"><img src="images/Button%20icons/eye-regular.svg" alt="search_button" loading="lazy"></button>
       </div>
       <div class="password">
@@ -257,6 +257,7 @@
       document.getElementById('hide_surname').style.display  = 'none';
       document.getElementById('hide_username').style.display = 'none';
       document.getElementById('hide_password').style.display = 'none';
+
       const removeBorder = document.querySelectorAll('.avatar');
       removeBorder.forEach(function (avatar) {
         avatar.classList.remove('selected');
