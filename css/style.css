@@ -1540,7 +1540,7 @@ nav input[type="button"]:hover
   color: black;
 }
 
-#previews_btn:hover
+#reviews_btn:hover
 {
   color: #ec3853;
   transition: 0.2s;
