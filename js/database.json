@@ -39,7 +39,7 @@
       "prezzo": "10€",
       "recensioni": [
         {
-          "titolo": "Stupefacnte",
+          "titolo": "Stupefacente",
           "commento": "Probabilmente uno dei migliori libri che abbia mai letto",
           "data": "20/12/2023",
           "utente": "vincenzo",
@@ -53,10 +53,10 @@
           "avatar": "images/avatar/11.png"
         },
         {
-          "titolo": "Boh",
-          "commento": "Non so leggere",
-          "data": "22/12/2023",
-          "utente": "gaetano",
+          "titolo": "Ottimo libro",
+          "commento": "Personaggi carismatici e ottima trama",
+          "data": "4/1/2024",
+          "utente": "gaetano22",
           "avatar": "images/avatar/1.png"
         }
       ],

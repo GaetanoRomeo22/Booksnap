@@ -34,7 +34,7 @@ function checkNotLogged() {
 //starts automatically when the page is loaded and checks if the user is logged
 function showNavbar() {
 
-  //gets navbar's button's elements
+  //gets navbar button's elements
   const accountButton = document.getElementById('nav_account'),
       shopButton    = document.getElementById('nav_shop'),
       loginButton   = document.getElementById('nav_login');
@@ -484,7 +484,7 @@ function searchBook() {
 
       let noPreview = document.getElementById('no_preview');
 
-      //set book's information to make it visualizable
+      //set book's information to make it viewable
       if(data.percorso) {
         pdfView.src = data.percorso;
         noPreview.style.display = 'none';
@@ -496,7 +496,7 @@ function searchBook() {
         pdfView.style.display = 'none';
       }
 
-      //set book's information to make it visualizable
+      //set book's information to make it viewable
       pdfView.src                  = data.percorso;
       pdfAppear.style.display      = "block";
       bookImage.src                = 'images/' + data.genere + '/' + bookName + '.webp';
