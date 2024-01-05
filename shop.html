@@ -115,16 +115,18 @@
 
   <!-- JavaScript Client Side -->
   <script>
+
+    //checks if the user has access to the page (if he's logged)
     window.addEventListener('load', function() {
       checkLogged();
     });
 
+    //checks if the user has accessed the page by searching a book
     document.addEventListener('DOMContentLoaded', function () {
       checkSearch();
     });
 
     document.getElementById('overlay').addEventListener('click', function() {
-
       document.getElementById('overlay').style.display     = 'none';
       document.getElementById('hide_review').style.display = 'none';
     });

@@ -209,43 +209,48 @@
 <script>
   window.addEventListener('load', function()
   {
+
+    //checks if the user has access to the page
     checkLogged();
+
+    //gets user's information like username and avatar
     getInfo();
+
+    //shows all user's reviews
     showUserReviews();
+
+    //shows user's cart
     showCart();
 
-    document.getElementById('overlay').addEventListener('click', function() { location.reload(); });
+    document.getElementById('overlay').addEventListener('click', function() {
+      location.reload();
+    });
 
     document.getElementById('edit_avatar').addEventListener('click', function() {
-
       document.getElementById('overlay').style.display = 'block';
       document.getElementById('hide_avatar').style.display = 'block';
       document.body.style.overflow = 'hidden';
     });
 
     document.getElementById('edit_name').addEventListener('click', function() {
-
       document.getElementById('overlay').style.display = 'block';
       document.getElementById('hide_name').style.display = 'block';
       document.body.style.overflow = 'hidden';
     });
 
     document.getElementById('edit_surname').addEventListener('click', function() {
-
       document.getElementById('overlay').style.display = 'block';
       document.getElementById('hide_surname').style.display = 'block';
       document.body.style.overflow = 'hidden';
     });
 
     document.getElementById('edit_username').addEventListener('click', function() {
-
       document.getElementById('overlay').style.display = 'block';
       document.getElementById('hide_username').style.display = 'block';
       document.body.style.overflow = 'hidden';
     });
 
     document.getElementById('edit_password').addEventListener('click', function() {
-
       document.getElementById('overlay').style.display = 'block';
       document.getElementById('hide_password').style.display = 'block';
       document.body.style.overflow = 'hidden';

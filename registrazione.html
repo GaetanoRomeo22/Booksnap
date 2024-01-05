@@ -85,10 +85,13 @@
 
 <!-- JavaScript Client Side -->
 <script>
+
+  //checks if the user has access to the page (if he's not logged yet)
   window.addEventListener('load', function() {
     checkNotLogged();
   });
 
+  //prevents form's default action to show message errors
   document.getElementById('register_form').addEventListener('submit', event => {
     event.preventDefault();
   });
