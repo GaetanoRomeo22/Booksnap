@@ -27,22 +27,6 @@
         }
       ],
       "avatar": "images/avatar/11.png"
-    },
-    {
-      "nome": "a",
-      "cognome": "a",
-      "username": "a",
-      "password": "7d034aee0ff23b75d9a7061c8610869dbe37453443cbe3edb33503926b117c78",
-      "carrello": [],
-      "avatar": "images/avatar/18.png"
-    },
-    {
-      "nome": "sas",
-      "cognome": "asa",
-      "username": "asa",
-      "password": "7d034aee0ff23b75d9a7061c8610869dbe37453443cbe3edb33503926b117c78",
-      "carrello": [],
-      "avatar": "images/avatar/7.png"
     }
   ],
   "libri": [
