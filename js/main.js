@@ -1219,11 +1219,6 @@ var indexChange;
 function changeAvatarIndex(imgElement) {
   indexChange = imgElement;
 
-  var allTheAvatar = document.querySelectorAll('.avatar');
-  allTheAvatar.forEach(function (avatar) {
-    avatar.classList.remove('selected');
-  });
-
   var thistAvatar = document.querySelector('.avatar[src="images/avatar/' + indexChange + '.png"]');
   thistAvatar.classList.add('selected');
 }

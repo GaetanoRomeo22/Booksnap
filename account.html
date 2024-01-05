@@ -98,7 +98,7 @@
         <label for="current_passw"><input class="account" id="current_passw" name="password" required placeholder="Password attuale"></label>
       </div>
       <div class="password">
-        <label for="new_passw"><input type="password" class="account lable_passw" id="new_passw" name="password" required placeholder="Nuova assword"></label>
+        <label for="new_passw"><input type="password" class="account lable_passw" id="new_passw" name="password" required placeholder="Nuova password"></label>
         <button class="showhide_passw" type="button" onclick="newTogglePasswordVisibility()"><img src="images/Button%20icons/eye-regular.svg" alt="search_button" loading="lazy"></button>
       </div>
       <div class="password">
@@ -214,6 +214,8 @@
     showUserReviews();
     showCart();
 
+    document.getElementById('overlay').addEventListener('click', function() { location.reload(); });
+
     document.getElementById('edit_avatar').addEventListener('click', function() {
 
       document.getElementById('overlay').style.display = 'block';
@@ -247,21 +249,6 @@
       document.getElementById('overlay').style.display = 'block';
       document.getElementById('hide_password').style.display = 'block';
       document.body.style.overflow = 'hidden';
-    });
-
-    document.getElementById('overlay').addEventListener('click', function() {
-
-      document.getElementById('overlay').style.display       = 'none';
-      document.getElementById('hide_avatar').style.display   = 'none';
-      document.getElementById('hide_name').style.display     = 'none';
-      document.getElementById('hide_surname').style.display  = 'none';
-      document.getElementById('hide_username').style.display = 'none';
-      document.getElementById('hide_password').style.display = 'none';
-      const removeBorder = document.querySelectorAll('.avatar');
-      removeBorder.forEach(function (avatar) {
-        avatar.classList.remove('selected');
-      });
-      document.body.style.overflow = 'auto';
     });
 
   });

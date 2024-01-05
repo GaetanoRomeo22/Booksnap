@@ -483,6 +483,7 @@ nav input[type="button"]:hover
   border-top-right-radius: 100px;
   background-color: white;
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  cursor: pointer;
 }
 
 .showhide_passw:hover
@@ -618,6 +619,7 @@ nav input[type="button"]:hover
   box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
   border-radius: 100px;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .avatar.selected
@@ -697,6 +699,7 @@ nav input[type="button"]:hover
   font-size: 16px;
   box-shadow: 0 0 50px 7px rgba(0, 0, 0, 0.15);
   margin-left: 0.25rem;
+  cursor: pointer;
 }
 
 #search_bnt:hover
@@ -725,6 +728,7 @@ nav input[type="button"]:hover
   margin-left: -26px;
   margin-top: 10px;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 #suggestion_list li:hover
@@ -811,6 +815,7 @@ nav input[type="button"]:hover
   background-color: rgba(255, 255, 255, 0);
   opacity: 0;
   transition: opacity 0.2s ease;
+  cursor: pointer;
 }
 
 #edit_avatar:hover
@@ -909,6 +914,7 @@ nav input[type="button"]:hover
   border: none;
   margin: 0.25rem;
   padding: 0;
+  cursor: pointer;
 }
 
 .change_btn:hover
@@ -1142,6 +1148,7 @@ nav input[type="button"]:hover
   color: #626262;
   margin: 0;
   padding: 0;
+  cursor: pointer;
 }
 
 #cart_clear:hover
@@ -1162,12 +1169,14 @@ nav input[type="button"]:hover
 .image_container img
 {
   transition: transform 0.1s ease-in-out;
+  cursor: pointer;
 }
 
 .image_container img:hover
 {
   transform: scale(1.05);
 }
+
 
 .avatar:hover
 {
@@ -1185,6 +1194,11 @@ nav input[type="button"]:hover
   display: flex;
   flex-flow: column;
   margin-left: 1rem;
+}
+
+.info_container h3
+{
+  cursor: pointer;
 }
 
 .price_container
@@ -1538,6 +1552,7 @@ nav input[type="button"]:hover
   border: none;
   font-size: 11px;
   color: black;
+  cursor: pointer;
 }
 
 #reviews_btn:hover
