@@ -20,6 +20,8 @@ window.onload = () => {
 function checkLogged() {
   if (sessionStorage.getItem('logged') !== 'true') {
     document.location.href = "index.html";
+  } else if(sessionStorage.getItem('writer') === 'true'){
+    document.getElementById('writer_box').style.display = "visible";
   }
 }
 
@@ -372,7 +374,7 @@ function register() {
       password        = document.getElementById('reg_passw').value,
       confirmPassword = document.getElementById('conf_passw').value,
       avatar          =  'images/avatar/' + indexSelector + '.png';
-
+  let isWriter = document.getElementById('reg_writer').checked;
   //checks if the password respects the standard using the checkPassword() function
   if (checkUsername() && checkPassword() && password === confirmPassword) {
 
@@ -381,7 +383,7 @@ function register() {
       url: 'http://localhost:3000/register',
       method: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify ({ name: name, surname: surname, username: username, password: password, confirmPassword: confirmPassword, avatar: avatar}),
+      data: JSON.stringify ({ name: name, surname: surname, username: username, password: password, confirmPassword: confirmPassword, avatar: avatar, writer: isWriter}),
 
       //if the sign-up works, it sends the user to the page "index.html"
       success: function (data) {
@@ -390,6 +392,7 @@ function register() {
         sessionStorage.setItem('surname',  surname);
         sessionStorage.setItem('username', username);
         sessionStorage.setItem('avatar',   avatar);
+        sessionStorage.setItem('writer',   writer);
         document.location.href = data.redirect;
       },
 
