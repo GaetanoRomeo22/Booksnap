@@ -11,6 +11,5 @@
     <orderEntry type="library" name="jquery-3.6.4" level="application" />
     <orderEntry type="library" name="3125df5d48" level="application" />
     <orderEntry type="library" name="pdfjs-dist" level="application" />
-    <orderEntry type="library" name="font-awesome" level="application" />
   </component>
 </module>

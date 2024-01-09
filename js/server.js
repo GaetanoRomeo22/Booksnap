@@ -1,11 +1,11 @@
 //-----------------------------------------------------Node.js Modules--------------------------------------------------
-const fs                = require('fs'),
-    express           = require('express'),
-    bodyParser        = require('body-parser'),
+const fs                = require('fs'), //modulo
+    express           = require('express'), //framework Express
+    bodyParser        = require('body-parser'), //modulo
     path              = require('path'),
-    cors              = require('cors'),
-    CryptoJS          = require('crypto-js'),
-    PasswordValidator = require('password-validator');
+    cors              = require('cors'), //middlware di Express
+    CryptoJS          = require('crypto-js'), //Libreria
+    PasswordValidator = require('password-validator'); //libreria
 //-----------------------------------------------------Node.js Modules--------------------------------------------------
 
 //-----------------------------------------------------Variables--------------------------------------------------------
@@ -70,7 +70,8 @@ app.post('/register', (req, res) => {
       username = req.body.username,
       password = req.body.password,
       confirmPassword = req.body.confirmPassword,
-      avatar = req.body.avatar;
+      avatar = req.body.avatar,
+      writer = req.body.writer;
 
   //checks if the password respects the standard
   const checkPassword = new PasswordValidator();
@@ -106,7 +107,9 @@ app.post('/register', (req, res) => {
           username: username,
           password: hashedPassword,
           carrello: [],
-          avatar: avatar
+          avatar: avatar,
+          writer: writer
+
         });
 
         //writes the updated data to the JSON file
